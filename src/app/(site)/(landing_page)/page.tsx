@@ -1,3 +1,4 @@
+import Navbar from "@/components/navbar";
 import CTX from "./(components)/CTX";
 import Benifits from "./(components)/benefits";
 import Features from "./(components)/features";
@@ -7,7 +8,8 @@ import Services from "./(components)/services";
 
 const LandingPage = () => {
   return (
-    <div className="font-bold">
+    <div className="">
+      <Navbar />
       <Header />
       <Benifits />
       <Features />
