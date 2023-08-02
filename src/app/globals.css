@@ -11,7 +11,7 @@ body,
 
 
 .colors-test{
-  color: hsl(357 71% 52%)
+  color: hsl(210 40% 96.1%)
 }
 
 @layer base {
@@ -69,6 +69,7 @@ body,
     --card-foreground: 210 40% 98%;
  
     --border: 217.2 32.6% 17.5%;
+
     --input: 217.2 32.6% 17.5%;
  
     --primary: 210 40% 98%;
