@@ -80,8 +80,8 @@ model Profile {
   height    Float
   objective String
 
-  userId             String           @unique
-  user               User             @relation(fields: [userId], references: [id])
-  subscriptionPlanId String
-  subscriptionPlan   SubscriptionPlan @relation(fields: [subscriptionPlanId], references: [id])
+  userId             String            @unique
+  user               User              @relation(fields: [userId], references: [id])
+  subscriptionPlanId String?
+  subscriptionPlan   SubscriptionPlan? @relation(fields: [subscriptionPlanId], references: [id])
 }
