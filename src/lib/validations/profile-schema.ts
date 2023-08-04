@@ -27,7 +27,7 @@ const profileSchema = z.object({
     .nonempty("Required")
     .min(10, "should have 10 characters at least"),
   userId: z.string().cuid(),
-  subscriptionPlanId: z.string().cuid(),
+  // subscriptionPlanId: z.string().cuid(),
 });
 
 export type ProfileSchema = z.infer<typeof profileSchema>;
