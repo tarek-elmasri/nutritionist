@@ -15,3 +15,15 @@ declare module "next-auth" {
     };
   }
 }
+
+export enum Gender {
+  MALE = "MALE",
+  FEMALE = "FEMALE",
+}
+
+export enum Goal {
+  LOSE_WEIGHT = "LOSE_WEIGHT",
+  GAIN_WEIGHT = "GAIN_WEIGHT",
+  MAINTAIN_WEIGHT = "MAINTAIN_WEIGHT",
+  BUILD_MUSCLES = "BUILD_MUSCLES",
+}

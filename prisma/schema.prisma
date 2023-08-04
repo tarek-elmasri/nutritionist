@@ -45,8 +45,10 @@ model User {
   password      String?
   emailVerified DateTime?
   image         String?
-  accounts      Account[]
-  sessions      Session[]
+
+  accounts Account[]
+  sessions Session[]
+  Profile  Profile?
 }
 
 model VerificationToken {
@@ -55,4 +57,31 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model SubscriptionPlan {
+  id          String  @id @default(cuid())
+  label       String
+  description String
+  price       Float
+  per         String
+  active      Boolean @default(true)
+
+  Profile Profile[]
+}
+
+model Profile {
+  id        String   @id @default(cuid())
+  goal      String
+  name      String
+  dob       DateTime
+  gender    String
+  weight    Float
+  height    Float
+  objective String
+
+  userId             String           @unique
+  user               User             @relation(fields: [userId], references: [id])
+  subscriptionPlanId String
+  subscriptionPlan   SubscriptionPlan @relation(fields: [subscriptionPlanId], references: [id])
 }
