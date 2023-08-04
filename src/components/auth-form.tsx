@@ -91,7 +91,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant, callbackURL }) => {
   };
 
   return (
-    <>
+    <div className="">
       {isRedirecting && (
         <PageLoader message="Please wait while being redirected" />
       )}
@@ -184,7 +184,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant, callbackURL }) => {
           </Button>
         </div>
       </Form>
-    </>
+    </div>
   );
 };
 
