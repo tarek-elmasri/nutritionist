@@ -5,8 +5,9 @@ import { redirect } from "next/navigation";
 const SignupPage = async () => {
   const user = await getCurrentUser();
 
-  const redirectUrl = `/profile`;
-  if (user?.email) redirect(redirectUrl);
+  const profileUrl = `/profile`;
+  const newProfileUrl = `/profile/new`;
+  if (user?.email) redirect(profileUrl);
 
   return (
     <div className="h-full w-full">
@@ -15,7 +16,7 @@ const SignupPage = async () => {
 
       {/* form container */}
       <div className="relative z-10 h-full p-6  lg:px-28 xl:px-40  flex justify-center lg:justify-start items-center">
-        <AuthForm variant="REGISTER" callbackURL={redirectUrl} />
+        <AuthForm variant="REGISTER" callbackURL={newProfileUrl} />
       </div>
     </div>
   );
