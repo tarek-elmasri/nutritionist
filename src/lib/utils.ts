@@ -12,3 +12,6 @@ export const isPositiveFloat = (num: string) =>
   !isNaN(num as unknown as number) &&
   !isNaN(parseFloat(num)) &&
   parseFloat(num) > 0;
+
+export const calculateAgeFromDOB = (dob: Date) =>
+  new Date().getFullYear() - dob.getFullYear();
