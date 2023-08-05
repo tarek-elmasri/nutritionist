@@ -9,7 +9,10 @@ import { redirect } from "next/navigation";
 const createProfile = async (form: CreateProfileForm) => {
   "use server";
   const data = profileSchema.parse(form);
-  return prisma.profile.create({ data });
+  const { height, weight, ...rest } = data;
+  return prisma.profile.create({
+    data: { ...rest, records: { create: [{ height, weight }] } },
+  });
 };
 
 const NewProfilePage = async () => {

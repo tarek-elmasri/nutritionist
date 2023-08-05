@@ -1,4 +1,4 @@
-import { Gender, Goal } from "@/type";
+import { ActivityLevel, Gender, Goal } from "@/type";
 import * as z from "zod";
 
 const profileSchema = z.object({
@@ -8,6 +8,11 @@ const profileSchema = z.object({
   gender: z
     .string()
     .refine((value) => Object.values(Gender).includes(value as Gender)),
+  activityLevel: z
+    .string()
+    .refine((value) =>
+      Object.values(ActivityLevel).includes(value as ActivityLevel)
+    ),
   weight: z.preprocess(
     (value) => parseFloat(value as string),
     z

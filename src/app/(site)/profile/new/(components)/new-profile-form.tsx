@@ -9,6 +9,7 @@ import PageLoader from "@/components/ui/page-loader";
 import { toast } from "react-hot-toast";
 import { Profile } from "@prisma/client";
 import { useRouter } from "next/navigation";
+import ActivityStep from "./activity-step";
 
 export interface NewProfileFormProps {
   userId: string;
@@ -39,6 +40,7 @@ const NewProfileForm: FC<NewProfileFormProps> = ({
 
   const steps: ReactNode[] = [
     <GoalStep key={"goal-step"} />,
+    <ActivityStep key={"activity-step"} />,
     <DetailsStep key={"detail-step"} />,
     <ObjectiveStep key={"objective-step"} onSubmit={handleCreateProfile} />,
     // <PlansStep subscriptionPlans={subscriptionPlans} key={"plan-step"} />,

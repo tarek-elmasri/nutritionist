@@ -27,3 +27,9 @@ export enum Goal {
   MAINTAIN_WEIGHT = "MAINTAIN_WEIGHT",
   BUILD_MUSCLES = "BUILD_MUSCLES",
 }
+
+export enum ActivityLevel {
+  LOW = "LOW",
+  MEDIUM = "Moderate",
+  HIGH = "HIGH",
+}
