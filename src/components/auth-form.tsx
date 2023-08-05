@@ -136,7 +136,7 @@ const AuthForm: FC<AuthFormProps> = ({ variant, callbackURL }) => {
                 {variant === "REGISTER" && (
                   <FormDescription className="text-xs">
                     Password must be at least of 6 characters, a capital letter,
-                    a number and a special character.
+                    <br />a number and a special character.
                   </FormDescription>
                 )}
               </FormItem>
