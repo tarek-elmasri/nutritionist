@@ -71,17 +71,81 @@ model SubscriptionPlan {
 }
 
 model Profile {
-  id        String   @id @default(cuid())
-  goal      String
-  name      String
-  dob       DateTime
-  gender    String
-  weight    Float
-  height    Float
-  objective String
+  id            String   @id @default(cuid())
+  goal          String
+  name          String
+  dob           DateTime
+  gender        String
+  activityLevel String   @default("LOW")
+  // weight    Float
+  // height    Float
+  objective     String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   userId             String            @unique
   user               User              @relation(fields: [userId], references: [id])
   subscriptionPlanId String?
   subscriptionPlan   SubscriptionPlan? @relation(fields: [subscriptionPlanId], references: [id])
+
+  dietPlans DietPlan[]
+  records   Record[]
+}
+
+model Record {
+  id String @id @default(cuid())
+
+  weight    Float
+  height    Float
+  createdAt DateTime @default(now())
+
+  profileId String
+  profile   Profile @relation(fields: [profileId], references: [id])
+}
+
+model DietPlan {
+  id String @id @default(cuid())
+
+  startDate DateTime
+  endDate   DateTime
+  active    Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  profileId String
+  profile   Profile @relation(fields: [profileId], references: [id])
+
+  dietPortions DietPortion[]
+}
+
+model DietPortion {
+  id    String @id @default(cuid())
+  label String
+  order Int
+
+  dietPlanId String
+  dietPlan   DietPlan @relation(fields: [dietPlanId], references: [id])
+
+  contents DietPortionItem[]
+}
+
+model DietPortionItem {
+  id String @id @default(cuid())
+
+  dietPortionId String
+  dietPortion   DietPortion @relation(fields: [dietPortionId], references: [id])
+  dietItemId    String
+  item          DietItem    @relation(fields: [dietItemId], references: [id])
+}
+
+model DietItem {
+  id    String @id @default(cuid())
+  label String
+
+  choServes     Int
+  protienServes Int
+  fatServes     Int
+
+  dietPlanPortions DietPortionItem[]
 }
