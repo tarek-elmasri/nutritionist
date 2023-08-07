@@ -5,7 +5,7 @@ import Image from "next/image";
 import { ComponentRef, forwardRef } from "react";
 import separatorImg from "@/assets/separator.svg";
 
-const Separator = forwardRef<ComponentRef<"img">, { className: string }>(
+const Separator = forwardRef<ComponentRef<"img">, { className?: string }>(
   ({ className }, ref) => (
     <Image
       ref={ref}
