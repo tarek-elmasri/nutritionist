@@ -8,8 +8,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
+import { useRouter } from "next/navigation";
 
-const CellActions = () => {
+const CellActions = ({ profileId }: { profileId: string }) => {
+  const router = useRouter();
   return (
     <>
       <DropdownMenu>
@@ -21,7 +23,12 @@ const CellActions = () => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start">
           <DropdownMenuItem className="flex-row">View</DropdownMenuItem>
-          <DropdownMenuItem className="flex-row">Create Plan</DropdownMenuItem>
+          <DropdownMenuItem
+            className="flex-row"
+            onClick={() => router.push(`console/${profileId}/diets/new`)}
+          >
+            Create Plan
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </>

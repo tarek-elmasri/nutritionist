@@ -1,7 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import CellActions from "@/components/sections/profiles-section/cell-actions";
+import CellActions from "@/components/sections/require-actions/cell-actions";
 
 export type RequireActionColumn = {
   profileId: string;
@@ -20,6 +20,6 @@ export const columns: ColumnDef<RequireActionColumn>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => <CellActions />,
+    cell: ({ row }) => <CellActions profileId={row.original.profileId} />,
   },
 ];
