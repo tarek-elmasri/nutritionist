@@ -11,9 +11,7 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="h-full max-h-[44rem] overflow-y-auto max-w-4xl">
-        {children}
-      </DialogContent>
+      <DialogContent className="max-w-lg">{children}</DialogContent>
     </Dialog>
   );
 };
