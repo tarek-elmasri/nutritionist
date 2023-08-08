@@ -1,7 +1,7 @@
 "use client";
 
 import ProfileCalculator from "@/lib/profile-calculator";
-import { ServeType } from "@/type";
+import { MealForm, ServeType } from "@/type";
 import { create } from "zustand";
 import {
   freeFatMilkServe,
@@ -91,6 +91,8 @@ interface UseCreateDietPlanForm {
   servePlanForm: ServePlanForm;
   serveTypeTotals: ReturnType<typeof calculateServeTypeTotals>;
   categoryTotals: ServeType;
+  meals: MealForm[];
+  setMeals: (meals: MealForm[]) => void;
   setProfileCalculator: (calculator: ProfileCalculator) => void;
   setServePlanForm: (form: Partial<ServePlanForm>) => void;
 }
@@ -114,6 +116,7 @@ const initServePlanForm = {
 const useCreateDietPlan = create<UseCreateDietPlanForm>((set) => ({
   profileCalculator: undefined,
   servePlanForm: initServePlanForm,
+  meals: [],
   serveTypeTotals: calculateServeTypeTotals(initServePlanForm),
   categoryTotals: calculateCategoryTotals(
     calculateServeTypeTotals(initServePlanForm)
@@ -132,6 +135,7 @@ const useCreateDietPlan = create<UseCreateDietPlanForm>((set) => ({
         categoryTotals,
       };
     }),
+  setMeals: (meals) => set((state) => ({ ...state, meals })),
 }));
 
 export default useCreateDietPlan;

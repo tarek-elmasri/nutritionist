@@ -1,3 +1,4 @@
+import { Food, Meal, MealItem } from "@prisma/client";
 import { User } from "next-auth";
 
 declare module "next-auth/jwt" {
@@ -55,3 +56,8 @@ export interface ServeType {
   fat: number;
   calories: number;
 }
+
+export type MealItemForm = Omit<MealItem, "id" | "mealId"> & { item: Food };
+export type MealForm = Omit<Meal, "id" | "dietPlanId"> & {
+  contents: MealItemForm[];
+};

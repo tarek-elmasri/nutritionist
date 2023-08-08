@@ -8,6 +8,7 @@ import { FC, ReactNode, useEffect } from "react";
 import ProfileSummaryStep from "./(components)/profile-summary-step";
 import Separator from "@/components/ui/separator";
 import ServesStep from "./(components)/serves-step";
+import AddMealsStep from "./(components)/add-meals-step";
 
 interface CreateDietFormProps {
   profile: Profile & { records: Record[] };
@@ -20,6 +21,7 @@ const CreateDietForm: FC<CreateDietFormProps> = ({ profile }) => {
   const steps: ReactNode[] = [
     <ProfileSummaryStep key={"summary-step"} />,
     <ServesStep key={"serves-step"} />,
+    <AddMealsStep key={"meals-step"} />,
   ];
 
   useEffect(() => {
