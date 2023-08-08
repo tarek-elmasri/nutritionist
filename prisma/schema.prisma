@@ -77,8 +77,6 @@ model Profile {
   dob           DateTime
   gender        String
   activityLevel String   @default("LOW")
-  // weight    Float
-  // height    Float
   objective     String
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
@@ -116,10 +114,10 @@ model DietPlan {
   profileId String
   profile   Profile @relation(fields: [profileId], references: [id])
 
-  dietPortions DietPortion[]
+  meals Meal[]
 }
 
-model DietPortion {
+model Meal {
   id    String @id @default(cuid())
   label String
   order Int
@@ -127,25 +125,26 @@ model DietPortion {
   dietPlanId String
   dietPlan   DietPlan @relation(fields: [dietPlanId], references: [id])
 
-  contents DietPortionItem[]
+  contents MealItem[]
 }
 
-model DietPortionItem {
-  id String @id @default(cuid())
+model MealItem {
+  id     String @id @default(cuid())
+  amount Int
 
-  dietPortionId String
-  dietPortion   DietPortion @relation(fields: [dietPortionId], references: [id])
-  dietItemId    String
-  item          DietItem    @relation(fields: [dietItemId], references: [id])
+  mealId String
+  meal   Meal   @relation(fields: [mealId], references: [id])
+  itemId String
+  item   Food   @relation(fields: [itemId], references: [id])
 }
 
-model DietItem {
+model Food {
   id    String @id @default(cuid())
   label String
 
-  choServes     Int
-  protienServes Int
-  fatServes     Int
+  unit      String
+  amount    Int
+  serveType String
 
-  dietPlanPortions DietPortionItem[]
+  mealItems MealItem[]
 }
