@@ -3,7 +3,7 @@
 import { MealForm, MealItemForm } from "@/type";
 import { Pen, Plus, X } from "lucide-react";
 import { FC } from "react";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 
 interface MealItemProps {
   data: MealItemForm;
@@ -11,16 +11,11 @@ interface MealItemProps {
   onRemoveItem?: () => void;
   onAddItem?: () => void;
 }
-const MealItem: FC<MealItemProps> = ({
-  data,
-  editMode,
-  onRemoveItem,
-  onAddItem,
-}) => {
+const MealItem: FC<MealItemProps> = ({ data, editMode, onRemoveItem }) => {
   const { amount, item } = data;
   const { amount: unitAmount, label, unit } = item;
 
-  const itemLabel = `${(amount * unitAmount).toFixed(1)} ${unit} ${label}`;
+  const itemLabel = `( ${(amount * unitAmount).toFixed(1)} ) ${unit} ${label}`;
 
   return (
     <div className="py-2 px-4 text-sm rounded-lg shadow-sm shadow-primary flex items-center justify-center gap-2 bg-primary text-primary-foreground">
@@ -28,7 +23,10 @@ const MealItem: FC<MealItemProps> = ({
         <p>{itemLabel}</p>
       </div>
       {editMode && (
-        <div className="p-1 rounded-full hover:bg-neutral-100/50 hover:text-neutral-900  cursor-pointer">
+        <div
+          onClick={onRemoveItem}
+          className="p-1 rounded-full hover:bg-neutral-100/50 hover:text-neutral-900  cursor-pointer"
+        >
           <X className="w-3 h-3  " />
         </div>
       )}

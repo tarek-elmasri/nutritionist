@@ -1,3 +1,5 @@
+import { serves } from "@/constants";
+import { leanMeatServe } from "@/constants/serves";
 import { Food, Meal, MealItem } from "@prisma/client";
 import { User } from "next-auth";
 
@@ -57,7 +59,26 @@ export interface ServeType {
   calories: number;
 }
 
+export interface ServePlanForm {
+  starch: number;
+  vegetable: number;
+  fruit: number;
+  leanMeat: number;
+  mediumMeat: number;
+  highMeat: number;
+  lowFatMilk: number;
+  mediumFatMilk: number;
+  highFatMilk: number;
+  legume: number;
+  sugar: number;
+  pufa: number;
+  mufa: number;
+}
+
 export type MealItemForm = Omit<MealItem, "id" | "mealId"> & { item: Food };
 export type MealForm = Omit<Meal, "id" | "dietPlanId"> & {
   contents: MealItemForm[];
 };
+
+export type ServeTypeKey = keyof ServePlanForm;
+export type ServeTypeMap = Record<ServeTypeKey, ServeType>;
