@@ -1,6 +1,6 @@
 import { serves } from "@/constants";
 import { leanMeatServe } from "@/constants/serves";
-import { Food, Meal, MealItem } from "@prisma/client";
+import { Food, Meal, MealItem, ServePlan } from "@prisma/client";
 import { User } from "next-auth";
 
 declare module "next-auth/jwt" {
@@ -59,21 +59,22 @@ export interface ServeType {
   calories: number;
 }
 
-export interface ServePlanForm {
-  starch: number;
-  vegetable: number;
-  fruit: number;
-  leanMeat: number;
-  mediumMeat: number;
-  highMeat: number;
-  lowFatMilk: number;
-  mediumFatMilk: number;
-  highFatMilk: number;
-  legume: number;
-  sugar: number;
-  pufa: number;
-  mufa: number;
-}
+export type ServePlanForm = Omit<ServePlan, "id" | "dietPlanId">;
+// export interface ServePlanForm {
+//   starch: number;
+//   vegetable: number;
+//   fruit: number;
+//   leanMeat: number;
+//   mediumMeat: number;
+//   highMeat: number;
+//   lowFatMilk: number;
+//   mediumFatMilk: number;
+//   highFatMilk: number;
+//   legume: number;
+//   sugar: number;
+//   pufa: number;
+//   mufa: number;
+// }
 
 export type MealItemForm = Omit<MealItem, "id" | "mealId"> & { item: Food };
 export type MealForm = Omit<Meal, "id" | "dietPlanId"> & {
