@@ -11,6 +11,7 @@ import { Profile } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import ActivityStep from "./activity-step";
 import useSteps from "@/hooks/use-steps";
+import MedicalStep from "./medical-step";
 
 export interface NewProfileFormProps {
   userId: string;
@@ -44,6 +45,7 @@ const NewProfileForm: FC<NewProfileFormProps> = ({
     <GoalStep key={"goal-step"} />,
     <ActivityStep key={"activity-step"} />,
     <DetailsStep key={"detail-step"} />,
+    <MedicalStep key={"medical-step"} />,
     <ObjectiveStep key={"objective-step"} onSubmit={handleCreateProfile} />,
     // <PlansStep subscriptionPlans={subscriptionPlans} key={"plan-step"} />,
   ];

@@ -29,10 +29,12 @@ import { Calendar } from "@/components/ui/calendar";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import useSteps from "@/hooks/use-steps";
 
-const detailsSchema = profileSchema.omit({
-  userId: true,
-  goal: true,
-  objective: true,
+const detailsSchema = profileSchema.pick({
+  name: true,
+  dob: true,
+  gender: true,
+  weight: true,
+  height: true,
 });
 type DetailsSchema = z.infer<typeof detailsSchema>;
 
@@ -49,6 +51,7 @@ const DetailsStep = () => {
     setForm({
       ...form.getValues(),
     });
+    console.log("navigation");
     if (action === "NEXT") {
       nextStep();
     } else {

@@ -21,6 +21,7 @@ const initalFormData: CreateProfileForm = {
   height: 0,
   chronicDisease: undefined,
   foodAllergy: undefined,
+  previousDiet: false,
   objective: "",
   userId: "",
   subscriptionPlanId: "",

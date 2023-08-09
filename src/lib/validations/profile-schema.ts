@@ -31,6 +31,15 @@ const profileSchema = z.object({
     .string()
     .nonempty("Required")
     .min(10, "should have 10 characters at least"),
+  foodAllergy: z
+    .string()
+    .optional()
+    .transform((v) => (v === "" ? undefined : v)),
+  chronicDisease: z
+    .string()
+    .optional()
+    .transform((v) => (v === "" ? undefined : v)),
+  previousDiet: z.boolean().default(false),
   userId: z.string().cuid(),
   // subscriptionPlanId: z.string().cuid(),
 });
