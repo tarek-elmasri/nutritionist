@@ -12,12 +12,14 @@ import logo from "@/assets/logo.png";
 import { AlarmCheck, Dumbbell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import InputRadio from "./input-radio";
+import useSteps from "@/hooks/use-steps";
 
 const goalSchema = profileSchema.pick({ goal: true });
 type GoalSchema = z.infer<typeof goalSchema>;
 
 const GoalStep = () => {
-  const { setForm, nextStep, form: data } = useCreateProfile();
+  const { setForm, form: data } = useCreateProfile();
+  const { nextStep } = useSteps();
 
   const form = useForm<GoalSchema>({
     resolver: zodResolver(goalSchema),

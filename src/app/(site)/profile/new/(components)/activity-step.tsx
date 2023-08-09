@@ -18,12 +18,14 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import InputRadio from "./input-radio";
+import useSteps from "@/hooks/use-steps";
 
 const activitySchema = profileSchema.pick({ activityLevel: true });
 type GoalSchema = z.infer<typeof activitySchema>;
 
 const ActivityStep = () => {
-  const { setForm, nextStep, prevStep, form: data } = useCreateProfile();
+  const { setForm, form: data } = useCreateProfile();
+  const { nextStep, prevStep } = useSteps();
 
   const form = useForm<GoalSchema>({
     resolver: zodResolver(activitySchema),

@@ -17,6 +17,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { FC } from "react";
+import useSteps from "@/hooks/use-steps";
 
 const objectiveSchema = profileSchema.pick({
   objective: true,
@@ -27,7 +28,9 @@ interface ObjectiveStepProps {
   onSubmit: (form: CreateProfileForm) => void;
 }
 const ObjectiveStep: FC<ObjectiveStepProps> = ({ onSubmit }) => {
-  const { form: data, setForm, prevStep, nextStep } = useCreateProfile();
+  const { form: data, setForm } = useCreateProfile();
+  const { prevStep } = useSteps();
+
   const form = useForm<ObjectiveSchema>({
     resolver: zodResolver(objectiveSchema),
     defaultValues: data,

@@ -27,6 +27,7 @@ import { cn } from "@/lib/utils";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import useSteps from "@/hooks/use-steps";
 
 const detailsSchema = profileSchema.omit({
   userId: true,
@@ -36,7 +37,9 @@ const detailsSchema = profileSchema.omit({
 type DetailsSchema = z.infer<typeof detailsSchema>;
 
 const DetailsStep = () => {
-  const { form: data, setForm, prevStep, nextStep } = useCreateProfile();
+  const { form: data, setForm } = useCreateProfile();
+  const { prevStep, nextStep } = useSteps();
+
   const form = useForm<DetailsSchema>({
     resolver: zodResolver(detailsSchema),
     defaultValues: data,

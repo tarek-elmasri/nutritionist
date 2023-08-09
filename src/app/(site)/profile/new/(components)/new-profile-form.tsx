@@ -10,6 +10,7 @@ import { toast } from "react-hot-toast";
 import { Profile } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import ActivityStep from "./activity-step";
+import useSteps from "@/hooks/use-steps";
 
 export interface NewProfileFormProps {
   userId: string;
@@ -23,7 +24,8 @@ const NewProfileForm: FC<NewProfileFormProps> = ({
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-  const { setStepsCount, currentStepIndex, setForm } = useCreateProfile();
+  const { setForm } = useCreateProfile();
+  const { currentStepIndex, setStepsCount } = useSteps();
 
   const handleCreateProfile = async (form: CreateProfileForm) => {
     try {

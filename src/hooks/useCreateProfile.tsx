@@ -9,11 +9,6 @@ export type CreateProfileForm = Partial<Omit<Profile, "id">> &
 interface UseCreateProfileProps {
   form: CreateProfileForm;
   setForm: (form: CreateProfileForm) => void;
-  totalSteps: number;
-  setStepsCount: (stepsCount: number) => void;
-  currentStepIndex: number;
-  nextStep: () => void;
-  prevStep: () => void;
 }
 
 const initalFormData: CreateProfileForm = {
@@ -24,6 +19,8 @@ const initalFormData: CreateProfileForm = {
   activityLevel: ActivityLevel.LOW,
   weight: 0,
   height: 0,
+  chronicDisease: undefined,
+  foodAllergy: undefined,
   objective: "",
   userId: "",
   subscriptionPlanId: "",
@@ -31,32 +28,8 @@ const initalFormData: CreateProfileForm = {
 
 const useCreateProfile = create<UseCreateProfileProps>((set) => ({
   form: initalFormData,
-  totalSteps: 0,
-  currentStepIndex: 0,
   setForm: (fields) =>
     set((state) => ({ ...state, form: { ...state.form, ...fields } })),
-  setStepsCount: (stepsCount) =>
-    set((state) => ({ ...state, totalSteps: stepsCount })),
-  nextStep: () =>
-    set((state) => {
-      const nextStepIndex =
-        state.currentStepIndex === state.totalSteps - 1
-          ? state.currentStepIndex
-          : state.currentStepIndex + 1;
-      return {
-        ...state,
-        currentStepIndex: nextStepIndex,
-      };
-    }),
-  prevStep: () =>
-    set((state) => {
-      const prevStepIndex =
-        state.currentStepIndex === 0 ? 0 : state.currentStepIndex - 1;
-      return {
-        ...state,
-        currentStepIndex: prevStepIndex,
-      };
-    }),
 }));
 
 export default useCreateProfile;
