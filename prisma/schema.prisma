@@ -71,15 +71,18 @@ model SubscriptionPlan {
 }
 
 model Profile {
-  id            String   @id @default(cuid())
-  goal          String
-  name          String
-  dob           DateTime
-  gender        String
-  activityLevel String   @default("LOW")
-  objective     String
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id             String   @id @default(cuid())
+  goal           String
+  name           String
+  dob            DateTime
+  gender         String
+  activityLevel  String   @default("LOW")
+  objective      String
+  foodAllergy    String?
+  chronicDisease String?
+  previousDiet   Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   userId             String            @unique
   user               User              @relation(fields: [userId], references: [id])
@@ -114,7 +117,28 @@ model DietPlan {
   profileId String
   profile   Profile @relation(fields: [profileId], references: [id])
 
-  meals Meal[]
+  servePlan ServePlan?
+  meals     Meal[]
+}
+
+model ServePlan {
+  id            String @id @default(cuid())
+  starch        Int
+  vegetable     Int
+  fruit         Int
+  leanMeat      Int
+  mediumMeat    Int
+  highMeat      Int
+  lowFatMilk    Int
+  mediumFatMilk Int
+  highFatMilk   Int
+  legume        Int
+  sugar         Int
+  pufa          Int
+  mufa          Int
+
+  dietPlanId String   @unique
+  DietPlan   DietPlan @relation(fields: [dietPlanId], references: [id])
 }
 
 model Meal {
