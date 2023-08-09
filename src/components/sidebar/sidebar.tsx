@@ -10,7 +10,7 @@ const Sidebar = ({ children }: { children: ReactNode }) => {
       <Image
         src={logo}
         alt="Aya Salem"
-        className="w-32 mx-auto h-auto opacity-50"
+        className="w-32 mx-auto h-auto"
         priority
       />
 
