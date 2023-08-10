@@ -1,4 +1,5 @@
 import { type ClassValue, clsx } from "clsx";
+import { format } from "date-fns";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -15,3 +16,8 @@ export const isPositiveFloat = (num: string) =>
 
 export const calculateAgeFromDOB = (dob: Date) =>
   new Date().getFullYear() - dob.getFullYear();
+
+export const parseDateWithoutTime = (date: Date) => {
+  const formattedDate = format(date, "yyyy-MM-dd");
+  return new Date(formattedDate);
+};

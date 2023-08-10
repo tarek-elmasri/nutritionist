@@ -10,11 +10,10 @@ import ServeMapBox from "@/components/serve-map-box";
 import { Button } from "@/components/ui/button";
 import { MealForm, MealItemForm } from "@/type";
 import AddMealItemModal from "@/components/modals/add-meal-item-modal";
-import foods from "@/type/mockFoods";
 import useSteps from "@/hooks/use-steps";
 
 const AddMealsStep = () => {
-  const { meals, servePlanForm, setMeals } = useCreateDietPlan();
+  const { meals, servePlanForm, setMeals, foodList } = useCreateDietPlan();
   const { nextStep, prevStep } = useSteps();
   // const [mealsForm, setMealsForm] = useState(meals);
   const [isMealModalOpen, setIsMealModalOpen] = useState(false);
@@ -77,7 +76,7 @@ const AddMealsStep = () => {
         <AddMealItemModal
           isOpen={isAddItemModalOpen}
           onClose={() => setIsAddItemModalOpen(false)}
-          items={foods}
+          items={foodList}
           onSubmit={addItemtoMeal}
         />
       )}

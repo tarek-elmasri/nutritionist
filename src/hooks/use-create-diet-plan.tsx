@@ -5,15 +5,25 @@ import {
   calculateCategoryTotals,
   calculateServeTypeTotals,
 } from "@/lib/servesHelper";
+import { parseDateWithoutTime } from "@/lib/utils";
 import { MealForm, ServePlanForm, ServeType } from "@/type";
+import { Food } from "@prisma/client";
 import { create } from "zustand";
 
 interface UseCreateDietPlanForm {
+  schedule: {
+    startDate: Date;
+    endDate: Date;
+  };
+  active: boolean;
   profileCalculator?: ProfileCalculator;
   servePlanForm: ServePlanForm;
   serveTypeTotals: ReturnType<typeof calculateServeTypeTotals>;
   categoryTotals: ServeType;
   meals: MealForm[];
+  foodList: Food[];
+  setFoodList: (list: Food[]) => void;
+  setSchedule: (startDate: Date, endDate: Date) => void;
   setMeals: (meals: MealForm[]) => void;
   setProfileCalculator: (calculator: ProfileCalculator) => void;
   setServePlanForm: (form: Partial<ServePlanForm>) => void;
@@ -36,13 +46,21 @@ const initServePlanForm = {
 };
 
 const useCreateDietPlan = create<UseCreateDietPlanForm>((set) => ({
+  schedule: {
+    startDate: new Date(),
+    endDate: new Date(Date.now() + 12096e5), // two weeks from now
+  },
+  active: true,
   profileCalculator: undefined,
   servePlanForm: initServePlanForm,
   meals: [],
+  foodList: [],
   serveTypeTotals: calculateServeTypeTotals(initServePlanForm),
   categoryTotals: calculateCategoryTotals(
     calculateServeTypeTotals(initServePlanForm)
   ),
+  setSchedule: (startDate, endDate) =>
+    set((state) => ({ ...state, schedule: { startDate, endDate } })),
   setProfileCalculator: (calculator) =>
     set((state) => ({ ...state, profileCalculator: calculator })),
   setServePlanForm: (form) =>
@@ -58,6 +76,7 @@ const useCreateDietPlan = create<UseCreateDietPlanForm>((set) => ({
       };
     }),
   setMeals: (meals) => set((state) => ({ ...state, meals })),
+  setFoodList: (foodList) => set((state) => ({ ...state, foodList })),
 }));
 
 export default useCreateDietPlan;
