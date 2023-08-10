@@ -45,8 +45,10 @@ model User {
   password      String?
   emailVerified DateTime?
   image         String?
-  accounts      Account[]
-  sessions      Session[]
+
+  accounts Account[]
+  sessions Session[]
+  Profile  Profile?
 }
 
 model VerificationToken {
@@ -55,4 +57,118 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model SubscriptionPlan {
+  id          String  @id @default(cuid())
+  label       String
+  description String
+  price       Float
+  per         String
+  active      Boolean @default(true)
+
+  Profile Profile[]
+}
+
+model Profile {
+  id             String   @id @default(cuid())
+  goal           String
+  name           String
+  dob            DateTime
+  gender         String
+  activityLevel  String   @default("LOW")
+  objective      String
+  foodAllergy    String?
+  chronicDisease String?
+  previousDiet   Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  userId             String            @unique
+  user               User              @relation(fields: [userId], references: [id])
+  subscriptionPlanId String?
+  subscriptionPlan   SubscriptionPlan? @relation(fields: [subscriptionPlanId], references: [id])
+
+  dietPlans DietPlan[]
+  records   Record[]
+}
+
+model Record {
+  id String @id @default(cuid())
+
+  weight    Float
+  height    Float
+  createdAt DateTime @default(now())
+
+  profileId String
+  profile   Profile @relation(fields: [profileId], references: [id])
+}
+
+model DietPlan {
+  id String @id @default(cuid())
+
+  startDate DateTime
+  endDate   DateTime
+  active    Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  profileId String
+  profile   Profile @relation(fields: [profileId], references: [id])
+
+  servePlan ServePlan?
+  meals     Meal[]
+}
+
+model ServePlan {
+  id            String @id @default(cuid())
+  starch        Int
+  vegetable     Int
+  fruit         Int
+  leanMeat      Int
+  mediumMeat    Int
+  highMeat      Int
+  lowFatMilk    Int
+  mediumFatMilk Int
+  highFatMilk   Int
+  legume        Int
+  sugar         Int
+  pufa          Int
+  mufa          Int
+
+  dietPlanId String   @unique
+  DietPlan   DietPlan @relation(fields: [dietPlanId], references: [id])
+}
+
+model Meal {
+  id    String @id @default(cuid())
+  label String
+  order Int
+
+  dietPlanId String
+  dietPlan   DietPlan @relation(fields: [dietPlanId], references: [id])
+
+  contents MealItem[]
+}
+
+model MealItem {
+  id     String @id @default(cuid())
+  amount Int
+
+  mealId String
+  meal   Meal   @relation(fields: [mealId], references: [id])
+  itemId String
+  item   Food   @relation(fields: [itemId], references: [id])
+}
+
+model Food {
+  id    String @id @default(cuid())
+  label String
+
+  unit      String
+  amount    Int
+  serveType String
+
+  mealItems MealItem[]
 }

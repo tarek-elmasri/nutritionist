@@ -1,5 +1,23 @@
 import { ZodError } from "zod";
 
+export class UnauthenticatedError extends Error {
+  constructor() {
+    super("Unauthenticated");
+  }
+}
+
+export class UnauthorizedError extends Error {
+  constructor() {
+    super("Unauthorized");
+  }
+}
+
+export class NotFoundError extends Error {
+  constructor() {
+    super("Not Found");
+  }
+}
+
 type FieldError = {
   field: string;
   message: string;
