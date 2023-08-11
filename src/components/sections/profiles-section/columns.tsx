@@ -2,7 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import CellActions from "@/components/sections/profiles-section/cell-actions";
-import { Gender, Goal } from "@/type";
+import { Gender, TableFilterKeys } from "@/type";
 
 export type ProfilesColumn = {
   id: string;
@@ -11,6 +11,17 @@ export type ProfilesColumn = {
   gender: Gender;
   createdAt: string;
 };
+
+export const filterKeys: TableFilterKeys<ProfilesColumn> = [
+  {
+    accessorKey: "name",
+    label: "Name",
+  },
+  {
+    accessorKey: "gender",
+    label: "Gender",
+  },
+];
 
 export const columns: ColumnDef<ProfilesColumn>[] = [
   {

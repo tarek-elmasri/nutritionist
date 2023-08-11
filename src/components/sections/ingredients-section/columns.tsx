@@ -2,7 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import CellActions from "@/components/sections/profiles-section/cell-actions";
-import { ServeTypeKey } from "@/type";
+import { ServeTypeKey, TableFilterKeys } from "@/type";
 
 export type ItemColumn = {
   id: string;
@@ -11,6 +11,17 @@ export type ItemColumn = {
   unit: string;
   serveType: string;
 };
+
+export const filterKeys: TableFilterKeys<ItemColumn> = [
+  {
+    accessorKey: "label",
+    label: "Name",
+  },
+  {
+    accessorKey: "serveType",
+    label: "Serve Category",
+  },
+];
 
 export const columns: ColumnDef<ItemColumn>[] = [
   {

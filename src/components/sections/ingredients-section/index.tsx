@@ -3,7 +3,7 @@
 import { DataTable } from "@/components/ui/data-table";
 import useFetch from "@/hooks/useFetch";
 import { ServeTypeKey } from "@/type";
-import { ItemColumn, columns } from "./columns";
+import { ItemColumn, columns, filterKeys } from "./columns";
 import TableLoader from "@/components/ui/table-loader";
 import getFood from "@/actions/getFood";
 import { Button } from "@/components/ui/button";
@@ -69,7 +69,11 @@ const IngredientsSection = () => {
       </div>
 
       <div>
-        <DataTable columns={columns} data={structuredItems || []} />
+        <DataTable
+          columns={columns}
+          data={structuredItems || []}
+          filterKeys={filterKeys}
+        />
       </div>
     </div>
   );
