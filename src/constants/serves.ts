@@ -1,4 +1,4 @@
-import { ServeType } from "@/type";
+import { ServeType, ServeTypeMap } from "@/type";
 
 export const fruitServe: ServeType = {
   CHO: 15,
@@ -98,5 +98,60 @@ const serves = {
   sugarServe,
   vegetableServe,
 };
+
+export const serveOptions: ServeTypeMap = [
+  {
+    label: "Starch",
+    value: "starch",
+  },
+  {
+    label: "Fruit",
+    value: "fruit",
+  },
+  {
+    label: "Vegetable",
+    value: "vegetable",
+  },
+  {
+    label: "Lean Meat",
+    value: "leanMeat",
+  },
+  {
+    label: "Medium Fat Meat",
+    value: "mediumMeat",
+  },
+  {
+    label: "High Fat Meat",
+    value: "highMeat",
+  },
+  {
+    label: "Low Fat Milk",
+    value: "lowFatMilk",
+  },
+  {
+    label: "Medium Fat Milk",
+    value: "mediumFatMilk",
+  },
+  {
+    label: "High Fat Milk",
+    value: "highFatMilk",
+  },
+  {
+    label: "Sugar",
+    value: "sugar",
+  },
+  {
+    label: "Legume",
+    value: "legume",
+  },
+  {
+    label: "Unsaturated Fat (MUFA)",
+    value: "mufa",
+  },
+  {
+    label: "Unsaturated Fat (PUFA)",
+    value: "pufa",
+  },
+];
 
 export default serves;
