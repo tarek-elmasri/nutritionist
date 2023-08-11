@@ -5,6 +5,7 @@ export const HISTORY = "history";
 export const SUBSCRIPTION = "subscription";
 export const MESSAGES = "messages";
 export const PROFILES = "profiles";
+export const INGREDIENTS = "ingredients";
 
 const tabs = {
   // user
@@ -16,6 +17,7 @@ const tabs = {
   SETTINGS,
   // console
   PROFILES,
+  INGREDIENTS,
 };
 
 export default tabs;
