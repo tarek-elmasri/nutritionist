@@ -1,4 +1,4 @@
-import { ServeType, ServeTypeMap } from "@/type";
+import { ServeType, ServeTypeKey, ServeTypeMap } from "@/type";
 
 export const fruitServe: ServeType = {
   CHO: 15,
@@ -99,57 +99,73 @@ const serves = {
   vegetableServe,
 };
 
+export const serveLabels: Record<ServeTypeKey, string> = {
+  fruit: "Fruit",
+  starch: "Starch",
+  vegetable: "Vegetable",
+  leanMeat: "Lean Meet",
+  mediumMeat: "Medium Fat Meet",
+  highMeat: "High Fat Meet",
+  lowFatMilk: "Low Fat Milk",
+  mediumFatMilk: "Medium Fat Milk",
+  highFatMilk: "High Fat Milk",
+  legume: "Legume",
+  sugar: "Sugar",
+  pufa: "Unsaturated Fat (PUFA)",
+  mufa: "Unsaturated Fat (MUFA)",
+};
+
 export const serveOptions: ServeTypeMap = [
   {
-    label: "Starch",
+    label: serveLabels["starch"],
     value: "starch",
   },
   {
-    label: "Fruit",
+    label: serveLabels["fruit"],
     value: "fruit",
   },
   {
-    label: "Vegetable",
+    label: serveLabels["vegetable"],
     value: "vegetable",
   },
   {
-    label: "Lean Meat",
+    label: serveLabels["leanMeat"],
     value: "leanMeat",
   },
   {
-    label: "Medium Fat Meat",
+    label: serveLabels["mediumMeat"],
     value: "mediumMeat",
   },
   {
-    label: "High Fat Meat",
+    label: serveLabels["highMeat"],
     value: "highMeat",
   },
   {
-    label: "Low Fat Milk",
+    label: serveLabels["lowFatMilk"],
     value: "lowFatMilk",
   },
   {
-    label: "Medium Fat Milk",
+    label: serveLabels["mediumFatMilk"],
     value: "mediumFatMilk",
   },
   {
-    label: "High Fat Milk",
+    label: serveLabels["highFatMilk"],
     value: "highFatMilk",
   },
   {
-    label: "Sugar",
+    label: serveLabels["sugar"],
     value: "sugar",
   },
   {
-    label: "Legume",
+    label: serveLabels["legume"],
     value: "legume",
   },
   {
-    label: "Unsaturated Fat (MUFA)",
+    label: serveLabels["mufa"],
     value: "mufa",
   },
   {
-    label: "Unsaturated Fat (PUFA)",
+    label: serveLabels["pufa"],
     value: "pufa",
   },
 ];
