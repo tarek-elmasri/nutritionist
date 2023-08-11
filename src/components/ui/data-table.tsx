@@ -6,6 +6,8 @@ import {
   getCoreRowModel,
   useReactTable,
   getPaginationRowModel,
+  ColumnFiltersState,
+  getFilteredRowModel,
 } from "@tanstack/react-table";
 
 import {
@@ -18,6 +20,15 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { TableFilterKeys } from "@/type";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -27,20 +38,75 @@ interface DataTableProps<TData, TValue> {
 export function DataTable<TData, TValue>({
   columns,
   data,
-}: DataTableProps<TData, TValue>) {
+  filterKeys,
+}: DataTableProps<TData, TValue> & {
+  filterKeys?: TableFilterKeys<TData>;
+}) {
   const [currentPage, setCurrentPage] = useState(0);
+
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [searchKey, setSearchKey] = useState(filterKeys?.[0]);
+
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
     state: {
-      pagination: { pageSize: 7, pageIndex: currentPage },
+      pagination: { pageSize: 5, pageIndex: currentPage },
+      columnFilters,
     },
   });
 
   return (
     <div>
+      {/* Filtering */}
+      {filterKeys && searchKey && (
+        <div className="flex flex-col gap-4 md:flex-row justify-start items-start md:items-center py-4">
+          <Input
+            placeholder="Search"
+            value={
+              (table
+                .getColumn(searchKey.accessorKey as string)
+                ?.getFilterValue() as string) ?? ""
+            }
+            onChange={(event) =>
+              table
+                .getColumn(searchKey.accessorKey as string)
+                ?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm"
+          />
+
+          <Select
+            defaultValue={searchKey?.accessorKey as string}
+            onValueChange={(value) =>
+              setSearchKey(
+                filterKeys.find((filter) => filter.accessorKey === value)
+              )
+            }
+          >
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Search By" />
+            </SelectTrigger>
+            <SelectContent>
+              {filterKeys.map(
+                (option) =>
+                  option.accessorKey !== "actions" && (
+                    <SelectItem
+                      key={option.accessorKey as string}
+                      value={option.accessorKey as string}
+                    >
+                      {option.label}
+                    </SelectItem>
+                  )
+              )}
+            </SelectContent>
+          </Select>
+        </div>
+      )}
       <div className="rounded-md border border-primary">
         <Table>
           <TableHeader>
