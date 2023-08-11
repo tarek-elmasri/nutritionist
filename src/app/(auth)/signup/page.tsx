@@ -6,7 +6,7 @@ const SignupPage = async () => {
   const user = await getCurrentUser();
 
   const profileUrl = `/profile`;
-  const newProfileUrl = `/profile/new`;
+  const newProfileUrl = `/new`;
   if (user?.email) redirect(profileUrl);
 
   return (
