@@ -20,7 +20,7 @@ const ProfilePage = async () => {
         <NotificationsMenu />
       </div>
 
-      <div className="mt-10 p-6 h-full overflow-y-auto">
+      <div className="pt-10 p-6 h-full overflow-y-auto">
         <UserView userId={user!.id} profileId={profile.id} />
       </div>
     </div>
