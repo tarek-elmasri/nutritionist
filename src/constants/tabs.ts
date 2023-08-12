@@ -1,6 +1,6 @@
 export const PROGRESS = "progress";
 export const SETTINGS = "settings";
-export const WEEKLY_PLAN = "weeklyPlan";
+export const ACTIVE_PLANS = "plans";
 export const HISTORY = "history";
 export const SUBSCRIPTION = "subscription";
 export const MESSAGES = "messages";
@@ -9,7 +9,7 @@ export const INGREDIENTS = "ingredients";
 
 const tabs = {
   // user
-  WEEKLY_PLAN,
+  ACTIVE_PLANS,
   HISTORY,
   SUBSCRIPTION,
   MESSAGES,

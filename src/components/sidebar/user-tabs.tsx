@@ -7,40 +7,51 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 const UserTabs = () => {
   const router = useRouter();
-  const tab = useSearchParams().get("tab") || TABS.WEEKLY_PLAN;
+  const tab = useSearchParams().get("tab") || TABS.ACTIVE_PLANS;
 
+  const userTabs = [
+    {
+      label: "Diet Plan",
+      active: tab === TABS.ACTIVE_PLANS,
+      icon: LayoutGrid,
+      href: `/profile?tab=${TABS.ACTIVE_PLANS}`,
+    },
+    {
+      label: "Progress",
+      active: tab === TABS.PROGRESS,
+      icon: LayoutGrid,
+      href: `/profile?tab=${TABS.PROGRESS}`,
+    },
+    {
+      label: "History",
+      active: tab === TABS.HISTORY,
+      icon: LayoutGrid,
+      href: `/profile?tab=${TABS.HISTORY}`,
+    },
+    {
+      label: "Messages",
+      active: tab === TABS.MESSAGES,
+      icon: LayoutGrid,
+      href: `/profile?tab=${TABS.MESSAGES}`,
+    },
+    {
+      label: "Settings",
+      active: tab === TABS.SETTINGS,
+      icon: LayoutGrid,
+      href: `/profile?tab=${TABS.SETTINGS}`,
+    },
+  ];
   return (
     <>
-      <SidebarTap
-        label="Diet Plan"
-        isSelected={tab === TABS.WEEKLY_PLAN}
-        icon={LayoutGrid}
-        onClick={() => router.push(`/profile?tab=${TABS.WEEKLY_PLAN}`)}
-      />
-      <SidebarTap
-        label="Progress"
-        isSelected={tab === TABS.PROGRESS}
-        icon={LayoutGrid}
-        onClick={() => router.push(`/profile?tab=${TABS.PROGRESS}`)}
-      />
-      <SidebarTap
-        label="History"
-        isSelected={tab === TABS.HISTORY}
-        icon={LayoutGrid}
-        onClick={() => router.push(`/profile?tab=${TABS.HISTORY}`)}
-      />
-      <SidebarTap
-        label="Messages"
-        isSelected={tab === TABS.MESSAGES}
-        icon={LayoutGrid}
-        onClick={() => router.push(`/profile?tab=${TABS.MESSAGES}`)}
-      />
-      <SidebarTap
-        label="Settings"
-        isSelected={tab === TABS.SETTINGS}
-        icon={LayoutGrid}
-        onClick={() => router.push(`/profile?tab=${TABS.SETTINGS}`)}
-      />
+      {userTabs.map(({ label, active, icon, href }) => (
+        <SidebarTap
+          key={label}
+          label={label}
+          isSelected={active}
+          icon={icon}
+          onClick={() => router.push(href)}
+        />
+      ))}
     </>
   );
 };
