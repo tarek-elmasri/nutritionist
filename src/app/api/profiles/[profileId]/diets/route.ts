@@ -58,7 +58,7 @@ export const POST = async (
 
       // create array of promises for each meal and its content
       const promises = meals.map((meal) => {
-        tx.meal.create({
+        return tx.meal.create({
           data: {
             dietPlanId: plan.id,
             label: meal.label,
