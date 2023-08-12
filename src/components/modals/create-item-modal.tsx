@@ -182,7 +182,12 @@ const CreateItemModal: FC<CreateItemModalProps> = ({
             />
 
             <div className="py-3 flex items-center gap-6 justify-end">
-              <Button variant={"ghost"} size={"sm"} type="button">
+              <Button
+                variant={"ghost"}
+                size={"sm"}
+                type="button"
+                onClick={onClose}
+              >
                 Cancel
               </Button>
               <Button
