@@ -6,6 +6,7 @@ import {
   ValidationError,
   constructZodError,
 } from "@/app/api/errors";
+import routes from "@/constants/routes";
 import prisma from "@/lib/prisma";
 import dietPlanSchema from "@/lib/validations/create-diet-plan-schema";
 import { NextResponse } from "next/server";
@@ -78,7 +79,14 @@ export const POST = async (
       return plan;
     });
 
-    // TODO: create notification and message
+    // creates notification
+    await prisma.notification.create({
+      data: {
+        userId: profile.userId,
+        label: "A new diet plan has been added.",
+        href: `${routes.userDietPlan}/${dietPlan.id}`,
+      },
+    });
 
     return NextResponse.json(dietPlan);
   } catch (error) {
