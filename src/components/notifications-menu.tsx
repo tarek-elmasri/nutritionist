@@ -29,7 +29,7 @@ const NotificationCell: FC<NotificationCellProps> = ({
 }) => (
   <li
     className={cn(
-      "p-3 w-full border-b border-b-neutral-300 cursor-pointer hover:bg-lightgreen",
+      "p-3 bg-neutral-100 w-full border-b border-b-neutral-300 cursor-pointer hover:bg-lightgreen",
       !seen && "bg-lightgreen/40"
     )}
   >
@@ -108,10 +108,10 @@ const NotificationsMenu = () => {
           </Button>
         </PopoverTrigger>
         <PopoverContent
-          className="w-80 h-[15rem] overflow-y-auto p-0"
+          className="w-80 h-[15rem] overflow-y-auto p-0 bg-neutral-300"
           align="end"
         >
-          <ul className="w-full bg-background [&_li:last-child]:border-b-0">
+          <ul className="w-full [&_li:last-child]:border-b-0">
             {notificationList.length === 0 ? (
               <NoNotifications />
             ) : (
