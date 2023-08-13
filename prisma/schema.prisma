@@ -96,9 +96,15 @@ model Profile {
 model Record {
   id String @id @default(cuid())
 
-  weight    Float
-  height    Float
-  createdAt DateTime @default(now())
+  weight         Float
+  height         Float
+  bust           Float?
+  waist          Float?
+  abdominalGirth Float?
+  hips           Float?
+  arm            Float?
+  thighs         Float?
+  createdAt      DateTime @default(now())
 
   profileId String
   profile   Profile @relation(fields: [profileId], references: [id])
@@ -167,7 +173,7 @@ model Food {
   label String
 
   unit      String
-  amount    Int
+  amount    Float
   serveType String
 
   mealItems MealItem[]

@@ -82,4 +82,10 @@ export type MealForm = Omit<Meal, "id" | "dietPlanId"> & {
 };
 
 export type ServeTypeKey = keyof ServePlanForm;
-export type ServeTypeMap = Record<ServeTypeKey, ServeType>;
+// export type ServeTypeMap = Record<ServeTypeKey, ServeType>;
+export type ServeTypeMap = { label: string; value: ServeTypeKey }[];
+
+export type TableFilterKeys<TData> = {
+  accessorKey: keyof TData;
+  label: string;
+}[];

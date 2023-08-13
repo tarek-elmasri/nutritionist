@@ -11,26 +11,28 @@ const useFetch = <T,>(fetchMethod: () => Promise<T>) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<any>(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setIsLoading(true);
-        const res = await fetchMethod();
-        setData(res);
-      } catch (error) {
-        setErrors(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  const refetch = async () => {
+    try {
+      setIsLoading(true);
+      const res = await fetchMethod();
+      setData(res);
+    } catch (error) {
+      setErrors(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    fetchData();
-  }, [fetchMethod]);
+  useEffect(() => {
+    refetch();
+    // eslint-disable-next-line
+  }, []);
 
   return {
     data,
     errors,
     isLoading,
+    refetch,
   };
 };
 

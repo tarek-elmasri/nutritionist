@@ -2,13 +2,13 @@
 
 import prisma from "@/lib/prisma";
 
-export const getRecords = async (profileId: string) =>
+export const getRecords = async (profileId: string, order?: "asc" | "desc") =>
   prisma.record.findMany({
     where: {
       profileId,
     },
     orderBy: {
-      createdAt: "desc",
+      createdAt: order ?? "desc",
     },
   });
 

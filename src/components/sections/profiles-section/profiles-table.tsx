@@ -5,7 +5,7 @@ import { DataTable } from "@/components/ui/data-table";
 import useFetch from "@/hooks/useFetch";
 import { calculateAgeFromDOB } from "@/lib/utils";
 import { Gender } from "@/type";
-import { columns } from "./columns";
+import { columns, filterKeys } from "./columns";
 import TableLoader from "@/components/ui/table-loader";
 import { format } from "date-fns";
 
@@ -29,7 +29,11 @@ const ProfilesTable = () => {
       <h4 className="section-header">Profiles</h4>
 
       <div>
-        <DataTable columns={columns} data={structuredProfiles || []} />
+        <DataTable
+          columns={columns}
+          data={structuredProfiles || []}
+          filterKeys={filterKeys}
+        />
       </div>
     </div>
   );

@@ -36,63 +36,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-
-type ServeOptionsType = { label: string; value: ServeTypeKey }[];
-
-const serveOptions: ServeOptionsType = [
-  {
-    label: "Starch",
-    value: "starch",
-  },
-  {
-    label: "Fruit",
-    value: "fruit",
-  },
-  {
-    label: "Vegetable",
-    value: "vegetable",
-  },
-  {
-    label: "Lean Meat",
-    value: "leanMeat",
-  },
-  {
-    label: "Medium Fat Meat",
-    value: "mediumMeat",
-  },
-  {
-    label: "High Fat Meat",
-    value: "highMeat",
-  },
-  {
-    label: "Low Fat Milk",
-    value: "lowFatMilk",
-  },
-  {
-    label: "Medium Fat Milk",
-    value: "mediumFatMilk",
-  },
-  {
-    label: "High Fat Milk",
-    value: "highFatMilk",
-  },
-  {
-    label: "Sugar",
-    value: "sugar",
-  },
-  {
-    label: "Legume",
-    value: "legume",
-  },
-  {
-    label: "Unsaturated Fat (MUFA)",
-    value: "mufa",
-  },
-  {
-    label: "Unsaturated Fat (PUFA)",
-    value: "pufa",
-  },
-];
+import { serveOptions } from "@/constants/serves";
 
 interface AddMealItemModalProps {
   isOpen: boolean;
@@ -112,7 +56,6 @@ const AddMealItemModal: FC<AddMealItemModalProps> = ({
     serveOptions[0].value
   );
   const [isItemMenuOpen, setIsItemMenuOpen] = useState(false);
-  // const [currentItemId, setCurrentItemId] = useState<string | null>(null);
 
   const form = useForm({
     resolver: zodResolver(mealItemSchema),
