@@ -21,7 +21,7 @@ interface RecordsSectionProps {
 
 const RecordsSection: FC<RecordsSectionProps> = ({ profileId }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isAddRecordModalOpen, setIsAddRecordModalOpen] = useState(true);
+  const [isAddRecordModalOpen, setIsAddRecordModalOpen] = useState(false);
 
   const {
     data: records,
