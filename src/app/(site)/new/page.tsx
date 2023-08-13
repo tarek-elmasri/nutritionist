@@ -1,19 +1,17 @@
-import { CreateProfileForm } from "@/hooks/useCreateProfile";
-import profileSchema from "@/lib/validations/profile-schema";
-import prisma from "@/lib/prisma";
 import NewProfileForm from "./(components)/new-profile-form";
 import getCurrentUser from "@/actions/get CurrentUser";
 import { getProfile } from "@/actions/getProfiles";
 import { redirect } from "next/navigation";
+import createProfile from "@/actions/createProfile";
 
-const createProfile = async (form: CreateProfileForm) => {
-  "use server";
-  const data = profileSchema.parse(form);
-  const { height, weight, ...rest } = data;
-  return prisma.profile.create({
-    data: { ...rest, records: { create: [{ height, weight }] } },
-  });
-};
+// const createProfile = async (form: CreateProfileForm) => {
+//   "use server";
+//   const data = profileSchema.parse(form);
+//   const { height, weight, ...rest } = data;
+//   return prisma.profile.create({
+//     data: { ...rest, records: { create: [{ height, weight }] } },
+//   });
+// };
 
 const NewProfilePage = async () => {
   const user = await getCurrentUser();
