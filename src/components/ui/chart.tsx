@@ -8,6 +8,7 @@ import {
   YAxis,
   Tooltip,
   Legend,
+  ResponsiveContainer,
 } from "recharts";
 
 type TLine<TKey> = {
@@ -33,28 +34,28 @@ const Chart = <T,>({
   height,
 }: ChartProps<T>) => {
   return (
-    <LineChart
-      id={id}
-      width={width ?? 600}
-      height={height ?? 300}
-      data={data}
-      margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
-      throttleDelay={20}
-    >
-      <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-      <XAxis dataKey={xAxisKey as string} />
-      <YAxis type="number" domain={["dataMin", "dataMax"]} />
-      <Tooltip />
-      <Legend />
-      {lineKeys.map((line) => (
-        <Line
-          key={line.key as string}
-          type="monotone"
-          dataKey={line.key as string}
-          stroke={line.strokeColor}
-        />
-      ))}
-    </LineChart>
+    <ResponsiveContainer width={width ?? "100%"} height={300}>
+      <LineChart
+        id={id}
+        data={data}
+        margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
+        throttleDelay={20}
+      >
+        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+        <XAxis dataKey={xAxisKey as string} />
+        <YAxis type="number" domain={["dataMin", "dataMax"]} />
+        <Tooltip />
+        <Legend />
+        {lineKeys.map((line) => (
+          <Line
+            key={line.key as string}
+            type="monotone"
+            dataKey={line.key as string}
+            stroke={line.strokeColor}
+          />
+        ))}
+      </LineChart>
+    </ResponsiveContainer>
   );
 };
 
