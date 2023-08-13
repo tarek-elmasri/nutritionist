@@ -13,6 +13,7 @@ import PageLoader from "@/components/ui/page-loader";
 import createRecord from "@/actions/createRecord";
 import { RecordsSchema } from "@/lib/validations/records-schema";
 import { toast } from "react-hot-toast";
+import { parseDateWithoutTime } from "@/lib/utils";
 
 interface RecordsSectionProps {
   profileId: string;
@@ -20,7 +21,7 @@ interface RecordsSectionProps {
 
 const RecordsSection: FC<RecordsSectionProps> = ({ profileId }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isAddRecordModalOpen, setIsAddRecordModalOpen] = useState(false);
+  const [isAddRecordModalOpen, setIsAddRecordModalOpen] = useState(true);
 
   const {
     data: records,
@@ -32,6 +33,12 @@ const RecordsSection: FC<RecordsSectionProps> = ({ profileId }) => {
     id: record.id,
     weight: record.weight.toString(),
     height: record.height.toString(),
+    bust: record.bust?.toString() ?? "-",
+    waist: record.waist?.toString() ?? "-",
+    abdominalGirth: record.abdominalGirth?.toString() ?? "-",
+    hips: record.hips?.toString() ?? "-",
+    arm: record.arm?.toString() ?? "-",
+    thighs: record.thighs?.toString() ?? "-",
     createdAt: format(record.createdAt, "dd-MM-yyy"),
   }));
 
@@ -42,13 +49,15 @@ const RecordsSection: FC<RecordsSectionProps> = ({ profileId }) => {
       toast.success("Record added successfully!");
       refetch();
     } catch (error) {
-      toast.error("Something went wrong!");
+      toast.error((error as Error).message);
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  console.log(records?.[0]);
+  const isAllowedToCreateNewRecord =
+    records?.[0] && parseDateWithoutTime(new Date()) > records[0].createdAt;
+
   return (
     <div className="space-y-6">
       {isSubmitting && (
@@ -69,10 +78,14 @@ const RecordsSection: FC<RecordsSectionProps> = ({ profileId }) => {
           <p className="text-xs text-darkred leading-6">
             * It&apos;s recommanded to add new records on weekly basis.
           </p>
+          <p className="text-xs text-darkred leading-6">
+            * Only single record is allowed on daily basis.
+          </p>
         </div>
         <Button
           size={"sm"}
           type="button"
+          disabled={!isAllowedToCreateNewRecord}
           onClick={() => setIsAddRecordModalOpen(true)}
         >
           New

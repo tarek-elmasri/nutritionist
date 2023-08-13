@@ -7,6 +7,12 @@ export type RecordColumn = {
   id: string;
   weight: string;
   height: string;
+  bust: string;
+  waist: string;
+  abdominalGirth: string;
+  hips: string;
+  arm: string;
+  thighs: string;
   createdAt: string;
 };
 
@@ -33,6 +39,30 @@ export const columns: ColumnDef<RecordColumn>[] = [
   {
     accessorKey: "height",
     header: "Height",
+  },
+  {
+    accessorKey: "bust",
+    header: "Bust",
+  },
+  {
+    accessorKey: "waist",
+    header: "Waist",
+  },
+  {
+    accessorKey: "abdominalGirth",
+    header: "Abdominal Girth",
+  },
+  {
+    accessorKey: "hips",
+    header: "Hips",
+  },
+  {
+    accessorKey: "arm",
+    header: "Arm",
+  },
+  {
+    accessorKey: "thighs",
+    header: "Thighs",
   },
   {
     accessorKey: "createdAt",
