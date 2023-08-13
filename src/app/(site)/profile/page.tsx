@@ -14,17 +14,7 @@ const ProfilePage = async () => {
     redirect("/new");
   }
 
-  return (
-    <div className="relative w-full h-full bg-background p-6 rounded-lg shadow-[-5px_5px_10px_0_hsl(var(--primary)_/0.5)] ">
-      <div className="absolute top-3 right-3">
-        <NotificationsMenu />
-      </div>
-
-      <div className="pt-10 p-6 h-full overflow-y-auto">
-        <UserView userId={user!.id} profileId={profile.id} />
-      </div>
-    </div>
-  );
+  return <UserView userId={user!.id} profileId={profile.id} />;
 };
 
 export default ProfilePage;
