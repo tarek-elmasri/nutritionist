@@ -76,7 +76,7 @@ const Message: FC<MessageProps> = ({
       </div>
 
       <Separator />
-      <div className="p-6">{userMessage.message.body}</div>
+      <div className="p-6 whitespace-pre-wrap">{userMessage.message.body}</div>
     </div>
   );
 };

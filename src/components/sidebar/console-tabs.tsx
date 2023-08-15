@@ -17,7 +17,7 @@ const ConsoleTabs = () => {
       label: "Profiles",
       active: tab === TABS.PROFILES,
       icon: LayoutGrid,
-      href: `console?tab=${TABS.PROFILES}`,
+      href: `/console?tab=${TABS.PROFILES}`,
     },
     {
       label: "Ingredients",
