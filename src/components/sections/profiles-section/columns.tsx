@@ -42,6 +42,6 @@ export const columns: ColumnDef<ProfilesColumn>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => <CellActions />,
+    cell: ({ row }) => <CellActions profile={row.original} />,
   },
 ];
