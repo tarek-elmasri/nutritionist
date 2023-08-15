@@ -1,6 +1,6 @@
 "use client";
 
-import { Apple, LayoutGrid } from "lucide-react";
+import { Apple, LayoutGrid, Mail } from "lucide-react";
 import SidebarTap from "./sidebar-tab";
 import { TABS } from "@/constants";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -21,6 +21,12 @@ const ConsoleTabs = () => {
       active: tab === TABS.INGREDIENTS,
       icon: Apple,
       href: `/console?tab=${TABS.INGREDIENTS}`,
+    },
+    {
+      label: "Messages",
+      active: tab === TABS.MESSAGES,
+      icon: Mail,
+      href: `/console?tab=${TABS.MESSAGES}`,
     },
   ];
   return (
