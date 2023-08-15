@@ -30,10 +30,7 @@ const UserView: FC<UserViewProps> = ({ userId, profileId }) => {
       {tab === TABS.HISTORY && <ArchivedPlansSection profileId={profileId} />}
 
       {tab === TABS.MESSAGES && (
-        <MessagesSection
-          userId={userId}
-          newMessageLink={`${routes.userMessage}/new`}
-        />
+        <MessagesSection userId={userId} messagesLink={routes.userMessage} />
       )}
     </div>
   );

@@ -23,10 +23,7 @@ const ConsoleView = ({ userId }: { userId: string }) => {
       {tab === TABS.INGREDIENTS && <IngredientsSection />}
 
       {tab === TABS.MESSAGES && (
-        <MessagesSection
-          userId={userId}
-          newMessageLink={`${routes.consoleMessage}/new`}
-        />
+        <MessagesSection userId={userId} messagesLink={routes.consoleMessage} />
       )}
     </div>
   );

@@ -11,6 +11,7 @@ export type MessageColumn = {
   sender: string;
   title: string;
   seen: boolean;
+  href: string;
   createdAt: string;
 };
 
@@ -51,10 +52,7 @@ export const columns: ColumnDef<MessageColumn>[] = [
 
 const SubjectCell = ({ data }: { data: MessageColumn }) => {
   return (
-    <Link
-      href={`${routes.userMessage}/${data.id}`}
-      className="hover:underline focus-visible:underline"
-    >
+    <Link href={data.href} className="hover:underline focus-visible:underline">
       {data.title}
     </Link>
   );

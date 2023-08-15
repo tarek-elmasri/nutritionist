@@ -12,12 +12,12 @@ import { useRouter } from "next/navigation";
 
 interface MessagesSectionProps {
   userId: string;
-  newMessageLink: string;
+  messagesLink: string;
 }
 
 const MessagesSection: FC<MessagesSectionProps> = ({
   userId,
-  newMessageLink,
+  messagesLink,
 }) => {
   const router = useRouter();
 
@@ -28,6 +28,7 @@ const MessagesSection: FC<MessagesSectionProps> = ({
     sender: userMessage.sender.Profile?.name || userMessage.sender.name!,
     title: userMessage.message.title,
     seen: userMessage.seen,
+    href: `${messagesLink}/${userMessage.id}`,
     createdAt: format(userMessage.message.createdAt, "dd-MM-yyyy"),
   }));
 
@@ -39,7 +40,7 @@ const MessagesSection: FC<MessagesSectionProps> = ({
         <Button
           size={"sm"}
           type="button"
-          onClick={() => router.push(newMessageLink)}
+          onClick={() => router.push(`${messagesLink}/new`)}
         >
           New
         </Button>
