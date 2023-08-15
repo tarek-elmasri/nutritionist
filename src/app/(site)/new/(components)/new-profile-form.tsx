@@ -1,7 +1,7 @@
 "use client";
 
 import useCreateProfile, { CreateProfileForm } from "@/hooks/useCreateProfile";
-import { FC, ReactNode, useEffect, useState } from "react";
+import { FC, ReactNode, useEffect, useState, useTransition } from "react";
 import GoalStep from "./goal-step";
 import DetailsStep from "./details-step";
 import ObjectiveStep from "./objective-step";
@@ -23,22 +23,21 @@ const NewProfileForm: FC<NewProfileFormProps> = ({
   onSubmit: createProfile,
 }) => {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   const { setForm } = useCreateProfile();
   const { currentStepIndex, setStepsCount } = useSteps();
 
   const handleCreateProfile = async (form: CreateProfileForm) => {
-    try {
-      setIsLoading(true);
-      await createProfile(form);
-      router.replace("/profile");
-    } catch (error) {
-      console.log(error);
-      toast.error("Something went wrong");
-    } finally {
-      setIsLoading(false);
-    }
+    startTransition(async () => {
+      try {
+        await createProfile(form);
+        router.replace("/profile");
+      } catch (error) {
+        console.log(error);
+        toast.error("Something went wrong");
+      }
+    });
   };
 
   const steps: ReactNode[] = [
@@ -57,7 +56,7 @@ const NewProfileForm: FC<NewProfileFormProps> = ({
 
   return (
     <div className="w-full max-w-sm">
-      {isLoading && (
+      {isPending && (
         <PageLoader message="Please wait while creating your profile" />
       )}
       {steps[currentStepIndex]}

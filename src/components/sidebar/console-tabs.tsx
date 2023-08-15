@@ -4,9 +4,12 @@ import { Apple, LayoutGrid, Mail } from "lucide-react";
 import SidebarTap from "./sidebar-tab";
 import { TABS } from "@/constants";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTransition } from "react";
+import PageLoader from "@/components/ui/page-loader";
 
 const ConsoleTabs = () => {
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
   const tab = useSearchParams().get("tab") || TABS.PROFILES;
 
   const sidebarTabs = [
@@ -31,13 +34,14 @@ const ConsoleTabs = () => {
   ];
   return (
     <>
+      {isPending && <PageLoader />}
       {sidebarTabs.map(({ label, active, icon, href }) => (
         <SidebarTap
           key={label}
           label={label}
           isSelected={active}
           icon={icon}
-          onClick={() => router.push(href)}
+          onClick={() => startTransition(() => router.push(href))}
         />
       ))}
     </>

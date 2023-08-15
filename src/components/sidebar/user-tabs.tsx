@@ -4,9 +4,12 @@ import { LayoutGrid } from "lucide-react";
 import SidebarTap from "./sidebar-tab";
 import { TABS } from "@/constants";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTransition } from "react";
+import PageLoader from "../ui/page-loader";
 
 const UserTabs = () => {
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
   const tab = useSearchParams().get("tab") || TABS.ACTIVE_PLANS;
 
   const userTabs = [
@@ -43,13 +46,14 @@ const UserTabs = () => {
   ];
   return (
     <>
+      {isPending && <PageLoader />}
       {userTabs.map(({ label, active, icon, href }) => (
         <SidebarTap
           key={label}
           label={label}
           isSelected={active}
           icon={icon}
-          onClick={() => router.push(href)}
+          onClick={() => startTransition(() => router.push(href))}
         />
       ))}
     </>
