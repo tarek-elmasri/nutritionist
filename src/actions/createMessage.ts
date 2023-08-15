@@ -37,8 +37,8 @@ const createMessage = async (form: MessageSchema) => {
     await tx.notification.create({
       data: {
         href: newUserMessage.reciever!.isAdmin // reciever is already required on creation
-          ? routes.consoleMessage
-          : routes.userMessage,
+          ? routes.consoleInbox
+          : routes.userInbox,
         label: "A new message has been recieved.",
         userId: recieverId,
       },
