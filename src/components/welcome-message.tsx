@@ -3,7 +3,7 @@
 import Image from "next/image";
 import logo from "@/assets/logo.png";
 
-const WelcomeMessage = () => {
+const WelcomeMessage = ({ username }: { username: string }) => {
   return (
     <div className="relative w-full">
       <div className="absolute inset-0">
@@ -11,7 +11,7 @@ const WelcomeMessage = () => {
       </div>
       <div className="space-y-6">
         <h4 className="section-header text-primary">
-          <span className="text-3xl">Welcome</span> to our platform!
+          <span className="text-3xl">Welcome</span> {username} to our platform!
           <br />
           We are thrilled to have you on board as a registered member.
         </h4>

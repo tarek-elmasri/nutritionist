@@ -3,43 +3,46 @@
 import { LayoutGrid } from "lucide-react";
 import SidebarTap from "./sidebar-tab";
 import { TABS } from "@/constants";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTransition } from "react";
 import PageLoader from "../ui/page-loader";
 
 const UserTabs = () => {
   const router = useRouter();
-  const [isPending, startTransition] = useTransition();
+  const pathname = usePathname();
   const tab = useSearchParams().get("tab") || TABS.ACTIVE_PLANS;
+  const [isPending, startTransition] = useTransition();
+
+  const profilePath = pathname === "/profile";
 
   const userTabs = [
     {
       label: "Diet Plan",
-      active: tab === TABS.ACTIVE_PLANS,
+      active: profilePath && tab === TABS.ACTIVE_PLANS,
       icon: LayoutGrid,
       href: `/profile?tab=${TABS.ACTIVE_PLANS}`,
     },
     {
       label: "Progress",
-      active: tab === TABS.PROGRESS,
+      active: profilePath && tab === TABS.PROGRESS,
       icon: LayoutGrid,
       href: `/profile?tab=${TABS.PROGRESS}`,
     },
     {
       label: "History",
-      active: tab === TABS.HISTORY,
+      active: profilePath && tab === TABS.HISTORY,
       icon: LayoutGrid,
       href: `/profile?tab=${TABS.HISTORY}`,
     },
     {
       label: "Messages",
-      active: tab === TABS.MESSAGES,
+      active: profilePath && tab === TABS.MESSAGES,
       icon: LayoutGrid,
       href: `/profile?tab=${TABS.MESSAGES}`,
     },
     {
       label: "Settings",
-      active: tab === TABS.SETTINGS,
+      active: profilePath && tab === TABS.SETTINGS,
       icon: LayoutGrid,
       href: `/profile?tab=${TABS.SETTINGS}`,
     },

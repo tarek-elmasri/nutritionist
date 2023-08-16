@@ -5,6 +5,7 @@ import CellActions from "./cell-actions";
 
 export type DietPlanColumn = {
   id: string;
+  href: string;
   endDate: string;
   createdAt: string;
 };

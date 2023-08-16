@@ -9,17 +9,30 @@ import RecordsChartSection from "@/components/sections/records-chart-section";
 import ArchivedPlansSection from "@/components/sections/archived-plans-section";
 import MessagesSection from "@/components/sections/messages-section";
 import routes from "@/constants/routes";
+import WelcomeMessage from "./welcome-message";
 
 interface UserViewProps {
   userId: string;
   profileId: string;
+  username: string;
+  showWelcomeMessage?: boolean;
 }
 
-const UserView: FC<UserViewProps> = ({ userId, profileId }) => {
-  const tab = useSearchParams().get("tab") ?? TABS.ACTIVE_PLANS;
+const UserView: FC<UserViewProps> = ({
+  userId,
+  profileId,
+  showWelcomeMessage,
+  username,
+}) => {
+  const tab = useSearchParams().get("tab");
   return (
     <div className="space-y-6">
-      {tab === TABS.ACTIVE_PLANS && <DietPlansSection profileId={profileId} />}
+      {showWelcomeMessage && !tab && <WelcomeMessage username={username} />}
+
+      {(tab === TABS.ACTIVE_PLANS || !tab) && (
+        <DietPlansSection profileId={profileId} href={routes.userDietPlan} />
+      )}
+
       {tab === TABS.PROGRESS && (
         <>
           <RecordsSection profileId={profileId} />

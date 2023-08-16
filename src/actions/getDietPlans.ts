@@ -32,3 +32,10 @@ export const getArchivedDietPlans = (profileId: string) =>
       createdAt: "desc",
     },
   });
+
+export const getDietPlansCount = (profileId: string) =>
+  prisma.dietPlan.count({
+    where: {
+      profileId,
+    },
+  });

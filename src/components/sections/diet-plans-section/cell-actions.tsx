@@ -15,9 +15,7 @@ const CellActions = ({ data }: { data: DietPlanColumn }) => {
       <Button
         size={"sm"}
         type="button"
-        onClick={() =>
-          startTransition(() => router.push(`/profile/diets/${data.id}`))
-        }
+        onClick={() => startTransition(() => router.push(data.href))}
       >
         View
       </Button>

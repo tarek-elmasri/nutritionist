@@ -7,35 +7,18 @@ import useFetch from "@/hooks/useFetch";
 import { format } from "date-fns";
 import { FC } from "react";
 import { columns } from "./columns";
-import Image from "next/image";
-import logo from "@/assets/logo.png";
-import WelcomeMessage from "@/components/welcome-message";
-
-// const WelcomeMessage = () => (
-//   <div className="relative w-full">
-//     <div className="absolute inset-0">
-//       <Image src={logo} alt="" className="mx-auto opacity-10" />
-//     </div>
-//     <div className="space-y-6">
-//       <h4 className="section-header text-primary">Welcome to our platform.</h4>
-//       <div>
-//         <p>Our experts recieved your profile and working on your diet plans</p>
-//         <p>You will recieve a notification once your first plan is ready.</p>
-//       </div>
-//       <p className="font-semibold text-primary"> Stay Tuned !!</p>
-//     </div>
-//   </div>
-// );
 
 interface DietPlansSectionProps {
   profileId: string;
+  href: string;
 }
 
-const DietPlansSection: FC<DietPlansSectionProps> = ({ profileId }) => {
+const DietPlansSection: FC<DietPlansSectionProps> = ({ profileId, href }) => {
   const { data, isLoading } = useFetch(() => getActiveDietPlans(profileId));
 
   const formattedPlans = data?.map((plan) => ({
     id: plan.id,
+    href: `${href}/${plan.id}`,
     endDate: format(plan.endDate, "dd-MM-yyy"),
     createdAt: format(plan.createdAt, "dd-MM-yyyy"),
   }));
@@ -44,8 +27,6 @@ const DietPlansSection: FC<DietPlansSectionProps> = ({ profileId }) => {
     <div className="space-y-6">
       {isLoading ? (
         <TableLoader />
-      ) : data?.length === 0 ? (
-        <WelcomeMessage />
       ) : (
         <>
           <h4 className="section-header">Active Diet Plans:</h4>
