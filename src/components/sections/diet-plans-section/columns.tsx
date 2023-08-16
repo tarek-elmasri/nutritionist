@@ -6,6 +6,7 @@ import CellActions from "./cell-actions";
 export type DietPlanColumn = {
   id: string;
   href: string;
+  totalCalories: string;
   endDate: string;
   createdAt: string;
 };
@@ -18,6 +19,10 @@ export const columns: ColumnDef<DietPlanColumn>[] = [
   {
     accessorKey: "endDate",
     header: "Estimated Schedule",
+  },
+  {
+    accessorKey: "totalCalories",
+    header: "T. Calories",
   },
   {
     id: "actions",

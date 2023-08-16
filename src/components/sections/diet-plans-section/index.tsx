@@ -7,6 +7,7 @@ import useFetch from "@/hooks/useFetch";
 import { format } from "date-fns";
 import { FC } from "react";
 import { columns } from "./columns";
+import { getTotalsFromServePlan } from "@/lib/servesHelper";
 
 interface DietPlansSectionProps {
   profileId: string;
@@ -19,6 +20,7 @@ const DietPlansSection: FC<DietPlansSectionProps> = ({ profileId, href }) => {
   const formattedPlans = data?.map((plan) => ({
     id: plan.id,
     href: `${href}/${plan.id}`,
+    totalCalories: getTotalsFromServePlan(plan.servePlan!).calories + " KCAL",
     endDate: format(plan.endDate, "dd-MM-yyy"),
     createdAt: format(plan.createdAt, "dd-MM-yyyy"),
   }));

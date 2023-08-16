@@ -14,6 +14,9 @@ export const getActiveDietPlans = (profileId: string) => {
         gte: new Date(),
       },
     },
+    include: {
+      servePlan: true,
+    },
     orderBy: {
       createdAt: "desc",
     },
@@ -28,6 +31,9 @@ export const getArchivedDietPlans = (profileId: string) =>
         lt: parseDateWithoutTime(new Date()),
       },
     },
+    include: {
+      servePlan: true,
+    },
     orderBy: {
       createdAt: "desc",
     },
@@ -37,5 +43,18 @@ export const getDietPlansCount = (profileId: string) =>
   prisma.dietPlan.count({
     where: {
       profileId,
+    },
+  });
+
+export const getDietPlanById = async (dietPlanId: string) =>
+  prisma.dietPlan.findFirst({
+    where: {
+      id: dietPlanId,
+    },
+    include: {
+      meals: {
+        include: { contents: { include: { item: true } } },
+      },
+      servePlan: true,
     },
   });

@@ -1,10 +1,13 @@
 import { getProfileById } from "@/actions/getProfiles";
+import DietPlansSection from "@/components/sections/diet-plans-section";
 import RecordsChartSection from "@/components/sections/records-chart-section";
 import RecordsSection from "@/components/sections/records-section";
 import Separator from "@/components/ui/separator";
+import routes from "@/constants/routes";
 import { calculateAgeFromDOB } from "@/lib/utils";
 import { redirect } from "next/navigation";
 import { FC } from "react";
+import NewPlanButton from "./_new-plan-button";
 
 interface ConsoleViewProfilePageProps {
   params: {
@@ -20,13 +23,16 @@ const ConsoleViewProfilePage: FC<ConsoleViewProfilePageProps> = async ({
   if (!profile) redirect("/not-found");
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 pb-24">
       <section>
         <h4 className="section-header">{profile.name}</h4>
         <p className="text-xs text-muted-foreground">
           Joined in: {profile.createdAt.toDateString()}
         </p>
       </section>
+      <NewPlanButton
+        href={`${routes.consoleProfiles}/${params.profileId}/diets/new`}
+      />
       <Separator />
       <section className="space-y-6 max-w-md">
         <h4 className="section-header">Profile Information:</h4>
@@ -57,6 +63,12 @@ const ConsoleViewProfilePage: FC<ConsoleViewProfilePageProps> = async ({
       <RecordsSection profileId={profile.id} viewMode />
 
       <RecordsChartSection profileId={profile.id} />
+
+      <Separator />
+      <DietPlansSection
+        profileId={profile.id}
+        href={`${routes.consoleProfiles}/${profile.id}/diets`}
+      />
     </div>
   );
 };
