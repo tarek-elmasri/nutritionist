@@ -10,12 +10,64 @@ import {
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import { FC, useEffect, useState } from "react";
-import useFetch from "@/hooks/useFetch";
+import { FC, useCallback, useEffect, useReducer, useTransition } from "react";
 import { getNotifications } from "@/actions/getNotifications";
 import updateNotification from "@/actions/updateNotification";
 import PageLoader from "@/components/ui/page-loader";
 
+type NotificationState = {
+  offset: number;
+  limit: number;
+  list: Notification[];
+  hasMore: boolean;
+  newCount: number;
+  isMenuOpen: boolean;
+};
+
+const defaultState = {
+  offset: 0,
+  limit: 10,
+  list: [],
+  hasMore: false,
+  newCount: 0,
+  isMenuOpen: false,
+};
+
+type NotificationAction = { type: string; payload: unknown };
+
+const notificationReducer = (
+  state: NotificationState,
+  action: NotificationAction
+): NotificationState => {
+  switch (action.type) {
+    case "setOffset":
+      return { ...state, offset: action.payload as number };
+    case "updateNotificationStatus":
+      const { index, seen } = action.payload as {
+        index: number;
+        seen: boolean;
+      };
+      const newList = [...state.list];
+      newList[index].seen = seen;
+      return { ...state, list: newList };
+    case "setIsMenuOpen":
+      return { ...state, isMenuOpen: action.payload as boolean };
+    case "addToList":
+      return {
+        ...state,
+        list: [...state.list, ...(action.payload as Notification[])],
+      };
+    case "setHasMore":
+      return { ...state, hasMore: action.payload as boolean };
+    case "setNewCount":
+      return { ...state, newCount: action.payload as number };
+    case "decrementNewCount":
+      return { ...state, newCount: state.newCount - 1 };
+
+    default:
+      return state;
+  }
+};
 interface NotificationCellProps {
   seen: boolean;
   label: string;
@@ -47,62 +99,73 @@ const NoNotifications = () => (
 
 const NotificationsMenu = () => {
   const router = useRouter();
-  const NOTIFICATION_LIMIT = 10;
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [notificationList, setNotificationList] = useState<Notification[]>([]);
-  const [newNotificationsCount, setNewNotificationsCount] = useState(0);
-  const [notificationsOffset, setNotificationsOffset] = useState(0);
-  const [isUpdating, setIsUpdating] = useState(false);
-  const { data, refetch } = useFetch(() =>
-    getNotifications(NOTIFICATION_LIMIT, notificationsOffset)
-  );
+  const [isPending, startTransition] = useTransition();
+  const [data, dispatch] = useReducer(notificationReducer, defaultState);
+
+  const fetchNotifications = useCallback(async () => {
+    try {
+      const newNotificationsData = await getNotifications(
+        data.limit,
+        data.offset
+      );
+      dispatch({ type: "setHasMore", payload: newNotificationsData.hasMore });
+      dispatch({
+        type: "addToList",
+        payload: newNotificationsData.notifications,
+      });
+      dispatch({
+        type: "setNewCount",
+        payload: newNotificationsData.newNotificationsCount,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, [getNotifications, data.limit, data.offset, dispatch]);
 
   useEffect(() => {
-    if (data && data.notifications) {
-      setNotificationList((prev) => [...prev, ...data.notifications]);
-      setNewNotificationsCount(data.newNotificationsCount);
-    }
-  }, [data, setNotificationList, setNewNotificationsCount]);
+    fetchNotifications();
+  }, [data.offset, fetchNotifications]);
 
   const handleNavigation = async (
     notification: Notification,
     index: number
   ) => {
-    // set menu closed
-    setIsMenuOpen(false);
-    try {
-      // if seen is false trigger action to turn it true
-      if (notification.seen === false) {
-        setIsUpdating(true);
-        await updateNotification(notification.id);
-        // update current notification list and new counts
-        const newList = [...notificationList];
-        newList[index].seen = true;
-        setNotificationList(newList);
-        setNewNotificationsCount((prev) => prev - 1);
+    dispatch({ type: "setIsMenuOpen", payload: false });
+    startTransition(async () => {
+      try {
+        // if seen is false trigger action to turn it true
+        if (notification.seen === false) {
+          await updateNotification(notification.id);
+          dispatch({
+            type: "updateNotificationStatus",
+            payload: { index, seen: true },
+          });
+          dispatch({ type: "decrementNewCount", payload: null });
+        }
+        // redirect to href
+        router.push(notification.href);
+      } catch (error) {
+        console.log(error);
       }
-      // redirect to href
-      router.push(notification.href);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsUpdating(false);
-    }
+    });
   };
 
   return (
     <>
-      {isUpdating && <PageLoader />}
-      <Popover open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+      {isPending && <PageLoader />}
+      <Popover
+        open={data.isMenuOpen}
+        onOpenChange={(v) => dispatch({ type: "setIsMenuOpen", payload: v })}
+      >
         <PopoverTrigger asChild>
           <Button
             variant="outline"
             className="relative rounded-full p-0 w-12 h-12 hover:bg-lightgreen focus-visible:bg-lightgreen"
           >
             <Bell className="w-6 h-6 text-neutral-600" />
-            {newNotificationsCount > 0 && (
+            {data.newCount > 0 && (
               <div className="absolute top-0 right-0 w-4 aspect-square rounded-full bg-red-500 flex justify-center items-center">
-                <p className="text-xs text-white">{newNotificationsCount}</p>
+                <p className="text-xs text-white">{data.newCount}</p>
               </div>
             )}
           </Button>
@@ -112,10 +175,10 @@ const NotificationsMenu = () => {
           align="end"
         >
           <ul className="w-full [&_li:last-child]:border-b-0">
-            {notificationList.length === 0 ? (
+            {data.list.length === 0 ? (
               <NoNotifications />
             ) : (
-              notificationList.map((notification, index) => (
+              data.list.map((notification, index) => (
                 <NotificationCell
                   seen={notification.seen}
                   label={notification.label}
@@ -125,16 +188,16 @@ const NotificationsMenu = () => {
               ))
             )}
 
-            {data?.hasMore && (
+            {data.hasMore && (
               <NotificationCell
                 seen={true}
                 label="View More"
-                onClick={() => {
-                  setNotificationsOffset(
-                    (prev) => prev + NOTIFICATION_LIMIT - 1
-                  );
-                  refetch();
-                }}
+                onClick={() =>
+                  dispatch({
+                    type: "setOffset",
+                    payload: data.offset + data.limit,
+                  })
+                }
               />
             )}
           </ul>
