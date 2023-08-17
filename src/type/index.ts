@@ -1,6 +1,13 @@
 import { serves } from "@/constants";
 import { leanMeatServe } from "@/constants/serves";
-import { Food, Meal, MealItem, ServePlan } from "@prisma/client";
+import {
+  Food,
+  Meal,
+  MealItem,
+  Message,
+  ServePlan,
+  UserMessage,
+} from "@prisma/client";
 import { User } from "next-auth";
 
 declare module "next-auth/jwt" {
@@ -89,3 +96,14 @@ export type TableFilterKeys<TData> = {
   accessorKey: keyof TData;
   label: string;
 }[];
+
+export type MessageDetails = UserMessage & {
+  message: Message;
+  sender: {
+    id: string;
+    name: string | null;
+    Profile: {
+      name: string;
+    } | null;
+  };
+};

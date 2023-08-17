@@ -1,37 +1,50 @@
 "use client";
 
-import { Apple, LayoutGrid } from "lucide-react";
+import { Apple, LayoutGrid, Mail } from "lucide-react";
 import SidebarTap from "./sidebar-tab";
 import { TABS } from "@/constants";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useTransition } from "react";
+import PageLoader from "@/components/ui/page-loader";
 
 const ConsoleTabs = () => {
   const router = useRouter();
+  const pathname = usePathname();
+  const [isPending, startTransition] = useTransition();
   const tab = useSearchParams().get("tab") || TABS.PROFILES;
+
+  const consolePath = pathname === "/console";
 
   const sidebarTabs = [
     {
       label: "Profiles",
-      active: tab === TABS.PROFILES,
+      active: consolePath && tab === TABS.PROFILES,
       icon: LayoutGrid,
-      href: `console?tab=${TABS.PROFILES}`,
+      href: `/console?tab=${TABS.PROFILES}`,
     },
     {
       label: "Ingredients",
-      active: tab === TABS.INGREDIENTS,
+      active: consolePath && tab === TABS.INGREDIENTS,
       icon: Apple,
       href: `/console?tab=${TABS.INGREDIENTS}`,
+    },
+    {
+      label: "Messages",
+      active: consolePath && tab === TABS.MESSAGES,
+      icon: Mail,
+      href: `/console?tab=${TABS.MESSAGES}`,
     },
   ];
   return (
     <>
+      {isPending && <PageLoader />}
       {sidebarTabs.map(({ label, active, icon, href }) => (
         <SidebarTap
           key={label}
           label={label}
           isSelected={active}
           icon={icon}
-          onClick={() => router.push(href)}
+          onClick={() => startTransition(() => router.push(href))}
         />
       ))}
     </>

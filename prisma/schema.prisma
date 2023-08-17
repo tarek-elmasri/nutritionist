@@ -46,9 +46,12 @@ model User {
   emailVerified DateTime?
   image         String?
 
-  accounts Account[]
-  sessions Session[]
-  Profile  Profile?
+  accounts         Account[]
+  sessions         Session[]
+  Profile          Profile?
+  notifications    Notification[]
+  recievedMessages UserMessage[]  @relation("UserRecievedMessages")
+  sentMessages     UserMessage[]  @relation("UserSentMessages")
 }
 
 model VerificationToken {
@@ -177,4 +180,37 @@ model Food {
   serveType String
 
   mealItems MealItem[]
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  seen      Boolean  @default(false)
+  href      String
+  label     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  title     String
+  body      String
+  createdAt DateTime @default(now())
+
+  userMessages UserMessage[]
+}
+
+model UserMessage {
+  id   String  @id @default(cuid())
+  seen Boolean @default(false)
+
+  messageId  String
+  message    Message @relation(fields: [messageId], references: [id])
+  recieverId String?
+  reciever   User?   @relation("UserRecievedMessages", fields: [recieverId], references: [id])
+  senderId   String
+  sender     User    @relation("UserSentMessages", fields: [senderId], references: [id])
 }

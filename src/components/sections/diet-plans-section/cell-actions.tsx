@@ -3,18 +3,23 @@
 import { useRouter } from "next/navigation";
 import { DietPlanColumn } from "./columns";
 import { Button } from "@/components/ui/button";
+import { useTransition } from "react";
+import PageLoader from "@/components/ui/page-loader";
 
 const CellActions = ({ data }: { data: DietPlanColumn }) => {
   const router = useRouter();
-
+  const [isPending, startTransition] = useTransition();
   return (
-    <Button
-      size={"sm"}
-      type="button"
-      onClick={() => router.push(`/profile/diets/${data.id}`)}
-    >
-      View
-    </Button>
+    <>
+      {isPending && <PageLoader />}
+      <Button
+        size={"sm"}
+        type="button"
+        onClick={() => startTransition(() => router.push(data.href))}
+      >
+        View
+      </Button>
+    </>
   );
 };
 

@@ -6,6 +6,7 @@ import { Gender, TableFilterKeys } from "@/type";
 
 export type ProfilesColumn = {
   id: string;
+  userId: string;
   name: string;
   age: number;
   gender: Gender;
@@ -42,6 +43,6 @@ export const columns: ColumnDef<ProfilesColumn>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => <CellActions />,
+    cell: ({ row }) => <CellActions profile={row.original} />,
   },
 ];

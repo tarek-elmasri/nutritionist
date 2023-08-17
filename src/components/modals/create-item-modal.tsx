@@ -3,11 +3,7 @@
 import foodSchema, { FoodSchema } from "@/lib/validations/food-schema";
 import { FC, useState } from "react";
 import Modal from "@/components/ui/modal";
-import {
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {

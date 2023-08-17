@@ -9,11 +9,15 @@ import {
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useTransition } from "react";
+import PageLoader from "@/components/ui/page-loader";
 
 const CellActions = ({ profileId }: { profileId: string }) => {
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
   return (
     <>
+      {isPending && <PageLoader />}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="h-8 w-8 p-0">
@@ -25,7 +29,11 @@ const CellActions = ({ profileId }: { profileId: string }) => {
           <DropdownMenuItem className="flex-row">View</DropdownMenuItem>
           <DropdownMenuItem
             className="flex-row"
-            onClick={() => router.push(`console/${profileId}/diets/new`)}
+            onClick={() =>
+              startTransition(() =>
+                router.push(`console/${profileId}/diets/new`)
+              )
+            }
           >
             Create Plan
           </DropdownMenuItem>

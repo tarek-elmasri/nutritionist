@@ -1,5 +1,6 @@
 "use server";
 
+import routes from "@/constants/routes";
 import prisma from "@/lib/prisma";
 import { parseDateWithoutTime } from "@/lib/utils";
 import { RecordsSchema } from "@/lib/validations/records-schema";
@@ -33,7 +34,7 @@ const createRecord = async (form: RecordsSchema) => {
 
   if (record) throw new Error("Only one record is allowed per day");
 
-  return prisma.record.create({
+  const newRecord = await prisma.record.create({
     data: {
       profileId,
       height,
@@ -45,7 +46,25 @@ const createRecord = async (form: RecordsSchema) => {
       arm,
       thighs,
     },
+    include: {
+      profile: true,
+    },
   });
+
+  // create notification for admin user
+  const adminUser = await prisma.user.findFirst({ where: { isAdmin: true } });
+
+  if (adminUser) {
+    await prisma.notification.create({
+      data: {
+        userId: adminUser.id,
+        label: `New record added by: ${newRecord.profile.name}`,
+        href: `${routes.consoleProfiles}/${profileId}`,
+      },
+    });
+  }
+
+  return newRecord;
 };
 
 export default createRecord;

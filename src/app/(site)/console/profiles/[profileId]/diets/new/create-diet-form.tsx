@@ -4,7 +4,7 @@ import useCreateDietPlan from "@/hooks/use-create-diet-plan";
 import useSteps from "@/hooks/use-steps";
 import ProfileCalculator from "@/lib/profile-calculator";
 import { Food, Profile, Record } from "@prisma/client";
-import { FC, ReactNode, useEffect, useState } from "react";
+import { FC, ReactNode, useEffect, useState, useTransition } from "react";
 import ProfileSummaryStep from "./(components)/profile-summary-step";
 import Separator from "@/components/ui/separator";
 import ServesStep from "./(components)/serves-step";
@@ -24,11 +24,13 @@ interface CreateDietFormProps {
 
 const CreateDietForm: FC<CreateDietFormProps> = ({ profile, foodList }) => {
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+
   const { setProfileCalculator, servePlanForm, schedule, meals, setFoodList } =
     useCreateDietPlan();
   const { setStepsCount, currentStepIndex, prevStep } = useSteps();
 
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
   const steps: ReactNode[] = [
     <ProfileSummaryStep key={"summary-step"} />,
@@ -67,25 +69,25 @@ const CreateDietForm: FC<CreateDietFormProps> = ({ profile, foodList }) => {
   ]);
 
   const handleSubmit = async () => {
-    setIsLoading(true);
-    try {
-      const form = {
-        schedule,
-        meals,
-        servePlan: servePlanForm,
-      };
+    startTransition(async () => {
+      try {
+        const form = {
+          schedule,
+          meals,
+          servePlan: servePlanForm,
+        };
 
-      await axios.post(`/api/profiles/${profile.id}/diets`, form);
-      router.push("/console");
-    } catch (error) {
-      toast.error("Something went wrong!");
-      setIsLoading(false);
-    }
+        await axios.post(`/api/profiles/${profile.id}/diets`, form);
+        router.push("/console");
+      } catch (error) {
+        toast.error("Something went wrong!");
+      }
+    });
   };
 
   return (
     <div>
-      {isLoading && <PageLoader message="Please wait while creating plan" />}
+      {isPending && <PageLoader message="Please wait while creating plan" />}
       <h1 className="text-2xl font-bold text-primary">Create Diet Plan</h1>
       <h2 className="font-semibold mt-3">{profile.name}</h2>
       <Separator />

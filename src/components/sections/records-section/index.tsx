@@ -17,9 +17,10 @@ import { parseDateWithoutTime } from "@/lib/utils";
 
 interface RecordsSectionProps {
   profileId: string;
+  viewMode?: boolean;
 }
 
-const RecordsSection: FC<RecordsSectionProps> = ({ profileId }) => {
+const RecordsSection: FC<RecordsSectionProps> = ({ profileId, viewMode }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isAddRecordModalOpen, setIsAddRecordModalOpen] = useState(false);
 
@@ -75,21 +76,27 @@ const RecordsSection: FC<RecordsSectionProps> = ({ profileId }) => {
       <div className="flex items-center justify-between">
         <div>
           <h4 className="section-header">Records</h4>
-          <p className="text-xs text-darkred leading-6">
-            * It&apos;s recommanded to add new records on weekly basis.
-          </p>
-          <p className="text-xs text-darkred leading-6">
-            * Only single record is allowed on daily basis.
-          </p>
+          {!viewMode && (
+            <>
+              <p className="text-xs text-darkred leading-6">
+                * It&apos;s recommanded to add new records on weekly basis.
+              </p>
+              <p className="text-xs text-darkred leading-6">
+                * Only single record is allowed on daily basis.
+              </p>
+            </>
+          )}
         </div>
-        <Button
-          size={"sm"}
-          type="button"
-          disabled={!isAllowedToCreateNewRecord}
-          onClick={() => setIsAddRecordModalOpen(true)}
-        >
-          New
-        </Button>
+        {!viewMode && (
+          <Button
+            size={"sm"}
+            type="button"
+            disabled={!isAllowedToCreateNewRecord}
+            onClick={() => setIsAddRecordModalOpen(true)}
+          >
+            New
+          </Button>
+        )}
       </div>
       {isLoading ? (
         <TableLoader />

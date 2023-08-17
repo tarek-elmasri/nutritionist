@@ -4,8 +4,10 @@ const bcrypt = require("bcrypt")
 const prisma = new PrismaClient()
 
 const seed = async () => {
-  await prisma.food.deleteMany()
+  await prisma.notification.deleteMany()
+  await prisma.servePlan.deleteMany()
   await prisma.mealItem.deleteMany()
+  await prisma.food.deleteMany()
   await prisma.meal.deleteMany()
   await prisma.dietPlan.deleteMany()
   await prisma.account.deleteMany()
@@ -22,7 +24,7 @@ const seed = async () => {
     data: {
       email: "admin@gmail.com",
       isAdmin: true,
-      name: "tarek",
+      name: "Tarek",
       password: await bcrypt.hash("@Nutritionist0" + salt, 12),
     }
   })

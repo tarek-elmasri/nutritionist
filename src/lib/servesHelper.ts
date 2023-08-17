@@ -102,3 +102,8 @@ export const calculateMealsServeCount = (meals: MealForm[]) => {
 
   return results;
 };
+
+export const getTotalsFromServePlan = (servePlan: ServePlanForm) => {
+  const serveTypeTotals = calculateServeTypeTotals(servePlan);
+  return calculateCategoryTotals(serveTypeTotals);
+};

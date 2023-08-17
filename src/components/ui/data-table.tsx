@@ -29,6 +29,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { TableFilterKeys } from "@/type";
+import { cn } from "@/lib/utils";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -39,8 +40,10 @@ export function DataTable<TData, TValue>({
   columns,
   data,
   filterKeys,
+  seenKey,
 }: DataTableProps<TData, TValue> & {
   filterKeys?: TableFilterKeys<TData>;
+  seenKey?: keyof TData;
 }) {
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -131,6 +134,11 @@ export function DataTable<TData, TValue>({
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
+                  className={cn(
+                    seenKey &&
+                      !row.original[seenKey] &&
+                      "bg-lightgreen/40 hover:bg-lightgreen data-[state=selected]:bg-lightgreen"
+                  )}
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >

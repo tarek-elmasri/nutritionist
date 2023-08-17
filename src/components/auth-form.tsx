@@ -1,5 +1,5 @@
 "use client";
-import { FC, useState } from "react";
+import { FC, useTransition } from "react";
 import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
@@ -22,7 +22,7 @@ import googleIcon from "@/assets/googleIcon.png";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import PageLoader from "./ui/page-loader";
-import { MoonLoader, PulseLoader } from "react-spinners";
+import { PulseLoader } from "react-spinners";
 
 interface AuthFormProps {
   variant: "SIGN_IN" | "REGISTER";
@@ -31,9 +31,8 @@ interface AuthFormProps {
 
 const AuthForm: FC<AuthFormProps> = ({ variant, callbackURL }) => {
   const router = useRouter();
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [isRedirecting, setIsRedirecting] = useState(false);
+  const [isPending, startAuthentication] = useTransition();
+  const [isRedirecting, startRedirecting] = useTransition();
 
   const form = useForm<AuthSchema>({
     resolver: zodResolver(authSchema),
@@ -46,48 +45,41 @@ const AuthForm: FC<AuthFormProps> = ({ variant, callbackURL }) => {
   // Auth with credentials
   const onSubmit = async (form: AuthSchema) => {
     if (variant === "REGISTER") {
-      setIsLoading(true);
-      try {
-        await axios.post("/api/users", form);
-        const result = await signIn("credentials", {
-          ...form,
-          redirect: false,
-        });
-        if (result?.error) {
-          // TODO: handle errors
-          toast.error("Email already exists!");
-        } else {
-          router.replace(callbackURL);
+      startAuthentication(async () => {
+        try {
+          await axios.post("/api/users", form);
+          const result = await signIn("credentials", {
+            ...form,
+            redirect: false,
+          });
+          if (result?.error) {
+            // TODO: handle errors
+            toast.error("Email already exists!");
+          } else {
+            router.replace(callbackURL);
+          }
+        } catch (error) {
+          toast.error("Something went wrong!");
         }
-      } catch (error) {
-        toast.error("Something went wrong!");
-      } finally {
-        setIsLoading(false);
-      }
+      });
     } else if (variant === "SIGN_IN") {
-      try {
-        setIsLoading(true);
-        const result = await signIn("credentials", {
-          ...form,
-          redirect: false,
-        });
-        if (result?.error) {
-          // TODO: handle errors
-          toast.error("Invalid Credentials");
-        } else {
-          router.replace(callbackURL);
+      startAuthentication(async () => {
+        try {
+          const result = await signIn("credentials", {
+            ...form,
+            redirect: false,
+          });
+          if (result?.error) {
+            // TODO: handle errors
+            toast.error("Invalid Credentials");
+          } else {
+            router.replace(callbackURL);
+          }
+        } catch (error) {
+          toast.error("Something went wrong");
         }
-      } catch (error) {
-        toast.error("Something went wrong");
-      } finally {
-        setIsLoading(false);
-      }
+      });
     }
-  };
-
-  const handleGoogleAuth = () => {
-    setIsRedirecting(true);
-    signIn("google");
   };
 
   return (
@@ -146,9 +138,9 @@ const AuthForm: FC<AuthFormProps> = ({ variant, callbackURL }) => {
             size={"lg"}
             className="w-full rounded-xl font-bold text-lg py-6"
             type="submit"
-            disabled={isLoading || !form.formState.isValid}
+            disabled={isPending || !form.formState.isValid}
           >
-            {isLoading ? (
+            {isPending ? (
               <PulseLoader color="#fff" size={10} />
             ) : variant === "REGISTER" ? (
               "Sign Up"
@@ -175,8 +167,12 @@ const AuthForm: FC<AuthFormProps> = ({ variant, callbackURL }) => {
             variant={"outline"}
             type="button"
             size={"lg"}
-            onClick={handleGoogleAuth}
-            disabled={isLoading || isRedirecting}
+            onClick={() =>
+              startRedirecting(async () => {
+                await signIn("google");
+              })
+            }
+            disabled={isPending || isRedirecting}
             className="w-full text-lg py-6 text-bold shadow shadow-lightgreen hover:border-lightgreen hover:bg-primary hover:text-primary-foreground rounded-xl flex justify-center items-center gap-3"
           >
             <Image src={googleIcon} alt="google" className="w-8 h-8" />

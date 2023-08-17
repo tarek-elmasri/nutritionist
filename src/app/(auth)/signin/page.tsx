@@ -6,13 +6,13 @@ import { redirect } from "next/navigation";
 
 interface LoginPageProps {
   searchParams: {
-    callbackURL?: string;
+    callbackUrl?: string;
   };
 }
 const LoginPage = async ({ searchParams }: LoginPageProps) => {
   const user = await getCurrentUser();
 
-  const redirectUrl = searchParams.callbackURL ?? `/profile`;
+  const redirectUrl = searchParams.callbackUrl ?? `/profile`;
   if (user?.email) redirect(redirectUrl);
 
   return (
