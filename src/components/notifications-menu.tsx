@@ -120,7 +120,7 @@ const NotificationsMenu = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [getNotifications, data.limit, data.offset, dispatch]);
+  }, [data.limit, data.offset, dispatch]);
 
   useEffect(() => {
     fetchNotifications();
