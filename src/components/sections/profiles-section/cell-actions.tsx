@@ -13,7 +13,11 @@ import { useTransition } from "react";
 import PageLoader from "@/components/ui/page-loader";
 import routes from "@/constants/routes";
 
-const CellActions = ({ profile }: { profile: { id: string } }) => {
+const CellActions = ({
+  profile,
+}: {
+  profile: { id: string; userId: string };
+}) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   return (
@@ -35,9 +39,30 @@ const CellActions = ({ profile }: { profile: { id: string } }) => {
               )
             }
           >
-            View
+            View Profile
           </DropdownMenuItem>
-          <DropdownMenuItem className="flex-row">Diet Plans</DropdownMenuItem>
+          <DropdownMenuItem
+            className="flex-row"
+            onClick={() =>
+              startTransition(() =>
+                router.push(`${routes.consoleProfiles}/${profile.id}/diets/new`)
+              )
+            }
+          >
+            Create Plan
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            className="flex-row"
+            onClick={() =>
+              startTransition(() =>
+                router.push(
+                  `${routes.consoleMessage}/new?recieverId=${profile.userId}`
+                )
+              )
+            }
+          >
+            Send Message
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </>

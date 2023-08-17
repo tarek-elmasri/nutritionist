@@ -14,6 +14,7 @@ const ProfilesTable = () => {
 
   const structuredProfiles = profiles?.map((profile) => ({
     id: profile.id,
+    userId: profile.userId,
     name: profile.name,
     age: calculateAgeFromDOB(profile.dob),
     gender: profile.gender as Gender,

@@ -6,6 +6,7 @@ import { Gender, TableFilterKeys } from "@/type";
 
 export type ProfilesColumn = {
   id: string;
+  userId: string;
   name: string;
   age: number;
   gender: Gender;
