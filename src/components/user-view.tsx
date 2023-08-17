@@ -29,7 +29,7 @@ const UserView: FC<UserViewProps> = ({
     <div className="space-y-6">
       {showWelcomeMessage && !tab && <WelcomeMessage username={username} />}
 
-      {(tab === TABS.ACTIVE_PLANS || !tab) && (
+      {(tab === TABS.ACTIVE_PLANS || (!tab && !showWelcomeMessage)) && (
         <DietPlansSection profileId={profileId} href={routes.userDietPlan} />
       )}
 
