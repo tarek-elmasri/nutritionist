@@ -30,7 +30,7 @@ const MessagesSection: FC<MessagesSectionProps> = ({
     sender: userMessage.sender.Profile?.name || userMessage.sender.name!,
     title: userMessage.message.title,
     seen: userMessage.seen,
-    href: `${messagesLink}/${userMessage.id}`,
+    href: messagesLink,
     createdAt: format(userMessage.message.createdAt, "dd-MM-yyyy"),
   }));
 

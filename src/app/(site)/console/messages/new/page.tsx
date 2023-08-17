@@ -1,10 +1,20 @@
 import createMessage from "@/actions/createMessage";
 import getCurrentUser from "@/actions/get CurrentUser";
+import { getReplyForm } from "@/actions/getMessages";
 import { getProfiles } from "@/actions/getProfiles";
 import MessageForm from "@/components/message-form";
 import routes from "@/constants/routes";
+import { FC } from "react";
 
-const ConsoleNewMessagePage = async () => {
+interface ConsoleNewMessagePageProps {
+  searchParams: {
+    recieverId?: string;
+  };
+}
+
+const ConsoleNewMessagePage: FC<ConsoleNewMessagePageProps> = async ({
+  searchParams,
+}) => {
   const currentUser = await getCurrentUser();
   const senderId = currentUser!.id;
   const profiles = await getProfiles();
@@ -12,7 +22,7 @@ const ConsoleNewMessagePage = async () => {
   return (
     <MessageForm
       onSubmit={createMessage}
-      recieverId=""
+      recieverId={searchParams.recieverId || ""}
       recieverList={profiles}
       senderId={senderId}
       redirectTo={routes.consoleInbox}

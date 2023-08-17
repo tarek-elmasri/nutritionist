@@ -39,12 +39,14 @@ interface MessageFormProps {
   senderId: string;
   redirectTo: string;
   recieverList?: Profile[];
+  initData?: { title: string; body: string };
   onSubmit: (form: MessageSchema) => Promise<unknown>;
 }
 const MessageForm: FC<MessageFormProps> = ({
   recieverList,
   recieverId,
   senderId,
+  initData,
   onSubmit,
   redirectTo,
 }) => {
@@ -56,8 +58,8 @@ const MessageForm: FC<MessageFormProps> = ({
     resolver: zodResolver(messageSchema),
     defaultValues: {
       message: {
-        title: "",
-        body: "",
+        title: initData?.title ?? "",
+        body: initData?.body ?? "",
       },
       recieverId,
       senderId,
@@ -112,14 +114,14 @@ const MessageForm: FC<MessageFormProps> = ({
                             ? recieverList.find(
                                 (profile) => profile.userId === field.value
                               )?.name
-                            : "Select language"}
+                            : "Select User"}
                           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                         </Button>
                       </FormControl>
                     </PopoverTrigger>
                     <PopoverContent className="w-[200px] max-h-[15rem] overflow-y-auto p-0">
                       <Command>
-                        <CommandInput placeholder="Search framework..." />
+                        <CommandInput placeholder="Search user..." />
                         <CommandEmpty>No user found.</CommandEmpty>
                         <CommandGroup>
                           {recieverList.map((profile) => (

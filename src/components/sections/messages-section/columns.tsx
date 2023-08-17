@@ -46,13 +46,16 @@ export const columns: ColumnDef<MessageColumn>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => <CellActions />,
+    cell: ({ row }) => <CellActions data={row.original} />,
   },
 ];
 
 const SubjectCell = ({ data }: { data: MessageColumn }) => {
   return (
-    <Link href={data.href} className="hover:underline focus-visible:underline">
+    <Link
+      href={`${data.href}/${data.id}`}
+      className="hover:underline focus-visible:underline"
+    >
       {data.title}
     </Link>
   );

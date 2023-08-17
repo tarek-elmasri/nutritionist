@@ -59,3 +59,27 @@ export const getMessageById = async (
     },
   });
 };
+
+export const getReplyForm = async (messageId: string) => {
+  const message = await prisma.message.findFirst({
+    where: {
+      id: messageId,
+    },
+  });
+
+  if (!message) return { title: "", body: "" };
+
+  let title: string = "";
+  message.title.startsWith("[REPLY]")
+    ? (title = message.title)
+    : (title = `[REPLY] ${message.title}`);
+
+  const body = `
+    
+
+  -----------------------------------
+  ${message.body}
+  `;
+
+  return { title, body };
+};
