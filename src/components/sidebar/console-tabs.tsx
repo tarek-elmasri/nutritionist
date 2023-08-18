@@ -1,6 +1,6 @@
 "use client";
 
-import { Apple, LayoutGrid, LogOut, Mail } from "lucide-react";
+import { Apple, FileStack, LayoutGrid, LogOut, Mail } from "lucide-react";
 import SidebarTap from "./sidebar-tab";
 import { TABS } from "@/constants";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -20,7 +20,7 @@ const ConsoleTabs = () => {
     {
       label: "Profiles",
       active: consolePath && tab === TABS.PROFILES,
-      icon: LayoutGrid,
+      icon: FileStack,
       href: `/console?tab=${TABS.PROFILES}`,
     },
     {

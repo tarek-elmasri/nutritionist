@@ -1,6 +1,13 @@
 "use client";
 
-import { LayoutGrid, LogOut } from "lucide-react";
+import {
+  BarChart3,
+  FileStack,
+  LayoutGrid,
+  LogOut,
+  Mail,
+  TrendingUp,
+} from "lucide-react";
 import SidebarTap from "./sidebar-tab";
 import { TABS } from "@/constants";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -18,7 +25,7 @@ const UserTabs = () => {
 
   const userTabs = [
     {
-      label: "Diet Plan",
+      label: "Diet Plans",
       active: profilePath && tab === TABS.ACTIVE_PLANS,
       icon: LayoutGrid,
       href: `/profile?tab=${TABS.ACTIVE_PLANS}`,
@@ -26,27 +33,27 @@ const UserTabs = () => {
     {
       label: "Progress",
       active: profilePath && tab === TABS.PROGRESS,
-      icon: LayoutGrid,
+      icon: TrendingUp,
       href: `/profile?tab=${TABS.PROGRESS}`,
     },
     {
-      label: "History",
+      label: "Archived Plans",
       active: profilePath && tab === TABS.HISTORY,
-      icon: LayoutGrid,
+      icon: FileStack,
       href: `/profile?tab=${TABS.HISTORY}`,
     },
     {
       label: "Messages",
       active: profilePath && tab === TABS.MESSAGES,
-      icon: LayoutGrid,
+      icon: Mail,
       href: `/profile?tab=${TABS.MESSAGES}`,
     },
-    {
-      label: "Settings",
-      active: profilePath && tab === TABS.SETTINGS,
-      icon: LayoutGrid,
-      href: `/profile?tab=${TABS.SETTINGS}`,
-    },
+    // {
+    //   label: "Settings",
+    //   active: profilePath && tab === TABS.SETTINGS,
+    //   icon: LayoutGrid,
+    //   href: `/profile?tab=${TABS.SETTINGS}`,
+    // },
   ];
   return (
     <>
