@@ -11,6 +11,7 @@ import { MoreHorizontal } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import PageLoader from "@/components/ui/page-loader";
+import routes from "@/constants/routes";
 
 const CellActions = ({ profileId }: { profileId: string }) => {
   const router = useRouter();
@@ -26,12 +27,21 @@ const CellActions = ({ profileId }: { profileId: string }) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start">
-          <DropdownMenuItem className="flex-row">View</DropdownMenuItem>
           <DropdownMenuItem
             className="flex-row"
             onClick={() =>
               startTransition(() =>
-                router.push(`console/${profileId}/diets/new`)
+                router.push(`${routes.consoleProfiles}/${profileId}`)
+              )
+            }
+          >
+            View
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            className="flex-row"
+            onClick={() =>
+              startTransition(() =>
+                router.push(`${routes.consoleProfiles}/${profileId}/diets/new`)
               )
             }
           >
