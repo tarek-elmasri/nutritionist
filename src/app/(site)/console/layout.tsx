@@ -1,9 +1,14 @@
+import getCurrentUser from "@/actions/get CurrentUser";
 import NotificationsMenu from "@/components/notifications-menu";
 import ConsoleTabs from "@/components/sidebar/console-tabs";
 import Sidebar from "@/components/sidebar/sidebar";
+import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 
-const ConsoleLayout = ({ children }: { children: ReactNode }) => {
+const ConsoleLayout = async ({ children }: { children: ReactNode }) => {
+  const currentUser = await getCurrentUser();
+  if (!currentUser || !currentUser.isAdmin) redirect("/unauthorized");
+
   return (
     <div className="h-full bg-gradient-green flex">
       <Sidebar>
