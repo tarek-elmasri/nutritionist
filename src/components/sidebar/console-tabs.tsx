@@ -1,11 +1,12 @@
 "use client";
 
-import { Apple, LayoutGrid, Mail } from "lucide-react";
+import { Apple, LayoutGrid, LogOut, Mail } from "lucide-react";
 import SidebarTap from "./sidebar-tab";
 import { TABS } from "@/constants";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTransition } from "react";
 import PageLoader from "@/components/ui/page-loader";
+import { signOut } from "next-auth/react";
 
 const ConsoleTabs = () => {
   const router = useRouter();
@@ -47,6 +48,12 @@ const ConsoleTabs = () => {
           onClick={() => startTransition(() => router.push(href))}
         />
       ))}
+      <SidebarTap
+        key={"signout"}
+        label="Sign Out"
+        icon={LogOut}
+        onClick={() => startTransition(() => signOut())}
+      />
     </>
   );
 };
