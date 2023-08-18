@@ -9,6 +9,7 @@ export const getMessages = async (
   const messages = await prisma.userMessage.findMany({
     where: {
       recieverId: userId,
+      availableForReciever: true,
     },
     include: {
       message: true,
@@ -42,6 +43,7 @@ export const getMessageById = async (
     where: {
       id,
       recieverId: userId,
+      availableForReciever: true,
     },
     include: {
       message: true,

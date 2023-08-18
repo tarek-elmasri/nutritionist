@@ -9,7 +9,7 @@ const deleteMessage = (userId: string, messageId: string) => {
       id: messageId,
     },
     data: {
-      recieverId: null,
+      availableForReciever: false,
     },
   });
 };

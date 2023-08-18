@@ -204,13 +204,15 @@ model Message {
 }
 
 model UserMessage {
-  id   String  @id @default(cuid())
-  seen Boolean @default(false)
+  id                   String  @id @default(cuid())
+  seen                 Boolean @default(false)
+  availableForReciever Boolean @default(true)
+  availableForSender   Boolean @default(true)
 
   messageId  String
   message    Message @relation(fields: [messageId], references: [id])
-  recieverId String?
-  reciever   User?   @relation("UserRecievedMessages", fields: [recieverId], references: [id])
+  recieverId String
+  reciever   User    @relation("UserRecievedMessages", fields: [recieverId], references: [id])
   senderId   String
   sender     User    @relation("UserSentMessages", fields: [senderId], references: [id])
 }
