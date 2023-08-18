@@ -8,7 +8,7 @@ interface UseFetchProps<T> {
 
 const useFetch = <T,>(fetchMethod: () => Promise<T>) => {
   const [data, setData] = useState<T | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [errors, setErrors] = useState<any>(null);
 
   const refetch = async () => {
