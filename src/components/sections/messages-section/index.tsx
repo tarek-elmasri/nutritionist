@@ -27,6 +27,7 @@ const MessagesSection: FC<MessagesSectionProps> = ({
 
   const formattedMessages = userMessages?.map((userMessage) => ({
     id: userMessage.id,
+    recieverId: userId,
     sender: userMessage.sender.Profile?.name || userMessage.sender.name!,
     title: userMessage.message.title,
     seen: userMessage.seen,

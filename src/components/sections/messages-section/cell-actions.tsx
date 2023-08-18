@@ -12,13 +12,30 @@ import { useTransition } from "react";
 import PageLoader from "@/components/ui/page-loader";
 import { useRouter } from "next/navigation";
 import { MessageColumn } from "./columns";
+import deleteMessage from "@/actions/deleteMessage";
+import { toast } from "react-hot-toast";
 
-const CellActions = ({ data: { id, href } }: { data: MessageColumn }) => {
+const CellActions = ({
+  data: { id, recieverId, href },
+}: {
+  data: MessageColumn;
+}) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
   const handleNavigation = (link: string) => {
     startTransition(() => router.push(link));
+  };
+
+  const handleDelete = async () => {
+    startTransition(async () => {
+      try {
+        await deleteMessage(recieverId, id);
+        window.location.reload();
+      } catch (error) {
+        toast.error("Something went wrong");
+      }
+    });
   };
 
   return (
@@ -44,7 +61,9 @@ const CellActions = ({ data: { id, href } }: { data: MessageColumn }) => {
           >
             Reply
           </DropdownMenuItem>
-          <DropdownMenuItem className="flex-row">Delete</DropdownMenuItem>
+          <DropdownMenuItem className="flex-row" onClick={handleDelete}>
+            Delete
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </>
