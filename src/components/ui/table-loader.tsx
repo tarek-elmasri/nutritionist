@@ -4,6 +4,7 @@ import { FC } from "react";
 import ContentLoader from "react-content-loader";
 
 interface TableLoaderProps {
+  id: string;
   width?: number;
   height?: number;
   backgroundColor?: string;
@@ -11,12 +12,14 @@ interface TableLoaderProps {
 }
 
 const TableLoader: FC<TableLoaderProps> = ({
+  id,
   height,
   width,
   backgroundColor,
   foregroundColor,
 }) => (
   <ContentLoader
+    uniqueKey={id}
     width={width ?? 500}
     height={height ?? 200}
     viewBox="0 0 500 200"

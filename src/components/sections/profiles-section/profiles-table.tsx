@@ -22,7 +22,7 @@ const ProfilesTable = () => {
   }));
 
   if (isLoading) {
-    return <TableLoader />;
+    return <TableLoader id="profiles-loader" />;
   }
 
   return (

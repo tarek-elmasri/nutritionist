@@ -99,7 +99,7 @@ const RecordsSection: FC<RecordsSectionProps> = ({ profileId, viewMode }) => {
         )}
       </div>
       {isLoading ? (
-        <TableLoader />
+        <TableLoader id="records-loader" />
       ) : (
         <DataTable
           columns={columns}

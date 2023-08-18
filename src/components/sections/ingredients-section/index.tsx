@@ -30,7 +30,7 @@ const IngredientsSection = () => {
   }));
 
   if (isLoading) {
-    return <TableLoader />;
+    return <TableLoader id="ingredients-loader" />;
   }
 
   const handleNewItem = async (item: FoodSchema) => {

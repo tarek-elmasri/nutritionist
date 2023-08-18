@@ -33,7 +33,7 @@ const OutboxTab: FC<OutboxTabProps> = ({ userId, messagesLink }) => {
     createdAt: format(userMessage.message.createdAt, "dd-MM-yyyy"),
   }));
 
-  if (isLoading) return <TableLoader />;
+  if (isLoading) return <TableLoader id="outbox-loader" />;
   return (
     <div className="space-y-6">
       {isPending && <PageLoader />}
