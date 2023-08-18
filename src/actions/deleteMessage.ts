@@ -14,4 +14,15 @@ const deleteMessage = (userId: string, messageId: string) => {
   });
 };
 
+export const deleteSentMessage = (userId: string, messageId: string) =>
+  prisma.userMessage.update({
+    where: {
+      senderId: userId,
+      id: messageId,
+    },
+    data: {
+      availableForSender: false,
+    },
+  });
+
 export default deleteMessage;

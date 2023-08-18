@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useState } from "react";
+import { FC, useState, useTransition } from "react";
 import {
   Form,
   FormControl,
@@ -51,8 +51,7 @@ const MessageForm: FC<MessageFormProps> = ({
   redirectTo,
 }) => {
   const router = useRouter();
-
-  const [isSubmiting, setIsSubmiting] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   const form = useForm<MessageSchema>({
     resolver: zodResolver(messageSchema),
@@ -67,21 +66,21 @@ const MessageForm: FC<MessageFormProps> = ({
   });
 
   const handleSubmit = async (form: MessageSchema) => {
-    try {
-      setIsSubmiting(true);
-      await onSubmit(form);
-      toast.success("Your message has been sent successfully.");
-      router.push(redirectTo);
-    } catch (error) {
-      console.log(error);
-      toast.error("Something went wrong!");
-      setIsSubmiting(false);
-    }
+    startTransition(async () => {
+      try {
+        await onSubmit(form);
+        toast.success("Your message has been sent successfully.");
+        router.push(redirectTo);
+      } catch (error) {
+        console.log(error);
+        toast.error("Something went wrong!");
+      }
+    });
   };
 
   return (
     <div className="space-y-6">
-      {isSubmiting && (
+      {isPending && (
         <PageLoader message="Please wait while your message is being sent." />
       )}
 

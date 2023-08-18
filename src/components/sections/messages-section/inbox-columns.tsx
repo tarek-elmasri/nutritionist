@@ -1,7 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import CellActions from "@/components/sections/messages-section/cell-actions";
+import CellActions from "@/components/sections/messages-section/inbox-cell-actions";
 import { TableFilterKeys } from "@/type";
 import Link from "next/link";
 

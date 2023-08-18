@@ -1,4 +1,3 @@
-import deleteMessage from "@/actions/deleteMessage";
 import getCurrentUser from "@/actions/get CurrentUser";
 import { getMessageById } from "@/actions/getMessages";
 import updateMessage from "@/actions/updateMessage";
@@ -20,13 +19,18 @@ const ConsoleShowMessagePage: FC<ConsoleShowMessagePageProps> = async ({
 
   if (!message) redirect("/not-found");
 
-  await updateMessage(currentUser!.id, params.messageId);
+  const isInboxMessage = message.recieverId === currentUser!.id;
+
+  if (isInboxMessage && !message.seen) {
+    await updateMessage(currentUser!.id, params.messageId);
+  }
 
   return (
     <Message
       data={message}
-      onDelete={deleteMessage}
       redirectAfterDelete={routes.consoleInbox}
+      messagesLink={routes.consoleMessage}
+      type={isInboxMessage ? "INBOX" : "OUTBOX"}
     />
   );
 };

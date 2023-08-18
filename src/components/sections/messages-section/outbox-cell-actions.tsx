@@ -11,12 +11,12 @@ import { MoreHorizontal } from "lucide-react";
 import { useTransition } from "react";
 import PageLoader from "@/components/ui/page-loader";
 import { useRouter } from "next/navigation";
-import { MessageColumn } from "./columns";
-import deleteMessage from "@/actions/deleteMessage";
+import { MessageColumn } from "./outbox-columns";
+import { deleteSentMessage } from "@/actions/deleteMessage";
 import { toast } from "react-hot-toast";
 
 const CellActions = ({
-  data: { id, recieverId, href },
+  data: { id, senderId, href },
 }: {
   data: MessageColumn;
 }) => {
@@ -30,7 +30,7 @@ const CellActions = ({
   const handleDelete = async () => {
     startTransition(async () => {
       try {
-        await deleteMessage(recieverId, id);
+        await deleteSentMessage(senderId, id);
         window.location.reload();
       } catch (error) {
         toast.error("Something went wrong");
