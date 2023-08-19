@@ -8,7 +8,7 @@ const ProfileLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="h-full bg-gradient-green flex">
       {/* desktop sidebar */}
-      <div className="hidden lg:block">
+      <div className="hidden lg:block w-72">
         <Sidebar tabs={UserTabs} />
       </div>
 
