@@ -20,7 +20,7 @@ const TableLoader: FC<TableLoaderProps> = ({
 }) => (
   <ContentLoader
     uniqueKey={id}
-    width={width ?? 500}
+    width={width ?? "100%"}
     height={height ?? 200}
     viewBox="0 0 500 200"
     backgroundColor={backgroundColor ?? "#f3f3f3"}

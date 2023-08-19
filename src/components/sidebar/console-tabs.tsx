@@ -8,7 +8,7 @@ import { useTransition } from "react";
 import PageLoader from "@/components/ui/page-loader";
 import { signOut } from "next-auth/react";
 
-const ConsoleTabs = () => {
+const ConsoleTabs = ({ onClick }: { onClick?: () => void }) => {
   const router = useRouter();
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
@@ -40,20 +40,28 @@ const ConsoleTabs = () => {
     <>
       {isPending && <PageLoader />}
       {sidebarTabs.map(({ label, active, icon, href }) => (
-        <SidebarTap
-          key={label}
-          label={label}
-          isSelected={active}
-          icon={icon}
-          onClick={() => startTransition(() => router.push(href))}
-        />
+        <li className="list-none" key={label}>
+          <SidebarTap
+            label={label}
+            isSelected={active}
+            icon={icon}
+            onClick={() =>
+              startTransition(() => {
+                onClick && onClick();
+                router.push(href);
+              })
+            }
+          />
+        </li>
       ))}
-      <SidebarTap
-        key={"signout"}
-        label="Sign Out"
-        icon={LogOut}
-        onClick={() => startTransition(() => signOut())}
-      />
+      <li>
+        <SidebarTap
+          key={"signout"}
+          label="Sign Out"
+          icon={LogOut}
+          onClick={() => startTransition(() => signOut())}
+        />
+      </li>
     </>
   );
 };

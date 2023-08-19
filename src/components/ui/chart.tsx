@@ -21,8 +21,8 @@ interface ChartProps<TData> {
   data: TData[];
   lineKeys: TLine<keyof TData>[];
   xAxisKey: keyof TData;
-  width?: number;
-  height?: number;
+  width?: string | number;
+  height?: string | number;
 }
 
 const Chart = <T,>({
@@ -34,13 +34,8 @@ const Chart = <T,>({
   height,
 }: ChartProps<T>) => {
   return (
-    <ResponsiveContainer width={width ?? "100%"} height={300}>
-      <LineChart
-        id={id}
-        data={data}
-        margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
-        throttleDelay={20}
-      >
+    <ResponsiveContainer width={width ?? "100%"} height={height ?? 300}>
+      <LineChart id={id} data={data} throttleDelay={20}>
         <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
         <XAxis dataKey={xAxisKey as string} />
         <YAxis type="number" domain={["dataMin", "dataMax"]} />

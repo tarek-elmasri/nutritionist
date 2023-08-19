@@ -2,11 +2,16 @@
 
 import Image from "next/image";
 import logo from "@/assets/logo.png";
-import { ReactNode } from "react";
+import ConsoleTabs from "./console-tabs";
+import UserTabs from "./user-tabs";
 
-const Sidebar = ({ children }: { children: ReactNode }) => {
+const Sidebar = ({
+  tabs: ChildrenTabs,
+}: {
+  tabs: typeof ConsoleTabs | typeof UserTabs;
+}) => {
   return (
-    <div className="w-full h-full p-6 border-r-4 border-lightgreen max-w-[15rem] bg-background">
+    <aside className="w-full h-full p-6 border-r-4 border-lightgreen max-w-[15rem] bg-background">
       <Image
         src={logo}
         alt="Aya Salem"
@@ -14,8 +19,10 @@ const Sidebar = ({ children }: { children: ReactNode }) => {
         priority
       />
 
-      <div className="mt-12 space-y-3">{children}</div>
-    </div>
+      <ul className="mt-12 space-y-3">
+        <ChildrenTabs />
+      </ul>
+    </aside>
   );
 };
 

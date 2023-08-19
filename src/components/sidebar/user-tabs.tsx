@@ -15,7 +15,7 @@ import { useTransition } from "react";
 import PageLoader from "../ui/page-loader";
 import { signOut } from "next-auth/react";
 
-const UserTabs = () => {
+const UserTabs = ({ onClick }: { onClick?: () => void }) => {
   const router = useRouter();
   const pathname = usePathname();
   const tab = useSearchParams().get("tab") || TABS.ACTIVE_PLANS;
@@ -59,20 +59,29 @@ const UserTabs = () => {
     <>
       {isPending && <PageLoader />}
       {userTabs.map(({ label, active, icon, href }) => (
-        <SidebarTap
-          key={label}
-          label={label}
-          isSelected={active}
-          icon={icon}
-          onClick={() => startTransition(() => router.push(href))}
-        />
+        <li key={label}>
+          <SidebarTap
+            key={label}
+            label={label}
+            isSelected={active}
+            icon={icon}
+            onClick={() =>
+              startTransition(() => {
+                onClick && onClick();
+                router.push(href);
+              })
+            }
+          />
+        </li>
       ))}
-      <SidebarTap
-        key={"signout"}
-        label="Sign Out"
-        icon={LogOut}
-        onClick={() => startTransition(() => signOut())}
-      />
+      <li>
+        <SidebarTap
+          key={"signout"}
+          label="Sign Out"
+          icon={LogOut}
+          onClick={() => startTransition(() => signOut())}
+        />
+      </li>
     </>
   );
 };

@@ -1,8 +1,8 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import CellActions from "@/components/sections/profiles-section/cell-actions";
-import { ServeTypeKey, TableFilterKeys } from "@/type";
+import CellActions from "@/components/sections/ingredients-section/cell-actions";
+import { TableFilterKeys } from "@/type";
 
 export type ItemColumn = {
   id: string;
@@ -38,7 +38,7 @@ export const columns: ColumnDef<ItemColumn>[] = [
   },
   {
     accessorKey: "serveType",
-    header: "Serve Type",
+    header: "Type",
   },
   {
     id: "actions",
