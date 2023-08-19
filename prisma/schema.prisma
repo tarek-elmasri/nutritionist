@@ -94,6 +94,8 @@ model Profile {
 
   dietPlans DietPlan[]
   records   Record[]
+
+  @@index([userId])
 }
 
 model Record {
@@ -111,6 +113,8 @@ model Record {
 
   profileId String
   profile   Profile @relation(fields: [profileId], references: [id])
+
+  @@index([profileId])
 }
 
 model DietPlan {
@@ -128,6 +132,8 @@ model DietPlan {
 
   servePlan ServePlan?
   meals     Meal[]
+
+  @@index([startDate, endDate, profileId])
 }
 
 model ServePlan {
@@ -192,6 +198,8 @@ model Notification {
 
   userId String
   user   User   @relation(fields: [userId], references: [id])
+
+  @@index([userId])
 }
 
 model Message {
@@ -215,4 +223,6 @@ model UserMessage {
   reciever   User    @relation("UserRecievedMessages", fields: [recieverId], references: [id])
   senderId   String
   sender     User    @relation("UserSentMessages", fields: [senderId], references: [id])
+
+  @@index([messageId, recieverId, senderId])
 }
