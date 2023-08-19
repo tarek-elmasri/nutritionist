@@ -30,7 +30,7 @@ const IngredientsSection = () => {
   }));
 
   if (isLoading) {
-    return <TableLoader />;
+    return <TableLoader id="ingredients-loader" />;
   }
 
   const handleNewItem = async (item: FoodSchema) => {
@@ -49,14 +49,16 @@ const IngredientsSection = () => {
   return (
     <div className="space-y-6">
       {isSubmitting && (
-        <PageLoader message="Please wait while creating new ingredient item." />
+        <PageLoader message="Please wait, creating new ingredient item." />
       )}
 
-      <CreateItemModal
-        isOpen={isAddItemModalOpen}
-        onClose={() => setIsAddItemModalOpen(false)}
-        onSubmit={handleNewItem}
-      />
+      {isAddItemModalOpen && (
+        <CreateItemModal
+          isOpen={isAddItemModalOpen}
+          onClose={() => setIsAddItemModalOpen(false)}
+          onSubmit={handleNewItem}
+        />
+      )}
       <div className="flex items-center justify-between">
         <h4 className="section-header">Ingredients</h4>
         <Button

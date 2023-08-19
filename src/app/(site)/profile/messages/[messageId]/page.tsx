@@ -1,4 +1,4 @@
-import deleteMessage from "@/actions/deleteMessage";
+import deleteMessage, { deleteSentMessage } from "@/actions/deleteMessage";
 import getCurrentUser from "@/actions/get CurrentUser";
 import { getMessageById } from "@/actions/getMessages";
 import updateMessage from "@/actions/updateMessage";
@@ -19,12 +19,18 @@ const UserShowMessagePage: FC<UserShowMessagePageProps> = async ({
   const message = await getMessageById(currentUser!.id, params.messageId);
 
   if (!message) redirect("/not-found");
-  await updateMessage(currentUser!.id, params.messageId);
+
+  const isInboxMessage = currentUser!.id === message.recieverId;
+
+  if (isInboxMessage && !message.seen) {
+    await updateMessage(currentUser!.id, params.messageId);
+  }
 
   return (
     <Message
+      type={isInboxMessage ? "INBOX" : "OUTBOX"}
       data={message}
-      onDelete={deleteMessage}
+      messagesLink={routes.userMessage}
       redirectAfterDelete={routes.userInbox}
     />
   );

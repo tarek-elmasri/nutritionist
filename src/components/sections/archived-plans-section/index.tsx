@@ -23,15 +23,13 @@ const ArchivedPlansSection: FC<ArchivedPlansSectionProps> = ({ profileId }) => {
 
   return (
     <div className="space-y-6">
+      <h4 className="section-header">Archived Diet Plans:</h4>
       {isLoading ? (
-        <TableLoader />
+        <TableLoader id="archived-plans-loader" />
       ) : (
-        <>
-          <h4 className="section-header">Archived Diet Plans:</h4>
-          <div>
-            <DataTable columns={columns} data={formattedPlans || []} />
-          </div>
-        </>
+        <div>
+          <DataTable columns={columns} data={formattedPlans || []} />
+        </div>
       )}
     </div>
   );

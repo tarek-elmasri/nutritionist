@@ -73,7 +73,7 @@ const RecordsSection: FC<RecordsSectionProps> = ({ profileId, viewMode }) => {
           onSubmit={handleCreateRecord}
         />
       )}
-      <div className="flex items-center justify-between">
+      <div className="flex items-start justify-between gap-6">
         <div>
           <h4 className="section-header">Records</h4>
           {!viewMode && (
@@ -99,7 +99,7 @@ const RecordsSection: FC<RecordsSectionProps> = ({ profileId, viewMode }) => {
         )}
       </div>
       {isLoading ? (
-        <TableLoader />
+        <TableLoader id="records-loader" />
       ) : (
         <DataTable
           columns={columns}

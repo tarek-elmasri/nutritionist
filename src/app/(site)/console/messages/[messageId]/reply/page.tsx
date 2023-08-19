@@ -15,19 +15,19 @@ interface ReplyPageProps {
 
 const ReplyPage: FC<ReplyPageProps> = async ({ params }) => {
   const currentUser = await getCurrentUser(); // protected route
-  const senderId = currentUser!.id;
 
   const userMessage = await getMessageById(currentUser!.id, params.messageId);
   if (!userMessage) redirect("/not-found");
 
+  const isOwnMessage = currentUser!.id === userMessage.senderId;
   const profiles = await getProfiles();
 
   const initData = await getReplyForm(userMessage.messageId);
 
   return (
     <MessageForm
-      recieverId={userMessage.senderId}
-      senderId={senderId}
+      recieverId={isOwnMessage ? userMessage.recieverId : userMessage.senderId}
+      senderId={currentUser!.id}
       redirectTo={routes.consoleInbox}
       initData={initData}
       recieverList={profiles}

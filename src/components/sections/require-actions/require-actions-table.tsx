@@ -20,7 +20,7 @@ const RequireActionsTable = () => {
   }));
 
   if (isLoading) {
-    return <TableLoader />;
+    return <TableLoader id="require-actions-loader" />;
   }
 
   return (

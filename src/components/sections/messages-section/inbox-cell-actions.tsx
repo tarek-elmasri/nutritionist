@@ -8,14 +8,36 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import PageLoader from "@/components/ui/page-loader";
-import routes from "@/constants/routes";
+import { useRouter } from "next/navigation";
+import { MessageColumn } from "./inbox-columns";
+import deleteMessage from "@/actions/deleteMessage";
+import { toast } from "react-hot-toast";
 
-const CellActions = ({ profileId }: { profileId: string }) => {
+const CellActions = ({
+  data: { id, recieverId, href },
+}: {
+  data: MessageColumn;
+}) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
+
+  const handleNavigation = (link: string) => {
+    startTransition(() => router.push(link));
+  };
+
+  const handleDelete = async () => {
+    startTransition(async () => {
+      try {
+        await deleteMessage(recieverId, id);
+        window.location.reload();
+      } catch (error) {
+        toast.error("Something went wrong");
+      }
+    });
+  };
+
   return (
     <>
       {isPending && <PageLoader />}
@@ -29,23 +51,18 @@ const CellActions = ({ profileId }: { profileId: string }) => {
         <DropdownMenuContent align="start">
           <DropdownMenuItem
             className="flex-row"
-            onClick={() =>
-              startTransition(() =>
-                router.push(`${routes.consoleProfiles}/${profileId}`)
-              )
-            }
+            onClick={() => handleNavigation(`${href}/${id}`)}
           >
             View
           </DropdownMenuItem>
           <DropdownMenuItem
             className="flex-row"
-            onClick={() =>
-              startTransition(() =>
-                router.push(`${routes.consoleProfiles}/${profileId}/diets/new`)
-              )
-            }
+            onClick={() => handleNavigation(`${href}/${id}/reply`)}
           >
-            Create Plan
+            Reply
+          </DropdownMenuItem>
+          <DropdownMenuItem className="flex-row" onClick={handleDelete}>
+            Delete
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

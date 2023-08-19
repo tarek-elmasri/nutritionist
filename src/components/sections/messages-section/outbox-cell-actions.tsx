@@ -11,14 +11,31 @@ import { MoreHorizontal } from "lucide-react";
 import { useTransition } from "react";
 import PageLoader from "@/components/ui/page-loader";
 import { useRouter } from "next/navigation";
-import { MessageColumn } from "./columns";
+import { MessageColumn } from "./outbox-columns";
+import { deleteSentMessage } from "@/actions/deleteMessage";
+import { toast } from "react-hot-toast";
 
-const CellActions = ({ data: { id, href } }: { data: MessageColumn }) => {
+const CellActions = ({
+  data: { id, senderId, href },
+}: {
+  data: MessageColumn;
+}) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
   const handleNavigation = (link: string) => {
     startTransition(() => router.push(link));
+  };
+
+  const handleDelete = async () => {
+    startTransition(async () => {
+      try {
+        await deleteSentMessage(senderId, id);
+        window.location.reload();
+      } catch (error) {
+        toast.error("Something went wrong");
+      }
+    });
   };
 
   return (
@@ -44,7 +61,9 @@ const CellActions = ({ data: { id, href } }: { data: MessageColumn }) => {
           >
             Reply
           </DropdownMenuItem>
-          <DropdownMenuItem className="flex-row">Delete</DropdownMenuItem>
+          <DropdownMenuItem className="flex-row" onClick={handleDelete}>
+            Delete
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </>

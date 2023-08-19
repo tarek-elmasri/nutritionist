@@ -107,3 +107,14 @@ export type MessageDetails = UserMessage & {
     } | null;
   };
 };
+
+export type SentMessageDetails = UserMessage & {
+  message: Message;
+  reciever: {
+    id: string;
+    name: string | null;
+    Profile: {
+      name: string;
+    } | null;
+  };
+};

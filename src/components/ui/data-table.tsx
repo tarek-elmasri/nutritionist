@@ -67,7 +67,7 @@ export function DataTable<TData, TValue>({
     <div>
       {/* Filtering */}
       {filterKeys && searchKey && (
-        <div className="flex flex-col gap-4 md:flex-row justify-start items-start md:items-center py-4">
+        <div className="flex flex-col gap-4 md:flex-row justify-start py-4">
           <Input
             placeholder="Search"
             value={

@@ -27,15 +27,13 @@ const DietPlansSection: FC<DietPlansSectionProps> = ({ profileId, href }) => {
 
   return (
     <div className="space-y-6">
+      <h4 className="section-header">Active Diet Plans:</h4>
       {isLoading ? (
-        <TableLoader />
+        <TableLoader id="diet-plans-loader" />
       ) : (
-        <>
-          <h4 className="section-header">Active Diet Plans:</h4>
-          <div>
-            <DataTable columns={columns} data={formattedPlans || []} />
-          </div>
-        </>
+        <div>
+          <DataTable columns={columns} data={formattedPlans || []} />
+        </div>
       )}
     </div>
   );
