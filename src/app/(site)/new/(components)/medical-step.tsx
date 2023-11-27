@@ -61,7 +61,7 @@ const MedicalStep = () => {
             name="previousDiet"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Do you tried any diet before?</FormLabel>
+                <FormLabel>Did you try any diet before?</FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={(value) => field.onChange(value === "true")}

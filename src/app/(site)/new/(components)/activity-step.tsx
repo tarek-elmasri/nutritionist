@@ -51,7 +51,7 @@ const ActivityStep = () => {
         <div className="flex flex-col justify-center gap-6">
           <Image src={logo} alt="" className="w-36 h-auto mx-auto" />
           <h1 className="text-2xl text-primary font-semibold text-center">
-            Welcome to HealthyBite
+            Welcome to NourishMe
           </h1>
           <p className="text-lg font-semibold text-center">
             How is your activity level
