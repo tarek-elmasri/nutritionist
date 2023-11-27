@@ -30,7 +30,7 @@ const Footer = () => {
           </div>
 
           <p className="text-sm font-light text-neutral-600">
-            All Right Reserved&copy; 2022-2024
+            All Rights Reserved&copy; 2022-2024
           </p>
         </div>
       </div>

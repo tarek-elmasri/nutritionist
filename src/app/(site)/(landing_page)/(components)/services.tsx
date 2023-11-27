@@ -16,7 +16,7 @@ const Services = () => {
       <div className="p-6 py-24 w-full max-w-6xl mx-auto space-y-12">
         {/* title */}
         <h4 className="text-lg font-medium">
-          What is a <span className="text-6xl text-darkred">HealthyBite</span>{" "}
+          What is a <span className="text-6xl text-darkred">NourishMe</span>{" "}
           for you
         </h4>
 

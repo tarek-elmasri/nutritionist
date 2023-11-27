@@ -31,7 +31,7 @@ const Features = () => {
   return (
     <div className="mt-6 p-6 w-full max-w-6xl mx-auto space-y-12" id="benefits">
       <h3 className="text-xl font-bold text-center">
-        Have a <span className="text-darkred text-6xl"> HealthyBite </span> for
+        Have a <span className="text-darkred text-6xl"> NourishMe </span> for
       </h3>
 
       <div className="grid grid-cols-2 gap-x-24 gap-y-12">
