@@ -4,10 +4,10 @@ import NavLinks from "./nav-links";
 
 const Navbar = () => {
   return (
-    <nav className="bg-lightgreen/40">
-      <div className="w-full px-24 p-6  flex justify-start items-center gap-12">
+    <nav className="w-full bg-lightgreen/40">
+      <div className="w-full px-24 p-3  flex justify-start items-center gap-12">
         {/* logo */}
-        <Image alt="logo" src={logo} width={120} />
+        <Image alt="logo" src={logo} width={100} />
 
         {/* links */}
         <ul className="flex flex-1 items-center gap-6">
