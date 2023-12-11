@@ -98,7 +98,7 @@ body,
 
 /* .bg-image-fruits{
   background-image: url("../assets/auth-image.png");
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: top right;
   position: fixed;

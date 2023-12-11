@@ -3,15 +3,8 @@ import getCurrentUser from "@/actions/get CurrentUser";
 import { getProfile } from "@/actions/getProfiles";
 import { redirect } from "next/navigation";
 import createProfile from "@/actions/createProfile";
-
-// const createProfile = async (form: CreateProfileForm) => {
-//   "use server";
-//   const data = profileSchema.parse(form);
-//   const { height, weight, ...rest } = data;
-//   return prisma.profile.create({
-//     data: { ...rest, records: { create: [{ height, weight }] } },
-//   });
-// };
+import Image from "next/image";
+import backImg from "@/assets/auth-image.png";
 
 const NewProfilePage = async () => {
   const user = await getCurrentUser();
@@ -20,15 +13,17 @@ const NewProfilePage = async () => {
   if (profile) redirect("/profile");
 
   return (
-    <div className="h-full w-full">
-      {/* background image */}
-      <div className="bg-image-fruits opacity-5 lg:opacity-100 pointer-events-none" />
-
+    <main className="relative min-h-[100dvh] grid lg:grid-cols-2">
       {/* form container */}
-      <div className="relative z-10 h-full p-6 lg:px-28 xl:px-40  flex justify-center lg:justify-start items-center">
+      <div className="relative z-10 py-12 self-center justify-self-center">
         <NewProfileForm userId={user?.id!} onSubmit={createProfile} />
       </div>
-    </div>
+
+      {/* background image */}
+      <div className="absolute top-0 right-0 opacity-5 lg:opacity-100 lg:static">
+        <Image src={backImg} alt="" className="h-full object-cover w-auto" />
+      </div>
+    </main>
   );
 };
 
