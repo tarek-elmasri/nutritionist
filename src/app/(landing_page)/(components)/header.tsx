@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import headerImg from "@/assets/pngwing 2.png";
+import Link from "next/link";
 
 const Header = () => {
   return (
@@ -17,9 +18,11 @@ const Header = () => {
           Get your custum plans & one-to-one guidance from our experts
         </p>
         <div>
-          <Button className="text-foreground shadow-lg text-xl md:text-3xl px-12 py-8 rounded-xl hover:text-neutral-100 transition duration-300 bg-gradient-green--invert">
-            Get Started
-          </Button>
+          <Link href={"/signin"}>
+            <Button className="text-foreground shadow-lg text-xl md:text-3xl px-12 py-8 rounded-xl hover:text-neutral-100 transition duration-300 bg-gradient-green--invert">
+              Get Started
+            </Button>
+          </Link>
         </div>
       </div>
 
