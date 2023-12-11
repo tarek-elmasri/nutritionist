@@ -20,21 +20,20 @@ const HealthyBite = ({
       <div className="flex flex-col justify-between items-start gap-3">
         <h5 className="text-lg font-semibold">{title}</h5>
         <p className="font-medium text-neutral-600">{description}</p>
+        <Image src={separator} alt="" />
       </div>
     </div>
-
-    <Image src={separator} alt="" />
   </div>
 );
 
 const Features = () => {
   return (
-    <div className="mt-6 p-6 w-full max-w-6xl mx-auto space-y-12" id="benefits">
+    <div className="p-6 w-full max-w-6xl mx-auto space-y-12" id="benefits">
       <h3 className="text-xl font-bold text-center">
         Have a <span className="text-darkred text-6xl"> NourishMe </span> for
       </h3>
 
-      <div className="grid grid-cols-2 gap-x-24 gap-y-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-12">
         <HealthyBite
           imgSrc={saladImg}
           title="Find a diet you love"

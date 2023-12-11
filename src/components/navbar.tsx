@@ -1,24 +1,31 @@
 import Image from "next/image";
 import logo from "@/assets/logo.png";
 import NavLinks from "./nav-links";
+import { Button } from "./ui/button";
+import { Menu } from "lucide-react";
+import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <nav className="bg-lightgreen/40">
-      <div className="w-full px-24 p-6  flex justify-start items-center gap-12">
-        {/* logo */}
-        <Image alt="logo" src={logo} width={120} />
+    <nav className="py-3 md:py-6 flex items-center gap-6">
+      {/* logo */}
+      <Image alt="logo" src={logo} width={100} />
 
-        {/* links */}
-        <ul className="flex flex-1 items-center gap-6">
-          <NavLinks />
-        </ul>
+      {/* links */}
+      <div className="hidden md:block">
+        <NavLinks />
+      </div>
 
-        {/* user / login / register */}
-        <div className="flex items-center gap-12">
-          <button>login</button>
-          <button>signup</button>
-        </div>
+      {/* user / login / register */}
+      <div className="ml-auto flex items-center gap-12">
+        <Link href={`/signin`}>
+          <Button className="hidden md:block text-foreground font-bold hover:text-neutral-100 transition duration-300 bg-gradient-green--invert">
+            Login
+          </Button>
+        </Link>
+        <Button className="md:hidden text-foreground font-bold hover:text-neutral-100 transition duration-300 bg-gradient-green--invert">
+          <Menu />
+        </Button>
       </div>
     </nav>
   );

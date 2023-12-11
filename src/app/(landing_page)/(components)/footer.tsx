@@ -21,7 +21,7 @@ const Footer = () => {
 
           <Image src={separator} alt="" />
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center justify-center flex-wrap gap-6">
             <Image src={facebookIcon} alt="facebook" />
             <Image src={instagramIcon} alt="facebook" />
             <Image src={twitterIcon} alt="facebook" />

@@ -5,7 +5,7 @@
 html,
 body,
 :root{
-  height: 100%;
+  min-height: 100dvh;
   scroll-behavior: smooth;
 }
 
@@ -96,18 +96,45 @@ body,
   background: linear-gradient(180deg, hsl(var(--primary) / 60%) 20%,hsl(var(--light-green) / 40%) 100%); 
 }
 
-.bg-image-fruits{
+/* .bg-image-fruits{
   background-image: url("../assets/auth-image.png");
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: top right;
   position: fixed;
   inset: 0;
   z-index: 0
-}
+} */
 
 .section-header{
   @apply text-lg font-bold
+}
+
+.main-grid{
+  display: grid;
+  grid-template-columns: [fullwidth-start] 5vw [main-start] 1fr [main-end] 5vw [fullwidth-end];
+}
+
+.main-grid > :not(.fullwidth)  {
+  grid-column: main;
+}
+
+.main-grid > .fullwidth {
+  grid-column: fullwidth;
+  display: grid;
+  grid-template-columns: inherit;
+}
+
+.fullwidth > :not(.wrap-content) {
+  grid-column: fullwidth;
+}
+
+.fullwidth > .wrap-content{
+  grid-column: main;
+}
+
+.text-balance {
+  text-wrap: balance
 }
 
 @layer base {

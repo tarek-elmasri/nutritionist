@@ -24,7 +24,7 @@ const NavLinks = () => {
   ];
 
   return (
-    <>
+    <ul className="flex items-center gap-6">
       {routes.map((route) => (
         <Link href={route.href} key={route.href}>
           <li
@@ -37,7 +37,7 @@ const NavLinks = () => {
           </li>
         </Link>
       ))}
-    </>
+    </ul>
   );
 };
 
