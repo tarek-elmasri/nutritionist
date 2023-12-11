@@ -4,33 +4,31 @@ import headerImg from "@/assets/pngwing 2.png";
 
 const Header = () => {
   return (
-    <div>
-      <header className="w-full py-12 bg-gradient-green flex items-center justify-between shadow-md">
-        {/* content */}
-        <div className="pl-24 space-y-20 max-w-lg">
-          <h1 className="text-4xl font-medium">
-            <span className="text-darkred text-6xl font-bold leading-[6rem]">
-              Healthy
-            </span>{" "}
-            living
-            <br />
-            Made Easy!!
-          </h1>
-          <p className="font-medium text-3xl ">
-            Get your custum plans &<br /> one-to-one guidance from our experts
-          </p>
-          <div>
-            <Button className="text-foreground shadow-lg text-3xl px-20 py-8 rounded-xl hover:text-neutral-100 transition duration-300 bg-gradient-green--invert ">
-              Sign in
-            </Button>
-            <p className="ml-2 text-medium font-light leading-8">
-              Sign in & get started today.
-            </p>
-          </div>
+    <header className="relative grid md:grid-cols-2 overflow-hidden">
+      {/* content */}
+      <div className="self-center order-2 md:order-1 px-6 md:px-12 lg:px-20 space-y-10 text-center md:text-left text-balance">
+        <h1 className="text-2xl md:text-4xl font-medium">
+          <span className="text-darkred text-4xl md:text-6xl font-bold leading-[6rem]">
+            Healthy
+          </span>{" "}
+          Living Made Easy!!
+        </h1>
+        <p className="font-medium text-lg md:text-2xl ">
+          Get your custum plans & one-to-one guidance from our experts
+        </p>
+        <div>
+          <Button className="text-foreground shadow-lg text-xl md:text-3xl px-12 py-8 rounded-xl hover:text-neutral-100 transition duration-300 bg-gradient-green--invert">
+            Get Started
+          </Button>
         </div>
-        <Image alt="fruits" src={headerImg} />
-      </header>
-    </div>
+      </div>
+
+      <Image
+        alt="fruits"
+        src={headerImg}
+        className="order-1 md:order-2 w-full max-w-[250px] md:max-w-[40rem] justify-self-end"
+      />
+    </header>
   );
 };
 

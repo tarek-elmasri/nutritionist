@@ -4,18 +4,22 @@ import Image from "next/image";
 
 const CTX = () => {
   return (
-    <div className="mt-24 p-12 max-w-2xl mx-auto bg-lightgreen rounded-3xl flex justify-around items-center gap-6 shadow-md shadow-primary">
-      <div className=" max-w-[50%]">
-        <p className="font-semibold text-lg">
-          Don&apos;t know what&apos;s the right meal plan or the diet for you
-        </p>
-
-        <Button className="mt-8 bg-gradient-green--invert text-foreground shadow-lg text-lg px-10 py-6 rounded-xl hover:text-neutral-100 transition duration-300">
-          Sign in today
-        </Button>
+    <div className="py-12 ">
+      <div className="py-6 px-6 md:px-12 max-w-2xl mx-auto bg-lightgreen rounded-3xl grid grid-cols-[1.5fr,1fr] justify-items-center gap-3 shadow-md shadow-primary">
+        <div>
+          <p className="font-semibold text-lg text-balance">
+            Don&apos;t know what&apos;s the right meal plan or the diet for you
+          </p>
+          <Button className="mt-8 bg-gradient-green--invert text-foreground shadow-lg text-lg px-4 md:px-10 py-6 rounded-xl hover:text-neutral-100 transition duration-300">
+            Get Started
+          </Button>
+        </div>
+        <Image
+          src={questionMark}
+          alt=""
+          className="justify-self-end self-center"
+        />
       </div>
-
-      <Image src={questionMark} alt="" />
     </div>
   );
 };

@@ -110,6 +110,33 @@ body,
   @apply text-lg font-bold
 }
 
+.main-grid{
+  display: grid;
+  grid-template-columns: [fullwidth-start] 5vw [main-start] 1fr [main-end] 5vw [fullwidth-end];
+}
+
+.main-grid > :not(.fullwidth)  {
+  grid-column: main;
+}
+
+.main-grid > .fullwidth {
+  grid-column: fullwidth;
+  display: grid;
+  grid-template-columns: inherit;
+}
+
+.fullwidth > :not(.wrap-content) {
+  grid-column: fullwidth;
+}
+
+.fullwidth > .wrap-content{
+  grid-column: main;
+}
+
+.text-balance {
+  text-wrap: balance
+}
+
 @layer base {
   * {
     @apply border-border;
