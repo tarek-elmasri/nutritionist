@@ -13,7 +13,9 @@ const LoginPage = async ({ searchParams }: LoginPageProps) => {
   // TODO: redirection through middleware
   const user = await getCurrentUser();
 
-  const redirectUrl = searchParams.callbackUrl ?? `/profile`;
+  const redirectUrl =
+    searchParams.callbackUrl ?? user?.isAdmin ? "/console" : `/profile`;
+
   if (user?.email && user.isAdmin) redirect("/console");
   if (user?.email) redirect(redirectUrl);
 
