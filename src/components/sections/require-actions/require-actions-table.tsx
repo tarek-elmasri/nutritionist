@@ -14,7 +14,7 @@ const RequireActionsTable = () => {
     profileId: profile.id,
     name: profile.name,
     nextPlanSchedule: format(
-      profile.dietPlans[0]?.endDate || profile.createdAt,
+      profile.dietPlans[0]?.endDate ?? profile.createdAt,
       "dd-MM-yyyy"
     ),
   }));
@@ -28,7 +28,7 @@ const RequireActionsTable = () => {
       <h4 className="section-header">Require Actions</h4>
 
       <div>
-        <DataTable columns={columns} data={structuredProfiles || []} />
+        <DataTable columns={columns} data={structuredProfiles ?? []} />
       </div>
     </div>
   );

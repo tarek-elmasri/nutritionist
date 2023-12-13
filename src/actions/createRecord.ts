@@ -1,9 +1,9 @@
 "use server";
 
 import routes from "@/constants/routes";
-import prisma from "@/lib/prisma";
+import prisma from "@/server/prisma";
 import { parseDateWithoutTime } from "@/lib/utils";
-import { RecordsSchema } from "@/lib/validations/records-schema";
+import { type RecordsSchema } from "@/lib/validations/records-schema";
 
 /**
  * create records,

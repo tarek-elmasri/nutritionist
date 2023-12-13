@@ -1,8 +1,8 @@
 "use client";
 
-import { SubscriptionPlan } from "@prisma/client";
-import Image from "next/image";
-import { FC } from "react";
+import type { SubscriptionPlan } from "@prisma/client";
+import Image, { type StaticImageData } from "next/image";
+import type { FC } from "react";
 import separator from "@/assets/separator.svg";
 import { cn } from "@/lib/utils";
 
@@ -35,7 +35,7 @@ const SubscriptionPlanCard: FC<SubScriptionPlanCardProps> = ({
       >
         <div className="flex flex-col w-full items-center gap-3">
           <p className="font-bold text-lg">{plan.label}</p>
-          <Image src={separator} alt="" />
+          <Image src={separator as StaticImageData} alt="" />
           <div className="space-y-1">
             <p className="text-3xl font-bold text-primary text-center">
               {plan.price > 0 ? " $ " + plan.price : "FREE"}

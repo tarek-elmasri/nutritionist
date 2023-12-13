@@ -6,7 +6,7 @@ import Separator from "@/components/ui/separator";
 import routes from "@/constants/routes";
 import { calculateAgeFromDOB } from "@/lib/utils";
 import { redirect } from "next/navigation";
-import { FC } from "react";
+import type { FC } from "react";
 import NewPlanButton from "./_new-plan-button";
 
 interface ConsoleViewProfilePageProps {

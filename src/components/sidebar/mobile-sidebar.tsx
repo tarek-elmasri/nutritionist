@@ -1,20 +1,20 @@
 "use client";
 
-import Image from "next/image";
-import { Menu, X } from "lucide-react";
-import { useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import minLogo from "@/assets/mini-logo.png";
 import logo from "@/assets/logo.png";
+import minLogo from "@/assets/mini-logo.png";
 import { Button } from "@/components/ui/button";
 import useClickOutside from "@/hooks/use-click-outside";
-import ConsoleTabs from "./console-tabs";
-import UserTabs from "./user-tabs";
+import { AnimatePresence, motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import Image from "next/image";
+import { useRef, useState } from "react";
 
 const MobileSidebar = ({
   tabs: ChildrenTabs,
 }: {
-  tabs: typeof ConsoleTabs | typeof UserTabs;
+  tabs: (
+    props: { onClick: () => void } | Record<string, unknown>
+  ) => JSX.Element;
 }) => {
   const sidebarRef = useRef(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);

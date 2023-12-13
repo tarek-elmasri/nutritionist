@@ -5,7 +5,7 @@ import { DataTable } from "@/components/ui/data-table";
 import TableLoader from "@/components/ui/table-loader";
 import useFetch from "@/hooks/useFetch";
 import { format } from "date-fns";
-import { FC } from "react";
+import type { FC } from "react";
 import { columns } from "./columns";
 import { getTotalsFromServePlan } from "@/lib/servesHelper";
 
@@ -32,7 +32,7 @@ const DietPlansSection: FC<DietPlansSectionProps> = ({ profileId, href }) => {
         <TableLoader id="diet-plans-loader" />
       ) : (
         <div>
-          <DataTable columns={columns} data={formattedPlans || []} />
+          <DataTable columns={columns} data={formattedPlans ?? []} />
         </div>
       )}
     </div>

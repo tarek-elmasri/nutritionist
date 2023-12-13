@@ -1,7 +1,7 @@
 "use server";
 
-import prisma from "@/lib/prisma";
-import { CreateProfileForm } from "@/hooks/useCreateProfile";
+import prisma from "@/server/prisma";
+import { type CreateProfileForm } from "@/hooks/useCreateProfile";
 import profileSchema from "@/lib/validations/profile-schema";
 import routes from "@/constants/routes";
 

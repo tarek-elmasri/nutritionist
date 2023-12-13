@@ -1,6 +1,13 @@
 "use client";
 
-import { FC, useState, useTransition } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+} from "@/components/ui/command";
 import {
   Form,
   FormControl,
@@ -9,30 +16,25 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useForm } from "react-hook-form";
-import messageSchema, { MessageSchema } from "@/lib/validations/message-schema";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { useRouter } from "next/navigation";
-import PageLoader from "./ui/page-loader";
-import { toast } from "react-hot-toast";
-import { Profile } from "@prisma/client";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import messageSchema, {
+  type MessageSchema,
+} from "@/lib/validations/message-schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import type { Profile } from "@prisma/client";
 import { Check, ChevronsUpDown } from "lucide-react";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from "@/components/ui/command";
+import { useRouter } from "next/navigation";
+import { type FC, useTransition } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import PageLoader from "./ui/page-loader";
 
 interface MessageFormProps {
   recieverId: string;

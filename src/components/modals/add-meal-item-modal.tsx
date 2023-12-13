@@ -1,11 +1,11 @@
 "use client";
 
-import { FC, useMemo, useState } from "react";
+import { type FC, useMemo, useState } from "react";
 import Modal from "@/components/ui/modal";
 import { DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import Separator from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { MealItemForm, ServeTypeKey } from "@/type";
+import type { MealItemForm, ServeTypeKey } from "@/type";
 import {
   Popover,
   PopoverContent,
@@ -19,12 +19,12 @@ import {
   CommandInput,
   CommandItem,
 } from "@/components/ui/command";
-import { Food } from "@prisma/client";
+import type { Food } from "@prisma/client";
 import { cn } from "@/lib/utils";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  MealItemSchema,
+  type MealItemSchema,
   mealItemSchema,
 } from "@/lib/validations/create-diet-plan-schema";
 import { Input } from "@/components/ui/input";
@@ -53,7 +53,7 @@ const AddMealItemModal: FC<AddMealItemModalProps> = ({
 }) => {
   const [isServeTypeMenuOpen, setIsServeTypeMenuOpen] = useState(false);
   const [currentServeType, setCurrentServeType] = useState<ServeTypeKey | null>(
-    serveOptions[0].value
+    serveOptions[0]!.value
   );
   const [isItemMenuOpen, setIsItemMenuOpen] = useState(false);
 

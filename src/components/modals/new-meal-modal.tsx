@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useState } from "react";
+import { type FC, useState } from "react";
 import Modal from "@/components/ui/modal";
 import { DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";

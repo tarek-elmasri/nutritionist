@@ -11,7 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import useCreateDietPlan from "@/hooks/use-create-diet-plan";
-import { FC } from "react";
+import type { FC } from "react";
 
 interface InputCellProps {
   value: number;

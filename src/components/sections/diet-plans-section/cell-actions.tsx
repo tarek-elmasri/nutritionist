@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { DietPlanColumn } from "./columns";
+import type { DietPlanColumn } from "./columns";
 import { Button } from "@/components/ui/button";
 import { useTransition } from "react";
 import PageLoader from "@/components/ui/page-loader";

@@ -14,9 +14,8 @@ import useSteps from "@/hooks/use-steps";
 import useCreateProfile from "@/hooks/useCreateProfile";
 import profileSchema from "@/lib/validations/profile-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
+import type { z } from "zod";
 
 const medicalSchema = profileSchema.pick({
   chronicDisease: true,
@@ -27,7 +26,7 @@ const medicalSchema = profileSchema.pick({
 type MedicalSchema = z.infer<typeof medicalSchema>;
 
 const MedicalStep = () => {
-  const { form: data, setForm } = useCreateProfile();
+  const { setForm } = useCreateProfile();
   const { nextStep, prevStep } = useSteps();
 
   const form = useForm<MedicalSchema>({

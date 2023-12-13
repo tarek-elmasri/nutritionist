@@ -1,6 +1,6 @@
 "use client";
 
-import * as z from "zod";
+import type { z } from "zod";
 import profileSchema from "@/lib/validations/profile-schema";
 import useCreateProfile from "@/hooks/useCreateProfile";
 import { format } from "date-fns";

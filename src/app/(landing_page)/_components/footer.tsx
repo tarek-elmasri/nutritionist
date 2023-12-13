@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import NavLinks from "@/components/nav-links";
 import logo from "@/assets/logo.png";
 import separator from "@/assets/separator.svg";
@@ -19,7 +19,7 @@ const Footer = () => {
             <NavLinks />
           </ul>
 
-          <Image src={separator} alt="" />
+          <Image src={separator as StaticImageData} alt="" />
 
           <div className="flex items-center justify-center flex-wrap gap-6">
             <Image src={facebookIcon} alt="facebook" />

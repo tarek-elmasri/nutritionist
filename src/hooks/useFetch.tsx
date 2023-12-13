@@ -2,14 +2,10 @@
 
 import { useEffect, useState } from "react";
 
-interface UseFetchProps<T> {
-  fetchFn: () => Promise<T>;
-}
-
 const useFetch = <T,>(fetchMethod: () => Promise<T>) => {
   const [data, setData] = useState<T | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [errors, setErrors] = useState<any>(null);
+  const [errors, setErrors] = useState<unknown>(null);
 
   const refetch = async () => {
     try {
@@ -24,8 +20,8 @@ const useFetch = <T,>(fetchMethod: () => Promise<T>) => {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     refetch();
-    // eslint-disable-next-line
   }, []);
 
   return {

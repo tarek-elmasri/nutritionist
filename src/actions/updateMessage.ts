@@ -1,6 +1,6 @@
 "use server";
 
-import prisma from "@/lib/prisma";
+import prisma from "@/server/prisma";
 
 const updateMessage = (userId: string, messageId: string) => {
   return prisma.userMessage.update({

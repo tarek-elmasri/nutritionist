@@ -1,7 +1,7 @@
 "use client";
 
-import { TableFilterKeys } from "@/type";
-import { ColumnDef } from "@tanstack/react-table";
+import type { TableFilterKeys } from "@/type";
+import type { ColumnDef } from "@tanstack/react-table";
 
 export type RecordColumn = {
   id: string;

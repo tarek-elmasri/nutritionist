@@ -1,4 +1,4 @@
-import Image, { StaticImageData } from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import pic1 from "@/assets/pic-1.png";
 import pic2 from "@/assets/pic-2.png";
 import pic3 from "@/assets/pic-3.png";
@@ -77,7 +77,11 @@ const Benifits = () => {
           </p>
 
           {/* separator line */}
-          <Image alt="separator" src={separator} className="mt-3 mb-8" />
+          <Image
+            alt="separator"
+            src={separator as StaticImageData}
+            className="mt-3 mb-8"
+          />
 
           {/* plans */}
           <ul className="flex flex-col md:flex-row justify-between md:items-center gap-6">

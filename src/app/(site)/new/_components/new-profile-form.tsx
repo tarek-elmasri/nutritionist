@@ -1,17 +1,19 @@
 "use client";
 
-import useCreateProfile, { CreateProfileForm } from "@/hooks/useCreateProfile";
-import { FC, ReactNode, useEffect, useState, useTransition } from "react";
-import GoalStep from "./goal-step";
-import DetailsStep from "./details-step";
-import ObjectiveStep from "./objective-step";
 import PageLoader from "@/components/ui/page-loader";
-import { toast } from "react-hot-toast";
-import { Profile } from "@prisma/client";
-import { useRouter } from "next/navigation";
-import ActivityStep from "./activity-step";
 import useSteps from "@/hooks/use-steps";
+import useCreateProfile, {
+  type CreateProfileForm,
+} from "@/hooks/useCreateProfile";
+import type { Profile } from "@prisma/client";
+import { useRouter } from "next/navigation";
+import { type FC, type ReactNode, useEffect, useTransition } from "react";
+import { toast } from "react-hot-toast";
+import ActivityStep from "./activity-step";
+import DetailsStep from "./details-step";
+import GoalStep from "./goal-step";
 import MedicalStep from "./medical-step";
+import ObjectiveStep from "./objective-step";
 
 export interface NewProfileFormProps {
   userId: string;

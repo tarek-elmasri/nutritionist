@@ -7,7 +7,7 @@ import useFetch from "@/hooks/useFetch";
 import { columns, filterKeys } from "./inbox-columns";
 import { format } from "date-fns";
 import { getMessages } from "@/actions/getMessages";
-import { FC, useTransition } from "react";
+import { type FC, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import PageLoader from "@/components/ui/page-loader";
 
@@ -25,7 +25,7 @@ const InboxTab: FC<InboxTabProps> = ({ userId, messagesLink }) => {
   const formattedMessages = userMessages?.map((userMessage) => ({
     id: userMessage.id,
     recieverId: userId,
-    sender: userMessage.sender.Profile?.name || userMessage.sender.name!,
+    sender: userMessage.sender.Profile?.name ?? userMessage.sender.name!,
     title: userMessage.message.title,
     seen: userMessage.seen,
     href: messagesLink,
@@ -52,7 +52,7 @@ const InboxTab: FC<InboxTabProps> = ({ userId, messagesLink }) => {
       <div>
         <DataTable
           columns={columns}
-          data={formattedMessages || []}
+          data={formattedMessages ?? []}
           filterKeys={filterKeys}
           seenKey="seen"
         />

@@ -1,7 +1,7 @@
 "use client";
 
 import { ActivityLevel, Gender, Goal } from "@/type";
-import { Profile } from "@prisma/client";
+import type { Profile } from "@prisma/client";
 import { create } from "zustand";
 
 export type CreateProfileForm = Partial<Omit<Profile, "id">> &

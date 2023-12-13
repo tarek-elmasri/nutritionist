@@ -1,6 +1,6 @@
 "use server";
 
-import prisma from "@/lib/prisma";
+import prisma from "@/server/prisma";
 
 const getRequireActions = async () => {
   const profiles = await prisma.profile.findMany({

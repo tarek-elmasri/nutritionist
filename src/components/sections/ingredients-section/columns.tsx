@@ -1,8 +1,8 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
+import type { ColumnDef } from "@tanstack/react-table";
 import CellActions from "@/components/sections/ingredients-section/cell-actions";
-import { TableFilterKeys } from "@/type";
+import type { TableFilterKeys } from "@/type";
 
 export type ItemColumn = {
   id: string;
@@ -42,6 +42,6 @@ export const columns: ColumnDef<ItemColumn>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => <CellActions />,
+    cell: () => <CellActions />,
   },
 ];

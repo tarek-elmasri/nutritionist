@@ -1,14 +1,14 @@
 "use client";
 
-import Image from "next/image";
 import logo from "@/assets/logo.png";
-import ConsoleTabs from "./console-tabs";
-import UserTabs from "./user-tabs";
+import Image from "next/image";
 
 const Sidebar = ({
   tabs: ChildrenTabs,
 }: {
-  tabs: typeof ConsoleTabs | typeof UserTabs;
+  tabs: (
+    props: { onClick: () => void } | Record<string, unknown>
+  ) => JSX.Element;
 }) => {
   return (
     <aside className="w-full h-full p-6 border-r-4 border-lightgreen max-w-[15rem] bg-background">

@@ -11,7 +11,7 @@ import { MoreHorizontal } from "lucide-react";
 import { useTransition } from "react";
 import PageLoader from "@/components/ui/page-loader";
 import { useRouter } from "next/navigation";
-import { MessageColumn } from "./inbox-columns";
+import type { MessageColumn } from "./inbox-columns";
 import deleteMessage from "@/actions/deleteMessage";
 import { toast } from "react-hot-toast";
 

@@ -4,7 +4,7 @@ import ConsoleTabs from "@/components/sidebar/console-tabs";
 import MobileSidebar from "@/components/sidebar/mobile-sidebar";
 import Sidebar from "@/components/sidebar/sidebar";
 import { redirect } from "next/navigation";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 const ConsoleLayout = async ({ children }: { children: ReactNode }) => {
   const currentUser = await getCurrentUser();

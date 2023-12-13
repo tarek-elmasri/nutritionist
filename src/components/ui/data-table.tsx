@@ -1,12 +1,12 @@
 "use client";
 
 import {
-  ColumnDef,
+  type ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
   getPaginationRowModel,
-  ColumnFiltersState,
+  type ColumnFiltersState,
   getFilteredRowModel,
 } from "@tanstack/react-table";
 
@@ -28,7 +28,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { TableFilterKeys } from "@/type";
+import type { TableFilterKeys } from "@/type";
 import { cn } from "@/lib/utils";
 
 interface DataTableProps<TData, TValue> {

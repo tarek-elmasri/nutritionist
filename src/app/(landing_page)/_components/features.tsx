@@ -1,4 +1,4 @@
-import Image, { StaticImageData } from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import saladImg from "@/assets/salad.png";
 import cocktailImg from "@/assets/cocktail.png";
 import juiceImg from "@/assets/juice.png";
@@ -20,7 +20,7 @@ const HealthyBite = ({
       <div className="flex flex-col justify-between items-start gap-3">
         <h5 className="text-lg font-semibold">{title}</h5>
         <p className="font-medium text-neutral-600">{description}</p>
-        <Image src={separator} alt="" />
+        <Image src={separator as StaticImageData} alt="" />
       </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 "use server";
 
-import prisma from "@/lib/prisma";
+import prisma from "@/server/prisma";
 
 const getFood = () => prisma.food.findMany();
 

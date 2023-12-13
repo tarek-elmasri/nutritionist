@@ -1,6 +1,6 @@
 "use server";
 
-import prisma from "@/lib/prisma";
+import prisma from "@/server/prisma";
 import getCurrentUser from "./get CurrentUser";
 
 const updateNotification = async (id: string) => {

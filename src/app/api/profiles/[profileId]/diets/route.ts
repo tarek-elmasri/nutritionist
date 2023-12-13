@@ -7,9 +7,10 @@ import {
   constructZodError,
 } from "@/app/api/errors";
 import routes from "@/constants/routes";
-import prisma from "@/lib/prisma";
+import prisma from "@/server/prisma";
 import dietPlanSchema from "@/lib/validations/create-diet-plan-schema";
 import { NextResponse } from "next/server";
+import type { CreateDietPlanForm } from "@/type";
 
 export const POST = async (
   req: Request,
@@ -20,7 +21,7 @@ export const POST = async (
     if (!currentUser) throw new UnauthenticatedError();
     if (!currentUser.isAdmin) throw new UnauthorizedError();
 
-    const json = await req.json();
+    const json = (await req.json()) as CreateDietPlanForm;
     const form = {
       servePlan: json.servePlan,
       meals: json.meals,
@@ -29,6 +30,7 @@ export const POST = async (
         endDate: new Date(json.schedule.endDate),
       },
     };
+
     const parsedData = dietPlanSchema.safeParse(form);
     if (!parsedData.success)
       throw new ValidationError(constructZodError(parsedData.error));

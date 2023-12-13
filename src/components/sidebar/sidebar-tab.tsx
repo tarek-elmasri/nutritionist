@@ -1,8 +1,8 @@
 "use client";
 
-import { FC } from "react";
+import type { FC } from "react";
 import { cn } from "@/lib/utils";
-import { LucideIcon } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 interface SidebarTapProps {
   onClick: () => void;

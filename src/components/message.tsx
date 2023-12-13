@@ -1,7 +1,7 @@
 "use client";
 
-import { MessageDetails } from "@/type";
-import { FC, useTransition } from "react";
+import type { MessageDetails } from "@/type";
+import { type FC, useTransition } from "react";
 import Separator from "@/components/ui/separator";
 import { Button } from "./ui/button";
 import { Reply, Trash2 } from "lucide-react";
@@ -49,7 +49,7 @@ const Message: FC<MessageProps> = ({
       <div className="flex items-center gap-12">
         <div>
           <p className="font-semibold">
-            From: {userMessage.sender.Profile?.name || userMessage.sender.name}
+            From: {userMessage.sender.Profile?.name ?? userMessage.sender.name}
           </p>
           <p className="text-xs font-semibold">
             at: {userMessage.message.createdAt.toDateString()}

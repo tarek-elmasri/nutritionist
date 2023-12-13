@@ -1,10 +1,9 @@
 import createMessage from "@/actions/createMessage";
 import getCurrentUser from "@/actions/get CurrentUser";
-import { getReplyForm } from "@/actions/getMessages";
 import { getProfiles } from "@/actions/getProfiles";
 import MessageForm from "@/components/message-form";
 import routes from "@/constants/routes";
-import { FC } from "react";
+import type { FC } from "react";
 
 interface ConsoleNewMessagePageProps {
   searchParams: {
@@ -22,7 +21,7 @@ const ConsoleNewMessagePage: FC<ConsoleNewMessagePageProps> = async ({
   return (
     <MessageForm
       onSubmit={createMessage}
-      recieverId={searchParams.recieverId || ""}
+      recieverId={searchParams.recieverId ?? ""}
       recieverList={profiles}
       senderId={senderId}
       redirectTo={routes.consoleInbox}

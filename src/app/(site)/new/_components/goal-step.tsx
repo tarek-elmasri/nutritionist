@@ -7,7 +7,7 @@ import { Goal } from "@/type";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
+import type { z } from "zod";
 import logo from "@/assets/logo.png";
 import { AlarmCheck, Dumbbell } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -51,7 +51,7 @@ const GoalStep = () => {
             label="Lose Weight"
             name="goal"
             value={Goal.LOSE_WEIGHT}
-            onChange={(value) => form.setValue("goal", value)}
+            onChange={(value) => form.setValue("goal", value as Goal)}
           />
 
           <InputRadio
@@ -60,7 +60,7 @@ const GoalStep = () => {
             label="Gain Weight"
             name="goal"
             value={Goal.GAIN_WEIGHT}
-            onChange={(value) => form.setValue("goal", value)}
+            onChange={(value) => form.setValue("goal", value as Goal)}
           />
 
           <InputRadio
@@ -69,7 +69,7 @@ const GoalStep = () => {
             label="Maintaine Weight"
             name="goal"
             value={Goal.MAINTAIN_WEIGHT}
-            onChange={(value) => form.setValue("goal", value)}
+            onChange={(value) => form.setValue("goal", value as Goal)}
           />
 
           <InputRadio
@@ -78,7 +78,7 @@ const GoalStep = () => {
             label="Build Muscles"
             name="goal"
             value={Goal.BUILD_MUSCLES}
-            onChange={(value) => form.setValue("goal", value)}
+            onChange={(value) => form.setValue("goal", value as Goal)}
           />
 
           <Button type="submit" className="w-full text-lg h-12">

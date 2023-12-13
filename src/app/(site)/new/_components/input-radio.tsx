@@ -1,17 +1,16 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { ActivityLevel, Goal } from "@/type";
-import { LucideIcon } from "lucide-react";
-import { FC } from "react";
+import type { LucideIcon } from "lucide-react";
+import type { FC } from "react";
 
 interface InputRadioProps {
   icon: LucideIcon;
   name: string;
-  value: any;
+  value: string;
   label: string;
   isSelected: boolean;
-  onChange: (value: any) => void;
+  onChange: (value: string) => void;
 }
 
 const InputRadio: FC<InputRadioProps> = ({

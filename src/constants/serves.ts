@@ -1,4 +1,4 @@
-import { ServeType, ServeTypeKey, ServeTypeMap } from "@/type";
+import type { ServeType, ServeTypeKey, ServeTypeMap } from "@/type";
 
 export const fruitServe: ServeType = {
   CHO: 15,
@@ -117,55 +117,55 @@ export const serveLabels: Record<ServeTypeKey, string> = {
 
 export const serveOptions: ServeTypeMap = [
   {
-    label: serveLabels["starch"],
+    label: serveLabels.starch,
     value: "starch",
   },
   {
-    label: serveLabels["fruit"],
+    label: serveLabels.fruit,
     value: "fruit",
   },
   {
-    label: serveLabels["vegetable"],
+    label: serveLabels.vegetable,
     value: "vegetable",
   },
   {
-    label: serveLabels["leanMeat"],
+    label: serveLabels.leanMeat,
     value: "leanMeat",
   },
   {
-    label: serveLabels["mediumMeat"],
+    label: serveLabels.mediumMeat,
     value: "mediumMeat",
   },
   {
-    label: serveLabels["highMeat"],
+    label: serveLabels.highMeat,
     value: "highMeat",
   },
   {
-    label: serveLabels["lowFatMilk"],
+    label: serveLabels.lowFatMilk,
     value: "lowFatMilk",
   },
   {
-    label: serveLabels["mediumFatMilk"],
+    label: serveLabels.mediumFatMilk,
     value: "mediumFatMilk",
   },
   {
-    label: serveLabels["highFatMilk"],
+    label: serveLabels.highFatMilk,
     value: "highFatMilk",
   },
   {
-    label: serveLabels["sugar"],
+    label: serveLabels.sugar,
     value: "sugar",
   },
   {
-    label: serveLabels["legume"],
+    label: serveLabels.legume,
     value: "legume",
   },
   {
-    label: serveLabels["mufa"],
+    label: serveLabels.mufa,
     value: "mufa",
   },
   {
-    label: serveLabels["pufa"],
+    label: serveLabels.pufa,
     value: "pufa",
   },
 ];

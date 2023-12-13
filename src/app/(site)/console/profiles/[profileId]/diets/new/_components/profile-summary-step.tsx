@@ -6,7 +6,7 @@ import PageLoader from "@/components/ui/page-loader";
 import useCreateDietPlan from "@/hooks/use-create-diet-plan";
 import useSteps from "@/hooks/use-steps";
 import ProfileCalculator from "@/lib/profile-calculator";
-import { FC, useEffect, useState } from "react";
+import { type FC, useEffect, useState } from "react";
 
 interface CustomInputProps {
   name: string;
@@ -31,7 +31,7 @@ const CustomInput: FC<CustomInputProps> = ({
         maxLength={2}
         className="w-12 hover:ring-0 focus-visible:ring-0 text-center"
         value={value}
-        onChange={(e) => onChange(parseInt(e.target.value) || 0)}
+        onChange={(e) => onChange(parseInt(e.target.value) ?? 0)}
       />
     </div>
   );
@@ -44,7 +44,7 @@ const ProfileSummaryStep = () => {
 
   const initCustomFactors = {
     customCaloriesFactor:
-      profile?.customCalorieFactor || profile?.getCaloriesFactor() || 0,
+      profile?.customCalorieFactor ?? profile?.getCaloriesFactor() ?? 0,
     customProtienPercentage: profile?.customProtienPercentage ?? 20,
     customCHOPercentage: profile?.customCHOPercentage ?? 60,
   };
@@ -53,7 +53,7 @@ const ProfileSummaryStep = () => {
     if (profile) {
       setCustomFactors({
         customCaloriesFactor:
-          profile.customCalorieFactor || profile.getCaloriesFactor() || 0,
+          profile.customCalorieFactor ?? profile.getCaloriesFactor() ?? 0,
         customProtienPercentage: profile.customProtienPercentage ?? 20,
         customCHOPercentage: profile.customCHOPercentage ?? 60,
       });

@@ -1,6 +1,4 @@
-import { serves } from "@/constants";
-import { leanMeatServe } from "@/constants/serves";
-import {
+import type {
   Food,
   Meal,
   MealItem,
@@ -8,23 +6,22 @@ import {
   ServePlan,
   UserMessage,
 } from "@prisma/client";
-import { User } from "next-auth";
 
-declare module "next-auth/jwt" {
-  interface JWT {
-    id: string;
-    isAdmin: boolean;
-  }
-}
+// declare module "next-auth/jwt" {
+//   interface JWT {
+//     id: string;
+//     isAdmin: boolean;
+//   }
+// }
 
-declare module "next-auth" {
-  interface Session {
-    user: User & {
-      isAdmin: boolean;
-      id: string;
-    };
-  }
-}
+// declare module "next-auth" {
+//   interface Session {
+//     user: User & {
+//       isAdmin: boolean;
+//       id: string;
+//     };
+//   }
+// }
 
 export enum Gender {
   MALE = "MALE",
@@ -67,21 +64,15 @@ export interface ServeType {
 }
 
 export type ServePlanForm = Omit<ServePlan, "id" | "dietPlanId">;
-// export interface ServePlanForm {
-//   starch: number;
-//   vegetable: number;
-//   fruit: number;
-//   leanMeat: number;
-//   mediumMeat: number;
-//   highMeat: number;
-//   lowFatMilk: number;
-//   mediumFatMilk: number;
-//   highFatMilk: number;
-//   legume: number;
-//   sugar: number;
-//   pufa: number;
-//   mufa: number;
-// }
+
+export type CreateDietPlanForm = {
+  schedule: {
+    startDate: Date;
+    endDate: Date;
+  };
+  meals: MealForm[];
+  servePlan: ServePlanForm;
+};
 
 export type MealItemForm = Omit<MealItem, "id" | "mealId"> & { item: Food };
 export type MealForm = Omit<Meal, "id" | "dietPlanId"> & {

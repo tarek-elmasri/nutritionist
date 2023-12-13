@@ -1,9 +1,8 @@
-import { getProfileById } from "@/actions/getProfiles";
-import NotificationsMenu from "@/components/notifications-menu";
-import { FC } from "react";
-import CreateDietForm from "./create-diet-form";
-import { redirect } from "next/navigation";
 import getFood from "@/actions/getFood";
+import { getProfileById } from "@/actions/getProfiles";
+import { redirect } from "next/navigation";
+import type { FC } from "react";
+import CreateDietForm from "./create-diet-form";
 
 interface CreateDietPageProps {
   params: {

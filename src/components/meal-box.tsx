@@ -1,8 +1,8 @@
 "use client";
 
-import { MealForm, MealItemForm } from "@/type";
+import type { MealForm, MealItemForm } from "@/type";
 import { Pen, Plus, X } from "lucide-react";
-import { FC } from "react";
+import type { FC } from "react";
 import { Button } from "@/components/ui/button";
 
 interface MealItemProps {

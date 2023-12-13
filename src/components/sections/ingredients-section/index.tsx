@@ -2,15 +2,15 @@
 
 import { DataTable } from "@/components/ui/data-table";
 import useFetch from "@/hooks/useFetch";
-import { ServeTypeKey } from "@/type";
-import { ItemColumn, columns, filterKeys } from "./columns";
+import type { ServeTypeKey } from "@/type";
+import { type ItemColumn, columns, filterKeys } from "./columns";
 import TableLoader from "@/components/ui/table-loader";
 import getFood from "@/actions/getFood";
 import { Button } from "@/components/ui/button";
 import { serveLabels } from "@/constants/serves";
 import CreateItemModal from "@/components/modals/create-item-modal";
 import { useState } from "react";
-import { FoodSchema } from "@/lib/validations/food-schema";
+import type { FoodSchema } from "@/lib/validations/food-schema";
 import createFood from "@/actions/createFood";
 import PageLoader from "@/components/ui/page-loader";
 import { toast } from "react-hot-toast";
@@ -73,7 +73,7 @@ const IngredientsSection = () => {
       <div>
         <DataTable
           columns={columns}
-          data={structuredItems || []}
+          data={structuredItems ?? []}
           filterKeys={filterKeys}
         />
       </div>

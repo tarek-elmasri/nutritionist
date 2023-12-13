@@ -1,7 +1,7 @@
 "use client";
 
-import foodSchema, { FoodSchema } from "@/lib/validations/food-schema";
-import { FC, useState } from "react";
+import foodSchema, { type FoodSchema } from "@/lib/validations/food-schema";
+import { type FC, useState } from "react";
 import Modal from "@/components/ui/modal";
 import { DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useForm } from "react-hook-form";
@@ -23,7 +23,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { serveLabels, serveOptions } from "@/constants/serves";
-import { ServeTypeKey } from "@/type";
+import type { ServeTypeKey } from "@/type";
 import { Check, ChevronsUpDown } from "lucide-react";
 import {
   Command,

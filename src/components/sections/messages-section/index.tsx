@@ -1,7 +1,7 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FC } from "react";
+import type { FC } from "react";
 import InboxTab from "./inbox-tab";
 import OutboxTab from "./outbox-tab";
 

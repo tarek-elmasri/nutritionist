@@ -1,21 +1,22 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import PageLoader from "@/components/ui/page-loader";
+import Separator from "@/components/ui/separator";
 import useCreateDietPlan from "@/hooks/use-create-diet-plan";
 import useSteps from "@/hooks/use-steps";
 import ProfileCalculator from "@/lib/profile-calculator";
-import { Food, Profile, Record } from "@prisma/client";
-import { FC, ReactNode, useEffect, useState, useTransition } from "react";
-import ProfileSummaryStep from "./(components)/profile-summary-step";
-import Separator from "@/components/ui/separator";
-import ServesStep from "./(components)/serves-step";
-import AddMealsStep from "./(components)/add-meals-step";
-import ScheduleStep from "./(components)/schedule-step";
-import ReviewStep from "./(components)/review-step";
-import { Button } from "@/components/ui/button";
-import PageLoader from "@/components/ui/page-loader";
+import type { Food, Profile, Record } from "@prisma/client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { type FC, type ReactNode, useEffect, useTransition } from "react";
 import { toast } from "react-hot-toast";
+import AddMealsStep from "./_components/add-meals-step";
+import ProfileSummaryStep from "./_components/profile-summary-step";
+import ReviewStep from "./_components/review-step";
+import ScheduleStep from "./_components/schedule-step";
+import ServesStep from "./_components/serves-step";
+import type { CreateDietPlanForm } from "@/type";
 
 interface CreateDietFormProps {
   profile: Profile & { records: Record[] };
@@ -49,8 +50,8 @@ const CreateDietForm: FC<CreateDietFormProps> = ({ profile, foodList }) => {
         activityLevel: profile.activityLevel,
         dob: profile.dob,
         gender: profile.gender,
-        height: profile.records[0].height,
-        weight: profile.records[0].weight,
+        height: profile.records[0]!.height,
+        weight: profile.records[0]!.weight,
       })
     );
 
@@ -71,7 +72,7 @@ const CreateDietForm: FC<CreateDietFormProps> = ({ profile, foodList }) => {
   const handleSubmit = async () => {
     startTransition(async () => {
       try {
-        const form = {
+        const form: CreateDietPlanForm = {
           schedule,
           meals,
           servePlan: servePlanForm,

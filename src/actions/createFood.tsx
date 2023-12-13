@@ -1,7 +1,7 @@
 "use server";
 
-import prisma from "@/lib/prisma";
-import foodSchema, { FoodSchema } from "@/lib/validations/food-schema";
+import { type FoodSchema } from "@/lib/validations/food-schema";
+import prisma from "@/server/prisma";
 
 const createFood = (item: FoodSchema) => {
   const { amount, label, serveType, unit } = item;

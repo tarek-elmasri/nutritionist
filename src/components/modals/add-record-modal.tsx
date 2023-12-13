@@ -1,7 +1,9 @@
 "use client";
 
-import recordsSchema, { RecordsSchema } from "@/lib/validations/records-schema";
-import React, { FC } from "react";
+import recordsSchema, {
+  type RecordsSchema,
+} from "@/lib/validations/records-schema";
+import type { FC } from "react";
 import Modal from "@/components/ui/modal";
 import { DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import Separator from "@/components/ui/separator";

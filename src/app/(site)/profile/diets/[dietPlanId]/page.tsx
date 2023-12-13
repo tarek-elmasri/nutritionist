@@ -1,10 +1,10 @@
 import getCurrentUser from "@/actions/get CurrentUser";
 import { getMeals } from "@/actions/getMeals";
 import MealBox from "@/components/meal-box";
-import NotificationsMenu from "@/components/notifications-menu";
 import Separator from "@/components/ui/separator";
+import type { User } from "@prisma/client";
 import { redirect } from "next/navigation";
-import { FC } from "react";
+import type { FC } from "react";
 
 interface DietPlanPageProps {
   params: {
@@ -13,8 +13,8 @@ interface DietPlanPageProps {
 }
 
 const DietPlanPage: FC<DietPlanPageProps> = async ({ params }) => {
-  const currentUser = await getCurrentUser(); // protected route
-  const meals = await getMeals(currentUser!.id, params.dietPlanId);
+  const currentUser = (await getCurrentUser()) as User; // protected route
+  const meals = await getMeals(currentUser.id, params.dietPlanId);
 
   if (meals.length === 0) redirect("/not-found");
 

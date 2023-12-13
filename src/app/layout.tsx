@@ -1,9 +1,8 @@
+import { cookies } from "next/headers";
+import { TRPCReactProvider } from "@/trpc/react";
+import ToastProvider from "@/providers/toast-provider";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import getSession from "@/actions/getCurrentSession";
-import AuthProvider from "@/providers/auth-provider";
-import QueryProvider from "@/providers/query-provider";
-import ToastProvider from "@/providers/toast-provider";
 import "./globals.css";
 
 const inter = Inter({
@@ -21,18 +20,16 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getSession();
-
   return (
-    <AuthProvider session={session}>
-      <html lang="en">
-        <body className={inter.className}>
-          <ToastProvider />
-          <QueryProvider>
-            <div className="h-full bg-background">{children}</div>
-          </QueryProvider>
-        </body>
-      </html>
-    </AuthProvider>
+    <html lang="en">
+      <body className={inter.className}>
+        <ToastProvider />
+        <div className="h-full bg-background">
+          <TRPCReactProvider cookies={cookies().toString()}>
+            {children}
+          </TRPCReactProvider>
+        </div>
+      </body>
+    </html>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
+import type { ColumnDef } from "@tanstack/react-table";
 import CellActions from "@/components/sections/require-actions/cell-actions";
 
 export type RequireActionColumn = {

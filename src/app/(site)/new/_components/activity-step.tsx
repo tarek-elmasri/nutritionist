@@ -1,24 +1,18 @@
 "use client";
 
+import logo from "@/assets/logo.png";
+import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
+import useSteps from "@/hooks/use-steps";
 import useCreateProfile from "@/hooks/useCreateProfile";
-import profileSchema, { ProfileSchema } from "@/lib/validations/profile-schema";
-import { ActivityLevel, Goal } from "@/type";
+import profileSchema from "@/lib/validations/profile-schema";
+import { ActivityLevel } from "@/type";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { SignalHigh, SignalLow, SignalMedium } from "lucide-react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
-import logo from "@/assets/logo.png";
-import {
-  AlarmCheck,
-  Dumbbell,
-  SignalHigh,
-  SignalLow,
-  SignalMedium,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
+import type { z } from "zod";
 import InputRadio from "./input-radio";
-import useSteps from "@/hooks/use-steps";
 
 const activitySchema = profileSchema.pick({ activityLevel: true });
 type GoalSchema = z.infer<typeof activitySchema>;
@@ -61,7 +55,7 @@ const ActivityStep = () => {
         <div className="space-y-6">
           <InputRadio
             icon={SignalLow}
-            isSelected={activityLevel === ActivityLevel.LOW}
+            isSelected={activityLevel === (ActivityLevel.LOW as string)}
             label="Low activity"
             name="activityLevel"
             value={ActivityLevel.LOW}
@@ -70,7 +64,7 @@ const ActivityStep = () => {
 
           <InputRadio
             icon={SignalMedium}
-            isSelected={activityLevel === ActivityLevel.MEDIUM}
+            isSelected={activityLevel === (ActivityLevel.MEDIUM as string)}
             label="Moderate Activity"
             name="activityLevel"
             value={ActivityLevel.MEDIUM}
@@ -79,7 +73,7 @@ const ActivityStep = () => {
 
           <InputRadio
             icon={SignalHigh}
-            isSelected={activityLevel === ActivityLevel.HIGH}
+            isSelected={activityLevel === (ActivityLevel.HIGH as string)}
             label="High Level"
             name="activityLevel"
             value={ActivityLevel.HIGH}

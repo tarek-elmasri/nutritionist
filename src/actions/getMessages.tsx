@@ -1,7 +1,7 @@
 "use server";
 
-import prisma from "@/lib/prisma";
-import { MessageDetails, SentMessageDetails } from "@/type";
+import prisma from "@/server/prisma";
+import type { MessageDetails, SentMessageDetails } from "@/type";
 
 export const getMessages = async (
   userId: string
@@ -81,7 +81,7 @@ export const getReplyForm = async (messageId: string) => {
 
   if (!message) return { title: "", body: "" };
 
-  let title: string = "";
+  let title = "";
   message.title.startsWith("[REPLY]")
     ? (title = message.title)
     : (title = `[REPLY] ${message.title}`);

@@ -4,14 +4,14 @@ import { getRecords } from "@/actions/getRecords";
 import { DataTable } from "@/components/ui/data-table";
 import useFetch from "@/hooks/useFetch";
 import { format } from "date-fns";
-import { FC, useState } from "react";
+import { type FC, useState } from "react";
 import { columns, filterKeys } from "./columns";
 import TableLoader from "@/components/ui/table-loader";
 import { Button } from "@/components/ui/button";
 import AddRecordModal from "@/components/modals/add-record-modal";
 import PageLoader from "@/components/ui/page-loader";
 import createRecord from "@/actions/createRecord";
-import { RecordsSchema } from "@/lib/validations/records-schema";
+import type { RecordsSchema } from "@/lib/validations/records-schema";
 import { toast } from "react-hot-toast";
 import { parseDateWithoutTime } from "@/lib/utils";
 
@@ -48,6 +48,7 @@ const RecordsSection: FC<RecordsSectionProps> = ({ profileId, viewMode }) => {
       setIsSubmitting(true);
       await createRecord(form);
       toast.success("Record added successfully!");
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       refetch();
     } catch (error) {
       toast.error((error as Error).message);
@@ -103,7 +104,7 @@ const RecordsSection: FC<RecordsSectionProps> = ({ profileId, viewMode }) => {
       ) : (
         <DataTable
           columns={columns}
-          data={formattedRecords || []}
+          data={formattedRecords ?? []}
           filterKeys={filterKeys}
         />
       )}

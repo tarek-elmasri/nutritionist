@@ -1,6 +1,6 @@
 "use client";
 
-import { FC } from "react";
+import type { FC } from "react";
 import { format } from "date-fns";
 import { getRecords } from "@/actions/getRecords";
 import BarsLoader from "@/components/ui/bars-loader";
@@ -40,7 +40,7 @@ const RecordsChartSection: FC<RecordsChartSectionProps> = ({ profileId }) => {
 
       <Chart
         id="records-chart"
-        data={formattedRecords || []}
+        data={formattedRecords ?? []}
         lineKeys={[
           { key: "weight", strokeColor: "red" },
           // { key: "height", strokeColor: "green" },

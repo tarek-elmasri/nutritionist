@@ -5,7 +5,7 @@ import { DataTable } from "@/components/ui/data-table";
 import TableLoader from "@/components/ui/table-loader";
 import useFetch from "@/hooks/useFetch";
 import { format } from "date-fns";
-import { FC } from "react";
+import type { FC } from "react";
 import { columns } from "./columns";
 
 interface ArchivedPlansSectionProps {
@@ -28,7 +28,7 @@ const ArchivedPlansSection: FC<ArchivedPlansSectionProps> = ({ profileId }) => {
         <TableLoader id="archived-plans-loader" />
       ) : (
         <div>
-          <DataTable columns={columns} data={formattedPlans || []} />
+          <DataTable columns={columns} data={formattedPlans ?? []} />
         </div>
       )}
     </div>

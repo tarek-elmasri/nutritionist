@@ -1,8 +1,8 @@
 "use server";
 
 import routes from "@/constants/routes";
-import prisma from "@/lib/prisma";
-import { MessageSchema } from "@/lib/validations/message-schema";
+import prisma from "@/server/prisma";
+import { type MessageSchema } from "@/lib/validations/message-schema";
 
 const createMessage = async (form: MessageSchema) => {
   const { message, senderId, recieverId } = form;

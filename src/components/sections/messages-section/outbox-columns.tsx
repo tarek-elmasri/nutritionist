@@ -1,8 +1,8 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
+import type { ColumnDef } from "@tanstack/react-table";
 import CellActions from "@/components/sections/messages-section/outbox-cell-actions";
-import { TableFilterKeys } from "@/type";
+import type { TableFilterKeys } from "@/type";
 import Link from "next/link";
 
 export type MessageColumn = {

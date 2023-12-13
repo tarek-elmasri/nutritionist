@@ -1,18 +1,18 @@
 "use client";
 
-import { Apple, FileStack, LayoutGrid, LogOut, Mail } from "lucide-react";
-import SidebarTap from "./sidebar-tab";
+import PageLoader from "@/components/ui/page-loader";
 import { TABS } from "@/constants";
+import { Apple, FileStack, LogOut, Mail } from "lucide-react";
+import { signOut } from "next-auth/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTransition } from "react";
-import PageLoader from "@/components/ui/page-loader";
-import { signOut } from "next-auth/react";
+import SidebarTap from "./sidebar-tab";
 
 const ConsoleTabs = ({ onClick }: { onClick?: () => void }) => {
   const router = useRouter();
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
-  const tab = useSearchParams().get("tab") || TABS.PROFILES;
+  const tab = useSearchParams().get("tab") ?? TABS.PROFILES;
 
   const consolePath = pathname === "/console";
 

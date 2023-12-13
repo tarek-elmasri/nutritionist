@@ -8,7 +8,7 @@ import {
 } from "@/lib/servesHelper";
 import { format } from "date-fns";
 import { redirect } from "next/navigation";
-import { FC } from "react";
+import type { FC } from "react";
 
 interface ConsoleDietPlanPageProps {
   params: {

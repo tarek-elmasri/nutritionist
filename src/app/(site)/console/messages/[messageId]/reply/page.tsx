@@ -5,7 +5,7 @@ import { getProfiles } from "@/actions/getProfiles";
 import MessageForm from "@/components/message-form";
 import routes from "@/constants/routes";
 import { redirect } from "next/navigation";
-import { FC } from "react";
+import type { FC } from "react";
 
 interface ReplyPageProps {
   params: {

@@ -1,4 +1,4 @@
-import prisma from "@/lib/prisma";
+import prisma from "@/server/prisma";
 import bcrypt from "bcrypt";
 import { authSchema } from "@/lib/validations/auth-schema";
 import { NextResponse } from "next/server";
@@ -6,7 +6,7 @@ import { ValidationError, constructZodError } from "../errors";
 
 export const POST = async (req: Request) => {
   try {
-    const json = await req.json();
+    const json = (await req.json()) as { email: string; password: string };
 
     // parsing data
     const parsedData = authSchema.safeParse(json);

@@ -2,7 +2,7 @@ import NotificationsMenu from "@/components/notifications-menu";
 import MobileSidebar from "@/components/sidebar/mobile-sidebar";
 import Sidebar from "@/components/sidebar/sidebar";
 import UserTabs from "@/components/sidebar/user-tabs";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 const ProfileLayout = ({ children }: { children: ReactNode }) => {
   return (

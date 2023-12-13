@@ -1,9 +1,9 @@
 "use server";
 
-import prisma from "@/lib/prisma";
+import prisma from "@/server/prisma";
 import getCurrentUser from "./get CurrentUser";
 
-export const getNotifications = async (limit: number = 10, offset?: number) => {
+export const getNotifications = async (limit = 10, offset?: number) => {
   const currentUser = await getCurrentUser();
 
   if (!currentUser)

@@ -1,11 +1,8 @@
 import getCurrentUser from "@/actions/get CurrentUser";
-import { redirect } from "next/navigation";
-import { getProfile } from "@/actions/getProfiles";
-import Sidebar from "@/components/sidebar/sidebar";
-import UserTabs from "@/components/sidebar/user-tabs";
-import NotificationsMenu from "@/components/notifications-menu";
-import UserView from "@/components/user-view";
 import { getDietPlansCount } from "@/actions/getDietPlans";
+import { getProfile } from "@/actions/getProfiles";
+import UserView from "@/components/user-view";
+import { redirect } from "next/navigation";
 
 const ProfilePage = async () => {
   const user = await getCurrentUser();

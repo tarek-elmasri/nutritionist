@@ -1,6 +1,6 @@
 "use client";
 
-import * as z from "zod";
+import type { z } from "zod";
 import useCreateDietPlan from "@/hooks/use-create-diet-plan";
 import useSteps from "@/hooks/use-steps";
 import dietPlanSchema from "@/lib/validations/create-diet-plan-schema";

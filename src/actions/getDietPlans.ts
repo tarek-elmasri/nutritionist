@@ -1,6 +1,6 @@
 "use server";
 
-import prisma from "@/lib/prisma";
+import prisma from "@/server/prisma";
 import { parseDateWithoutTime } from "@/lib/utils";
 
 export const getActiveDietPlans = (profileId: string) => {

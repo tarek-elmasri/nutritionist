@@ -1,8 +1,6 @@
 "use client";
 
 import successMark from "@/assets/success-red.png";
-import { Button } from "@/components/ui/button";
-import useSteps from "@/hooks/use-steps";
 import Image from "next/image";
 
 const ReviewItem = ({ label }: { label: string }) => (
@@ -12,8 +10,6 @@ const ReviewItem = ({ label }: { label: string }) => (
   </div>
 );
 const ReviewStep = () => {
-  const { prevStep } = useSteps();
-
   return (
     <div className="space-y-6">
       <h3 className="section-header">Diet Plan Review:</h3>

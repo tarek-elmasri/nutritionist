@@ -1,6 +1,6 @@
 "use server";
 
-import prisma from "@/lib/prisma";
+import prisma from "@/server/prisma";
 
 const getAdminUserId = async () => {
   const user = await prisma.user.findFirst({

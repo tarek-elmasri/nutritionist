@@ -8,7 +8,7 @@ import MealBox from "@/components/meal-box";
 import NewMealModal from "@/components/modals/new-meal-modal";
 import ServeMapBox from "@/components/serve-map-box";
 import { Button } from "@/components/ui/button";
-import { MealForm, MealItemForm } from "@/type";
+import type { MealForm, MealItemForm } from "@/type";
 import AddMealItemModal from "@/components/modals/add-meal-item-modal";
 import useSteps from "@/hooks/use-steps";
 
@@ -44,11 +44,11 @@ const AddMealsStep = () => {
 
   const removeMeal = (mealIndex: number) => {
     const mappedForm: Record<string, MealForm> = {};
-    let indexCount: number = 0;
+    let indexCount = 0;
     meals.forEach((meal, index) => {
       if (mealIndex !== index) {
         mappedForm[indexCount] = meal;
-        mappedForm[indexCount].order = indexCount;
+        mappedForm[indexCount]!.order = indexCount;
         indexCount++;
       }
     });
@@ -57,7 +57,7 @@ const AddMealsStep = () => {
 
   const addItemtoMeal = (mealItem: MealItemForm) => {
     const newMeals = [...meals];
-    newMeals[currentMealIndex].contents.push(mealItem);
+    newMeals[currentMealIndex]!.contents.push(mealItem);
     setMeals(newMeals);
     setServeTotals(calculateMealsServeCount(newMeals));
     setIsAddItemModalOpen(false);
@@ -65,7 +65,7 @@ const AddMealsStep = () => {
 
   const removeItemFromMeal = (mealIndex: number, itemIndex: number) => {
     const newMeals = [...meals];
-    newMeals[mealIndex].contents.splice(itemIndex, 1);
+    newMeals[mealIndex]!.contents.splice(itemIndex, 1);
     setServeTotals(calculateMealsServeCount(newMeals));
     setMeals(newMeals);
   };

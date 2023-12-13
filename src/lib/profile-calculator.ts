@@ -1,5 +1,5 @@
-import { ActivityLevel, Gender, IdealZone, WeightCategory } from "@/type";
-import { Profile, Record } from "@prisma/client";
+import { ActivityLevel, Gender, type IdealZone, WeightCategory } from "@/type";
+import type { Profile, Record } from "@prisma/client";
 import { calculateAgeFromDOB } from "./utils";
 
 class ProfileCalculator {
@@ -74,16 +74,16 @@ class ProfileCalculator {
     return BMI > 40
       ? WeightCategory.DANGEROUS_OBESE
       : BMI > 35
-      ? WeightCategory.CRITICAL_OBESE
-      : BMI > 30
-      ? WeightCategory.OBESE
-      : BMI > 25
-      ? WeightCategory.OVER_WEIGHT
-      : BMI > 18.5
-      ? WeightCategory.NORMAL
-      : BMI > 16.5
-      ? WeightCategory.UNDER_WEIGHT
-      : WeightCategory.SEVERELY_UNDER_WEIGHT;
+        ? WeightCategory.CRITICAL_OBESE
+        : BMI > 30
+          ? WeightCategory.OBESE
+          : BMI > 25
+            ? WeightCategory.OVER_WEIGHT
+            : BMI > 18.5
+              ? WeightCategory.NORMAL
+              : BMI > 16.5
+                ? WeightCategory.UNDER_WEIGHT
+                : WeightCategory.SEVERELY_UNDER_WEIGHT;
   };
 
   getCaloriesFactor = () => {
@@ -103,16 +103,13 @@ class ProfileCalculator {
     }
   };
 
-  getTotalCalories = (customCalorieFactor?: number) => {
-    const calorieFactor = this.customCalorieFactor || this.getCaloriesFactor();
+  getTotalCalories = () => {
+    const calorieFactor = this.customCalorieFactor ?? this.getCaloriesFactor();
     const totalCalories = calorieFactor * this.getDesiredBodyWeight();
     return parseFloat(totalCalories.toFixed(2));
   };
 
-  getTotalProtein = (
-    customProtienPercentage?: number,
-    customCalorieFactor?: number
-  ) => {
+  getTotalProtein = () => {
     const protienPercentage = this.customProtienPercentage
       ? this.customProtienPercentage / 100
       : 0.2;
@@ -120,8 +117,7 @@ class ProfileCalculator {
     // healthy adults
     if (this.age > 18) {
       const adultsTotalProtiens =
-        (protienPercentage * this.getTotalCalories(this.customCalorieFactor)) /
-        4;
+        (protienPercentage * this.getTotalCalories()) / 4;
       return parseFloat(adultsTotalProtiens.toFixed(2));
     }
 
@@ -130,30 +126,21 @@ class ProfileCalculator {
     return parseFloat(kidsTotalProtiens.toFixed(2));
   };
 
-  getTotalCHO = (
-    customCHOPercentage?: number,
-    customCalorieFactor?: number
-  ) => {
+  getTotalCHO = () => {
     const percentage = this.customCHOPercentage
       ? this.customCHOPercentage / 100
       : 0.6;
 
-    const totalCHO =
-      (percentage * this.getTotalCalories(this.customCalorieFactor)) / 4;
+    const totalCHO = (percentage * this.getTotalCalories()) / 4;
     return parseFloat(totalCHO.toFixed(2));
   };
 
-  getTotalFat = (customs?: {
-    customCalorieFactor?: number;
-    customCHOPercentage?: number;
-    customProtienPercentage?: number;
-  }) => {
-    const totalCal = this.getTotalCalories(this.customCalorieFactor);
+  getTotalFat = () => {
+    const totalCal = this.getTotalCalories();
 
-    const totalProtienInKCAL =
-      this.getTotalProtein(this.customProtienPercentage) * 4;
+    const totalProtienInKCAL = this.getTotalProtein() * 4;
 
-    const totalCHOinKCAL = this.getTotalCHO(this.customCHOPercentage) * 4;
+    const totalCHOinKCAL = this.getTotalCHO() * 4;
 
     const totalFatinKCAL = totalCal - totalProtienInKCAL - totalCHOinKCAL;
 
@@ -162,20 +149,13 @@ class ProfileCalculator {
     return parseFloat(totalFat.toFixed(2));
   };
 
-  getMaximumSaturatedFat = (customCalorieFactor?: number) => {
-    const maxSaturated =
-      (0.1 * this.getTotalCalories(this.customCalorieFactor)) / 9;
+  getMaximumSaturatedFat = () => {
+    const maxSaturated = (0.1 * this.getTotalCalories()) / 9;
     return parseFloat(maxSaturated.toFixed(2));
   };
 
-  getMaximumUnsaturatedFat = (
-    consumedSaturatedFat: number,
-    customs?: {
-      customCalorieFactor?: number;
-      customCHOPercentage?: number;
-      customProtienPercentage?: number;
-    }
-  ) => parseFloat((this.getTotalFat() - consumedSaturatedFat).toFixed(2));
+  getMaximumUnsaturatedFat = (consumedSaturatedFat: number) =>
+    parseFloat((this.getTotalFat() - consumedSaturatedFat).toFixed(2));
 }
 
 export default ProfileCalculator;

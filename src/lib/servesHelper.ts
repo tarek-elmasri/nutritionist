@@ -12,13 +12,7 @@ import {
   sugarServe,
   vegetableServe,
 } from "@/constants/serves";
-import {
-  MealForm,
-  ServePlanForm,
-  ServeType,
-  ServeTypeKey,
-  ServeTypeMap,
-} from "@/type";
+import type { MealForm, ServePlanForm, ServeType, ServeTypeKey } from "@/type";
 
 export const calculateServeTotals = (serve: ServeType, count: number) => ({
   protien: serve.protien * count,

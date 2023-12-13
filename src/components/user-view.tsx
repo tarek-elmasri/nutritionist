@@ -3,7 +3,7 @@
 import { TABS } from "@/constants";
 import { useSearchParams } from "next/navigation";
 import DietPlansSection from "@/components/sections/diet-plans-section";
-import { FC } from "react";
+import type { FC } from "react";
 import RecordsSection from "@/components/sections/records-section";
 import RecordsChartSection from "@/components/sections/records-chart-section";
 import ArchivedPlansSection from "@/components/sections/archived-plans-section";

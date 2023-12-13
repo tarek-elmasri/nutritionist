@@ -1,24 +1,17 @@
 "use client";
 
-import {
-  BarChart3,
-  FileStack,
-  LayoutGrid,
-  LogOut,
-  Mail,
-  TrendingUp,
-} from "lucide-react";
-import SidebarTap from "./sidebar-tab";
 import { TABS } from "@/constants";
+import { FileStack, LayoutGrid, LogOut, Mail, TrendingUp } from "lucide-react";
+import { signOut } from "next-auth/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTransition } from "react";
 import PageLoader from "../ui/page-loader";
-import { signOut } from "next-auth/react";
+import SidebarTap from "./sidebar-tab";
 
 const UserTabs = ({ onClick }: { onClick?: () => void }) => {
   const router = useRouter();
   const pathname = usePathname();
-  const tab = useSearchParams().get("tab") || TABS.ACTIVE_PLANS;
+  const tab = useSearchParams().get("tab") ?? TABS.ACTIVE_PLANS;
   const [isPending, startTransition] = useTransition();
 
   const profilePath = pathname === "/profile";

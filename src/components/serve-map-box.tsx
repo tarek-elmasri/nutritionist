@@ -1,7 +1,7 @@
 "use client";
 
-import { ServePlanForm } from "@/type";
-import { FC } from "react";
+import type { ServePlanForm } from "@/type";
+import type { FC } from "react";
 import Separator from "@/components/ui/separator";
 
 interface ServeMapProps {

@@ -1,8 +1,8 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
+import type { ColumnDef } from "@tanstack/react-table";
 import CellActions from "@/components/sections/profiles-section/cell-actions";
-import { Gender, TableFilterKeys } from "@/type";
+import type { Gender, TableFilterKeys } from "@/type";
 
 export type ProfilesColumn = {
   id: string;

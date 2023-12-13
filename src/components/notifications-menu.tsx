@@ -1,7 +1,7 @@
 "use client";
 
 import { Bell } from "lucide-react";
-import { Notification } from "@prisma/client";
+import type { Notification } from "@prisma/client";
 import {
   Popover,
   PopoverContent,
@@ -10,7 +10,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import { FC, useCallback, useEffect, useReducer, useTransition } from "react";
+import {
+  type FC,
+  useCallback,
+  useEffect,
+  useReducer,
+  useTransition,
+} from "react";
 import { getNotifications } from "@/actions/getNotifications";
 import updateNotification from "@/actions/updateNotification";
 import PageLoader from "@/components/ui/page-loader";
@@ -48,7 +54,7 @@ const notificationReducer = (
         seen: boolean;
       };
       const newList = [...state.list];
-      newList[index].seen = seen;
+      newList[index]!.seen = seen;
       return { ...state, list: newList };
     case "setIsMenuOpen":
       return { ...state, isMenuOpen: action.payload as boolean };
@@ -123,6 +129,7 @@ const NotificationsMenu = () => {
   }, [data.limit, data.offset, dispatch]);
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     fetchNotifications();
   }, [data.offset, fetchNotifications]);
 

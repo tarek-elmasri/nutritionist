@@ -1,8 +1,10 @@
 "use client";
 
-import * as z from "zod";
+import type { z } from "zod";
 import profileSchema from "@/lib/validations/profile-schema";
-import useCreateProfile, { CreateProfileForm } from "@/hooks/useCreateProfile";
+import useCreateProfile, {
+  type CreateProfileForm,
+} from "@/hooks/useCreateProfile";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -16,7 +18,7 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { FC } from "react";
+import type { FC } from "react";
 import useSteps from "@/hooks/use-steps";
 
 const objectiveSchema = profileSchema.pick({

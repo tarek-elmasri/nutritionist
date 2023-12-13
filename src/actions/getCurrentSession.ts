@@ -1,6 +1,6 @@
 "use server";
 
-import authOptions from "@/app/api/auth/[...nextauth]/options";
+import { authOptions } from "@/server/auth";
 import { getServerSession } from "next-auth";
 
 const currentSession = () => getServerSession(authOptions);

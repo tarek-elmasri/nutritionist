@@ -7,7 +7,7 @@ import useFetch from "@/hooks/useFetch";
 import { columns, filterKeys } from "./outbox-columns";
 import { format } from "date-fns";
 import { getSentMessages } from "@/actions/getMessages";
-import { FC, useTransition } from "react";
+import { type FC, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import PageLoader from "@/components/ui/page-loader";
 
@@ -27,7 +27,7 @@ const OutboxTab: FC<OutboxTabProps> = ({ userId, messagesLink }) => {
   const formattedMessages = userMessages?.map((userMessage) => ({
     id: userMessage.id,
     senderId: userId,
-    reciever: userMessage.reciever.Profile?.name || userMessage.reciever.name!,
+    reciever: userMessage.reciever.Profile?.name ?? userMessage.reciever.name!,
     title: userMessage.message.title,
     href: messagesLink,
     createdAt: format(userMessage.message.createdAt, "dd-MM-yyyy"),
@@ -53,7 +53,7 @@ const OutboxTab: FC<OutboxTabProps> = ({ userId, messagesLink }) => {
       <div>
         <DataTable
           columns={columns}
-          data={formattedMessages || []}
+          data={formattedMessages ?? []}
           filterKeys={filterKeys}
         />
       </div>

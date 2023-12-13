@@ -1,6 +1,6 @@
 "use server";
 
-import prisma from "@/lib/prisma";
+import prisma from "@/server/prisma";
 
 export const getMeals = (userId: string, dietPlanId: string) => {
   return prisma.meal.findMany({

@@ -1,12 +1,12 @@
 "use client";
-import { FC, useTransition } from "react";
+import { type FC, useTransition } from "react";
 import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import { toast } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
-import { AuthSchema, authSchema } from "@/lib/validations/auth-schema";
+import { type AuthSchema, authSchema } from "@/lib/validations/auth-schema";
 import {
   Form,
   FormControl,
